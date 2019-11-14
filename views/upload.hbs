@@ -3,9 +3,17 @@
         <div class="row mt-5">
             <div class="col-md-4 mt-5">
                 <div class="container">
-                    <input type="text">
-                    {{!-- <input type="image" placeholder="upload image"> --}}
-                    <input type="text" name="category" id="category" placeholder="categoty">
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <input type="file" name="avatar" />
+                        <select required>
+                            <option value="">None</option>
+                            <option value="volvo">Funny</option>
+                            <option value="saab">Bollywood</option>
+                            <option value="fiat">Sarcasm</option>
+                            <option value="audi">Random</option>
+                        </select>
+                        <input type="submit">
+                    </form>
                 </div>
             </div>
         </div>

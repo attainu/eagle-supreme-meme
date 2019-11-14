@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 // const session = require('express-session');
 
+
 //middelwares
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
@@ -66,6 +67,8 @@ app.get('/upload', function(req,res){
   // console.log('hello');
   res.render('upload');
 })
+
+app.post('/upload', authRoute.upload)
 
 app.listen(9008, function () {
   console.log('app on 9096');

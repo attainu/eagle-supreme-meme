@@ -3,6 +3,17 @@
   "version": "1.0.0",
   "description": "Project repo for Team 6",
   "main": "index.js",
+<<<<<<< HEAD
+=======
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-session": "^1.17.0",
+    "mongodb": "^3.3.4"
+  },
+  "devDependencies": {},
+>>>>>>> feature/login-setup
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,9 +26,13 @@
   "bugs": {
     "url": "https://github.com/attainu/eagle-supreme-meme/issues"
   },
+<<<<<<< HEAD
   "homepage": "https://github.com/attainu/eagle-supreme-meme#readme",
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0"
   }
+=======
+  "homepage": "https://github.com/attainu/eagle-supreme-meme#readme"
+>>>>>>> feature/login-setup
 }

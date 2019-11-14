@@ -62,7 +62,11 @@ app.get('/', function (req, res) {
 app.get('/loginpage', function (req, res) {
   res.render('login');
 })
+app.get('/upload', function(req,res){
+  // console.log('hello');
+  res.render('upload');
+})
 
-app.listen(9091, function () {
-  console.log('app on 9091');
+app.listen(9008, function () {
+  console.log('app on 9096');
 })

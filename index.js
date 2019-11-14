@@ -47,13 +47,8 @@ app.get('/', authRoute.home);
 app.get('/loginpage', function (req, res) {
   res.render('login');
 })
-app.get('/upload', function(req,res){
-  // console.log('hello');
-  res.render('upload');
-})
 
 app.get('/logoutpage', authRoute.logout);
-
 
 app.listen(9091, function () {
   console.log('app on 9091');

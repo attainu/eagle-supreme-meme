@@ -33,7 +33,7 @@ AuthModel.singUp = function (req, res, cb) {
 }
 
 
-AuthModel.signIn = function (req, res, cb) {
+AuthModel.signIn = function (req, session, cb) {
 
     var collection = db.collection('accounts');
     collection.find({}).toArray(function (err, response) {
@@ -52,6 +52,8 @@ AuthModel.signIn = function (req, res, cb) {
         if (!user) {
             return cb("data does not match")
         } else {
+            session.user = user;
+            console.log(session.user);
             return cb(null, "logged in")
         }
     })

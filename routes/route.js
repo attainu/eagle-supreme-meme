@@ -51,17 +51,24 @@ authController.upload = function (request, response) {
     // console.log('hi');
     // res.send('file');
     var data = request.body;
-    console.log(data);
+    // console.log(data);
     // response.send('hello');
 
     const file = request.file
-    // console.log(file);
-    console.log(file.path);
+    console.log(file);
+    console.log(data.category);
 
-    // var myObj = [{img:finalImg},{category:data.category}]; 
+    var img = fs.readFileSync(request.file.path);
+    var encode_image = img.toString('base64'); 
+
+    var finalImg = {
+        contentType: request.file.mimetype,
+        image:  new Buffer.from(encode_image, 'base64'),
+        category: data.category
+     };
 
     var collection = db.collection('uploads');
-    collection.insertOne(data, function (error, res) {
+    collection.insertOne(finalImg, function (error, res) {
         if (error) {
             return error
         }

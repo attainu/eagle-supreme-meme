@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meme Hub</title>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <header class="row mx-auto align align-items-center navbar navbar-expand-lg navbar-expand-sm fixed-top">
+        <div class="logo col-md-1">
+            Logo
+        </div>
+        <div class="categories col-md-1 mx-auto">
+            <span>Categories</span>
+                <div class="categoty-list row">
+                    <ul class="col-md-4">
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                    </ul>
+                    <ul class="col-md-4">
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                    </ul>
+                    <ul class="col-md-4">
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                    </ul>
+            </div>
+        </div>
+        <div class="search-bar col-md-4 mx-auto">
+            <input type="text" placeholder="You are one step away" class="form-control">
+
+        </div>
+        <div class="template col-md-2">
+            <span><a href="#">Template</a></span>
+
+        </div>
+
+        <div class="wishlist col-md-1">
+            <span>Icon</span>
+
+        </div>
+
+        <div class="login-signup col-md-1">
+            <span>{{{logIn}}}</span>
+
+        </div>
+        
+        
+    </header>
+    <div class="side-nav">
+       <ul>
+           <li><a href="#">Home</a></li>
+           <li><a href="#">Explore</a></li>
+           <li><a href="#">Trending</a></li>
+           <li><a href="#">What's New</a></li>
+           <li><a href="#" id="upload">Upload</a></li>
+       </ul>
+    </div>
+    <div class="promoted">
+        Promoted
+    </div>
+    
+    {{{body}}}
+      <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script src="postupload.js"></script>
+</body>
+</html>

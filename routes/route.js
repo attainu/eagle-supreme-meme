@@ -55,25 +55,26 @@ authController.upload = function (request, response) {
     // response.send('hello');
 
     const file = request.file
-    console.log(file);
+    console.log(file.path);
     console.log(data.category);
 
     var img = fs.readFileSync(request.file.path);
     var encode_image = img.toString('base64'); 
-
+    // console.log(encode_image);
     var finalImg = {
         contentType: request.file.mimetype,
         image:  new Buffer.from(encode_image, 'base64'),
         category: data.category
      };
 
-    var collection = db.collection('uploads');
+    var collection = db.collection('approval_pending');
     collection.insertOne(finalImg, function (error, res) {
         if (error) {
             return error
         }
         // console.log(res)
-        return response.send('info uploaded');
+        return response.send('info uploaded, redirecting....');
+        // response.redirect("/")
     });
 }
 

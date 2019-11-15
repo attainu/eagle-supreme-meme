@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const multer = require('multer');
+const PORT = process.env.PORT || 9004
 
 
 // const session = require('express-session');
@@ -96,6 +97,6 @@ app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
 
 
 
-app.listen(9004, function () {
-  console.log('app on 9004');
+app.listen(PORT, function () {
+  console.log('app on >>>>'+ PORT);
 })

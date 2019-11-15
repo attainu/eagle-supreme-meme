@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const multer = require('multer');
-const PORT = process.env.PORT || 9004
+const PORT = process.env.PORT || 8081
 
 
 // const session = require('express-session');
@@ -86,7 +86,10 @@ app.get('/loginpage', function (req, res) {
 
 app.post('/upload', upload.single('meme'), authRoute.upload)
 
-
+app.get('/upload', function(req,res){
+  // console.log('hello');
+  res.render('upload');
+})
 
 app.get('/test',function(req,res){
   res.sendFile(__dirname + '/test.html');
@@ -105,6 +108,8 @@ app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
 })
 
 app.get('/logoutpage', authRoute.logout);
+
+
 
 
 app.listen(PORT, function () {

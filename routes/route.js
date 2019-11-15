@@ -62,8 +62,9 @@ authController.upload = function (request, response) {
     var encode_image = img.toString('base64'); 
     // console.log(encode_image);
     var finalImg = {
-        contentType: request.file.mimetype,
-        image:  new Buffer.from(encode_image, 'base64'),
+        // contentType: request.file.mimetype,
+        image: file.path,
+        // image:  new Buffer.from(encode_image, 'base64'),
         category: data.category
      };
 

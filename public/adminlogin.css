@@ -1,0 +1,18 @@
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(to right, #9c5ffb, #a85dfb, #b45bfa, #c059f9, #cb57f8, #cb57f8, #cb57f8, #cb57f8, #c059f9, #b45bfa, #a85dfb, #9c5ffb);
+}
+.adminLoginButton{
+    background: rgb(87, 0, 128);
+    border: 2px solid rgb(255, 255, 255);
+    color: white;
+    border-radius:10px;
+    height: 40px;
+    width: 100px;
+    position: relative;
+    left: 30%;
+}

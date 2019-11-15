@@ -3,16 +3,16 @@
         <div class="row mt-5">
             <div class="col-md-4 mt-5">
                 <div class="container">
-                    <form action="/upload" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="avatar">
-                        <input type="text" name="category" id="category">
-                        <select required>
+                    <form class="form" action="/upload" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="meme">
+                        <input type="text" name="category" id="category" placeholder="category">
+                        {{!-- <select required>
                             <option value="">None</option>
-                            <option value="volvo" >Funny</option>
-                            <option value="saab">Bollywood</option>
-                            <option value="fiat">Sarcasm</option>
-                            <option value="audi">Random</option>
-                        </select>
+                            <option value="funny" >Funny</option>
+                            <option value="bollywood">Bollywood</option>
+                            <option value="sarcasm">Sarcasm</option>
+                            <option value="random">Random</option>
+                        </select> --}}
                         <input type="submit">
                     </form>
                 </div>

@@ -48,8 +48,11 @@ authController.signIn = function (request, response) {
 }
 authController.upload = function (request, response) {
     // console.log('hi');
+    res.send('file');
     var data = request.body;
     console.log(data);
+    const file = request.file
+    console.log(file);
     var collection = db.collection('uploads');
     collection.insertOne(data, function (error, res) {
         if (error) {

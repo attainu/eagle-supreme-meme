@@ -2,8 +2,13 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
-// const session = require('express-session');
+var multer = require('multer');
+var upload = multer();
 
+// const session = require('express-session');
+// for parsing multipart/form-data
+app.use(upload.array()); 
+app.use(express.static('public'));
 
 //middelwares
 app.use(express.static('public'));
@@ -17,6 +22,19 @@ app.engine('.hbs', exphbs({
   extname: '.hbs'
 }));
 app.set('view engine', '.hbs');
+
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    console.log(req);
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+ 
+var upload = multer({ storage: storage })
 
 // login Session
 // app.use(session({
@@ -68,7 +86,7 @@ app.get('/upload', function(req,res){
   res.render('upload');
 })
 
-app.post('/upload', authRoute.upload)
+app.post('/upload', upload.single('meme'), authRoute.upload)
 
 app.listen(9008, function () {
   console.log('app on 9096');

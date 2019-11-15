@@ -25,7 +25,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    maxAge: 120000,
+    maxAge: 3600000,
     path: '/',
     sameSite: true,
     secure: false
@@ -49,6 +49,8 @@ app.get('/loginpage', function (req, res) {
 })
 
 app.get('/logoutpage', authRoute.logout);
+
+
 
 app.listen(9091, function () {
   console.log('app on 9091');

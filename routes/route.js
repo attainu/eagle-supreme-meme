@@ -21,7 +21,9 @@ authController.signIn = function (request, response) {
     // console.log(data)
     Model.signIn(data, session, function (err, message) {
         if (err) {
-            return response.send(err)
+            return response.render('login',{
+                error: err
+            })
         } else {
             return response.redirect('/');
         }

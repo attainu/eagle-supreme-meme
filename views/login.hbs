@@ -4,16 +4,31 @@
            <div class="col-md-4 mt-5">
                <div class="container">
                    <div class= "login center">
-                       <div class="login center hideLogin">
+                       {{#if error}}
+                       <div class="login center hideLogin" style="display: none;"></div>
+                       <div class="inputField center" style="display: block;">
+                            <form action="/signin" method="POST">
+                            <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail" placeholder="Username" name="userId" required>
+                            <input id="passwordLogin" type="password" class="form-control  mx-auto inputDetail" placeholder="Password" name="password" required>
+                            {{{error}}}<br>
+                            <button type="submit" class=" loginDesign" id="loginSubmit">Login</button>
+                            </form>
+                        </div>
+                           {{else}}
+                    <div class="login center hideLogin">
                         <h1 class="center colors">Welcome Back</h1>
                         <p class="center colors">We Love People Who Share Happiness</p>
                         <button class="buttonLogin loginDesign" id="loginClick">Login</button>
                         </div>
+                           {{/if}}
+                        
+                        
                         <div class="inputField center">
-                            
-                            <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail" placeholder="Username">
-                            <input id="passwordLogin" type="password" class="form-control  mx-auto inputDetail" placeholder="Password">
-                            <button class=" loginDesign" id="loginSubmit">Login</button>
+                            <form action="/signin" method="POST">
+                            <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail" placeholder="Username" name="userId" required>
+                            <input id="passwordLogin" type="password" class="form-control  mx-auto inputDetail" placeholder="Password" name="password" required>
+                            <button type="submit" class=" loginDesign" id="loginSubmit">Login</button>
+                            </form>
                         </div>
                    </div>
                 
@@ -28,13 +43,15 @@
                                 
                                 </div>
                                 <div class=" signupPage inputFieldSignUP ">
-                                    <input id="firstname" type="text" class="form-control mx-auto inputDetail" placeholder="First Name">
-                                    <input id="lastname" type="text" class="form-control mx-auto inputDetail" placeholder="Last Name">
-                                    <input id="usernameSign" type="text" class="form-control mx-auto inputDetail" placeholder="Username">
-                                    <input id="passwordSign" type="password" class="form-control  mx-auto inputDetail" placeholder="Password">
-                                    <input id="confirmPass" type="password" class="form-control  mx-auto inputDetail" placeholder="Confirm Password">
-                                    <button class=" loginDesign" id="submitClick">SignUP</button>
-                                </div>
+                                    <form action="/signup" method="POST">
+                                    <input id="firstname" type="text" class="form-control mx-auto inputDetail" placeholder="First Name" name="firstName" required>
+                                    <input id="lastname" type="text" class="form-control mx-auto inputDetail" placeholder="Last Name" name="lastName" required>
+                                    <input id="usernameSign" type="text" class="form-control mx-auto inputDetail" placeholder="Username" name="userId" required>
+                                    <input id="passwordSign" type="password" class="form-control  mx-auto inputDetail" placeholder="Password" name="password" required>
+                                    <input id="confirmPass" type="password" class="form-control  mx-auto inputDetail" placeholder="Confirm Password" required>
+                                    <button type="submit" class=" loginDesign" id="submitClick">SignUP</button>
+                                    </form>
+                            </div>
                    </div>
                
                </div>
@@ -42,8 +59,10 @@
        </div>
    </div>
    </div>
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+   <h1>test</h1>
+   <h1>test</h1>
+
+   
+
+  
   <script src="login.js"></script>

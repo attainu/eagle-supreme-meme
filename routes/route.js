@@ -47,15 +47,17 @@ authController.signIn = function (request, response) {
     })
 }
 authController.upload = function (request, response) {
+    // console.log('hi');
     var data = request.body;
-    // console.log(data);
-    Model.singUp(data, response, function (err, message) {
-        if (err) {
-            return response.send(err)
-        } else {
-            return response.redirect('/');
+    console.log(data);
+    var collection = db.collection('uploads');
+    collection.insertOne(data, function (error, res) {
+        if (error) {
+            return error
         }
-    })
+        // console.log(res)
+        return response.send('info uploaded');
+    });
 }
 
 

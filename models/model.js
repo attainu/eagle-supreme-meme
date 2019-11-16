@@ -44,28 +44,44 @@ AuthModel.singUp = function (req, res, cb) {
 
 AuthModel.signIn = function (req, session, cb) {
 
-    var collection = db.collection('accounts');
-    collection.find({}).toArray(function (err, response) {
-        // console.log(req);
-        if (!err) {
-            var user = null;
-            response.forEach(function (value, index) {
-                if (value.userId === req.userId) {
-                    if (value.password === req.password) {
-                        user = value;
-                    }
-                }
-            })
-        }
-        //console.log(user);
-        if (!user) {
-            return cb("data does not match")
-        } else {
-            session.user = user;
-            console.log(session.user);
-            return cb(null, "logged in")
-        }
-    })
-}
+        var collection = db.collection('accounts');
+        collection.find({}).toArray(function (err, response) {
 
-module.exports = AuthModel;
+                // console.log(req);
+                if (!err) {
+                    var user = null;
+                    response.forEach(function (value, index) {
+                        if (value.userId === req.userId) {
+                            if (value.password === req.password) {
+                                user = value;
+                            }
+                        }
+                    })
+                }
+                //console.log(user);
+                if (!user) {
+                    var answer = null;
+                    response.forEach(function (value, index) {
+                            if (value.userId === req.userId) {
+                                if (value.seqQue === req.seqQue) {
+                                    if (value.seqAns === req.seqAns) {
+                                        answer = value
+                                    }
+                                }
+                            }
+                        })
+                        if (!answer){
+                            return cb("data does not match")
+                        } else {
+                            return cb(null, answer.password)
+                        }
+                    }
+                    else {
+                        session.user = user;
+                        console.log(session.user);
+                        return cb(null, "logged in")
+                    }
+                })
+        }
+
+        module.exports = AuthModel;

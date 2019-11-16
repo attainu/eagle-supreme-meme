@@ -16,7 +16,7 @@ MongoClient.connect(url, function (err, client) {
         var collection = db.collection('accounts');
         collection.find({}).toArray(function (err, res) {
             // console.log(err);
-           //  console.log(res);
+            //  console.log(res);
         })
         //   client.close();
     }
@@ -42,14 +42,21 @@ authController.signIn = function (request, response) {
     // console.log(data)
     Model.signIn(data, session, function (err, message) {
         if (err) {
-            return response.render('login',{
+            return response.render('login', {
                 error: err
             })
         } else {
-            return response.redirect('/');
+            if (message !== "logged in") {
+                response.render('login', {
+                    pass: ("Password:" + message)
+                })
+            } else {
+                return response.redirect('/');
+            }
         }
     })
 }
+
 authController.upload = function (request, response) {
     // console.log('hi');
     // res.send('file');
@@ -62,13 +69,13 @@ authController.upload = function (request, response) {
     console.log(data.category);
 
     var img = fs.readFileSync(request.file.path);
-    var encode_image = img.toString('base64'); 
+    var encode_image = img.toString('base64');
     // console.log(encode_image);
     var finalImg = {
         contentType: request.file.mimetype,
-        image:  new Buffer.from(encode_image, 'base64'),
+        image: new Buffer.from(encode_image, 'base64'),
         category: data.category
-     };
+    };
 
     var collection = db.collection('approval_pending');
     collection.insertOne(finalImg, function (error, res) {
@@ -100,17 +107,17 @@ authController.checkIfLoggedIn = function (req, res, next) {
 }
 
 var link = [{
-    "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
-  },
-  {
-    "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
-  },
-  {
-    "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
-  },
-  {
-    "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
-  }
+        "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
+    },
+    {
+        "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
+    },
+    {
+        "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
+    },
+    {
+        "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
+    }
 ]
 
 authController.home = function (req, res) {
@@ -132,8 +139,8 @@ authController.logout = function (req, res) {
     var session = req.session;
     console.log(session);
     session.destroy();
-  
+
     return res.redirect('/');
-  }
+}
 
 module.exports = authController;

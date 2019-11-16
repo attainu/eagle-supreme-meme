@@ -10,6 +10,7 @@
                             <form action="/signin" method="POST">
                             <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail" placeholder="Username" name="userId" required>
                             <input id="passwordLogin" type="password" class="form-control  mx-auto inputDetail" placeholder="Password" name="password" required>
+                            <p id='forgotPass'>Forgot Password</p>
                             {{{error}}}<br>
                             <button type="submit" class=" loginDesign" id="loginSubmit">Login</button>
                             </form>
@@ -27,7 +28,22 @@
                             <form action="/signin" method="POST">
                             <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail" placeholder="Username" name="userId" required>
                             <input id="passwordLogin" type="password" class="form-control  mx-auto inputDetail" placeholder="Password" name="password" required>
+                            <p id='forgotPass'>Forgot Password</p>
                             <button type="submit" class=" loginDesign" id="loginSubmit">Login</button>
+                            </form>
+                        </div>
+
+                        <div class="forPass center" style="display: none;">
+                            <form action="/signin" method="POST">
+                            <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail" placeholder="Username" name="userId" required>
+                            <select class="form-control  mx-auto inputDetail" name="seqQue" required>
+                                        <option value="petName">Pet Name</option>
+                                        <option value="middleName">Middle Name</option>
+                                        <option value="grandParentsName">Grand Parents Name</option>
+                                    </select>
+                                    <input type="text" class="form-control  mx-auto inputDetail" placeholder="Answer" name="seqAns" required>
+                            <button type="submit" class=" loginDesign" id="forPassSub" style="width: 150px;">Get Password</button>
+                            <h2 id="seqPassword">{{pass}}</h2>
                             </form>
                         </div>
                    </div>
@@ -49,6 +65,12 @@
                                     <input id="usernameSign" type="text" class="form-control mx-auto inputDetail" placeholder="Username" name="userId" required>
                                     <input id="passwordSign" type="password" class="form-control  mx-auto inputDetail" placeholder="Password" name="password" required>
                                     <input id="confirmPass" type="password" class="form-control  mx-auto inputDetail" placeholder="Confirm Password" required>
+                                    <select class="form-control  mx-auto inputDetail" name="seqQue" required>
+                                        <option value="petName">Pet Name</option>
+                                        <option value="middleName">Middle Name</option>
+                                        <option value="grandParentsName">Grand Parents Name</option>
+                                    </select>
+                                    <input type="text" class="form-control  mx-auto inputDetail" placeholder="Answer" name="seqAns" required>
                                     <button type="submit" class=" loginDesign" id="submitClick">SignUP</button>
                                     </form>
                             </div>

@@ -118,7 +118,7 @@ authController.home = function (req, res) {
     if (typeof req.session.user == "undefined") {
         res.render('home', {
             data: link,
-            logIn: "<a href='/loginpage'>Login </a>"
+            logIn: "<a href='/loginpage'>Login/Signup </a>"
         });
     } else {
         res.render('home', {

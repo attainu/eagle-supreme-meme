@@ -19,7 +19,7 @@ height: 400px;
 
 width: 300px;
 
-background-image: linear-gradient(to right,  #b65bfa,  #a05efb, #9f5ffb, #9c5ffb);
+background: rgb(22, 22, 22);
 
 box-shadow: -4px 7px 20px 0px #d2c2be;
 }
@@ -54,7 +54,7 @@ box-shadow: -4px 7px 20px 0px #d2c2be;
     
 }
 .loginDesign{
-    background: rgb(87, 0, 128);
+    background: rgb(0, 0, 0);
     border: 2px solid rgb(255, 255, 255);
     color: white;
     border-radius:10px;
@@ -71,7 +71,7 @@ box-shadow: -4px 7px 20px 0px #d2c2be;
     box-shadow: -3px 4px 20px 0px #d2c2be;
 }
 .signupCol{
-    color: rgb(123, 26, 168);
+    color: rgb(0, 0, 0);
 }
 
 .popup{

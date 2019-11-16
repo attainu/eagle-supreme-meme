@@ -1,6 +1,7 @@
 const authController = {};
 const Model = require('./../models/model.js');
-const fs = require('fs')
+const tinify = require("tinify");
+tinify.key = "YOUR_API_KEY";
 
 // mongo db
 const mongodb = require('mongodb');

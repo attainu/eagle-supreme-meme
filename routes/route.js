@@ -1,7 +1,8 @@
 const authController = {};
 const Model = require('./../models/model.js');
 const tinify = require("tinify");
-tinify.key = "YOUR_API_KEY";
+tinify.key = "FGssXbLPvZT54cncJw9CGsjrX807xzYW";
+tinify.fromFile("unoptimized.png").toFile("optimized.png");
 
 // mongo db
 const mongodb = require('mongodb');

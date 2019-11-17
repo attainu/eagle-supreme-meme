@@ -60,23 +60,15 @@ authController.signIn = function (request, response) {
 }
 
 authController.upload = function (request, response) {
-    // console.log('hi');
-    // res.send('file');
+    
     var data = request.body;
-    // console.log(data);
-    // response.send('hello');
 
     const file = request.file
     console.log(file.path);
     console.log(data.category);
 
-    var img = fs.readFileSync(request.file.path);
-    var encode_image = img.toString('base64');
-    // console.log(encode_image);
     var finalImg = {
-        // contentType: request.file.mimetype,
         image: file.path,
-        // image:  new Buffer.from(encode_image, 'base64'),
         category: data.category
     };
 
@@ -85,7 +77,7 @@ authController.upload = function (request, response) {
         if (error) {
             return error
         }
-        // console.log(res)
+       
         return response.send('info uploaded, redirecting....');
         // response.redirect("/")
     });

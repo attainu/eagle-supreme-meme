@@ -4,11 +4,25 @@
            <div class="col-md-4 mt-5">
                <div class="container">
                    <div class= "login center">
-                       <div class="login center hideLogin">
+                       {{#if error}}
+                       <div class="login center hideLogin" style="display: none;"></div>
+                       <div class="inputField center" style="display: block;">
+                            <form action="/signin" method="POST">
+                            <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail" placeholder="Username" name="userId" required>
+                            <input id="passwordLogin" type="password" class="form-control  mx-auto inputDetail" placeholder="Password" name="password" required>
+                            {{{error}}}<br>
+                            <button type="submit" class=" loginDesign" id="loginSubmit">Login</button>
+                            </form>
+                        </div>
+                           {{else}}
+                    <div class="login center hideLogin">
                         <h1 class="center colors">Welcome Back</h1>
                         <p class="center colors">We Love People Who Share Happiness</p>
                         <button class="buttonLogin loginDesign" id="loginClick">Login</button>
                         </div>
+                           {{/if}}
+                        
+                        
                         <div class="inputField center">
                             <form action="/signin" method="POST">
                             <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail" placeholder="Username" name="userId" required>

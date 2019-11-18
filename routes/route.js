@@ -92,7 +92,7 @@ authController.checkIfLoggedIn = function (req, res, next) {
 
     console.log("check session " + typeof req.session.user);
     console.log("Url " + req.originalUrl);
-    if (req.originalUrl !== '/logoutpage') {
+    if (req.originalUrl !== '/logoutpage' && req.originalUrl !== '/upload') {
         return next();
     } else {
         if (typeof req.session.user === "undefined") {

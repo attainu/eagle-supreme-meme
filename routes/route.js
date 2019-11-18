@@ -59,31 +59,25 @@ authController.signIn = function (request, response) {
     })
 }
 
-authController.upload = function (request, response) {
-    
+authController.upload = async function (request, response) {
+
     var data = request.body;
-
-    const file = request.file
-    console.log(file.path);
-    console.log(data.category);
-
-    //tiinify
-    const source = tinify.fromFile("file.path");
-    source.toFile("optimized.png");
-
+    
+    const file = request.file;
+    const destination = '/tmp/'+request.file.path;
+    var source = await tinify.fromFile(request.file.path);
+     await source.toFile(destination);
     var finalImg = {
         image: file.path,
         category: data.category
     };
 
-
     //store to db
     var collection = db.collection('approval_pending');
-    collection.insertOne(finalImg, function (error, res) {
+    collection.insertOne(finalImg, function  (error, res) {
         if (error) {
             return error
         }
-       
         return response.send('info uploaded, redirecting....');
         // response.redirect("/")
     });

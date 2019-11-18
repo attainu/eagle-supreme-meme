@@ -59,8 +59,9 @@ authController.signIn = function (request, response) {
     })
 }
 
-authController.upload = function (request, response) {
-    
+
+authController.upload = async function (request, response) {
+        
     var data = request.body;
 
     const file = request.file
@@ -68,8 +69,9 @@ authController.upload = function (request, response) {
     console.log(data.category);
 
     //tiinify
-    const source = tinify.fromFile("file.path");
+    const source = await tinify.fromFile("file.path");
     source.toFile("optimized.png");
+    console.log(source);
 
     var finalImg = {
         image: file.path,

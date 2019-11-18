@@ -128,7 +128,7 @@ authController.home = function (req, res) {
     if (typeof req.session.user == "undefined") {
         res.render('home', {
             data: link,
-            logIn: "<a href='/loginpage'>Login </a>"
+            logIn: "<a href='/loginpage'>Login/Signup </a>"
         });
     } else {
         res.render('home', {
@@ -145,5 +145,12 @@ authController.logout = function (req, res) {
 
     return res.redirect('/');
 }
+
+//authController.search = function(req,res){
+   // var search = req.query.search
+   // Model.search(search,function(error,success){
+
+////})
+//}
 
 module.exports = authController;

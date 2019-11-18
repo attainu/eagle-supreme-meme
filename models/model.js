@@ -67,5 +67,11 @@ AuthModel.signIn = function (req, session, cb) {
         }
     })
 }
+//AuthModel.search = function(search,cb){
+   // var collection = db.collection('accounts');
+    //collection.find({}).toArray(function (err, res) {})
+
+
+//}
 
 module.exports = AuthModel;

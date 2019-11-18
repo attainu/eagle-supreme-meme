@@ -2,7 +2,7 @@ const authController = {};
 const Model = require('./../models/model.js');
 const tinify = require("tinify");
 tinify.key = "FGssXbLPvZT54cncJw9CGsjrX807xzYW";
-tinify.fromFile("unoptimized.png").toFile("optimized.png");
+// tinify.fromFile("unoptimized.png").toFile("optimized.png");
 
 // mongo db
 const mongodb = require('mongodb');
@@ -67,11 +67,17 @@ authController.upload = function (request, response) {
     console.log(file.path);
     console.log(data.category);
 
+    //tiinify
+    const source = tinify.fromFile("file.path");
+    source.toFile("optimized.png");
+
     var finalImg = {
         image: file.path,
         category: data.category
     };
 
+
+    //store to db
     var collection = db.collection('approval_pending');
     collection.insertOne(finalImg, function (error, res) {
         if (error) {
@@ -85,8 +91,8 @@ authController.upload = function (request, response) {
 
 authController.checkIfLoggedIn = function (req, res, next) {
 
-    console.log("check session " + typeof req.session.user);
-    console.log("Url " + req.originalUrl);
+    // console.log("check session " + typeof req.session.user);
+    // console.log("Url " + req.originalUrl);
     if (req.originalUrl !== '/logoutpage') {
         return next();
     } else {

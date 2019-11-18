@@ -136,4 +136,11 @@ authController.logout = function (req, res) {
     return res.redirect('/');
   }
 
+//authController.search = function(req,res){
+   // var search = req.query.search
+   // Model.search(search,function(error,success){
+
+////})
+//}
+
 module.exports = authController;

@@ -8,6 +8,7 @@ const exphbs = require('express-handlebars');
 const multer = require('multer');
 const PORT = process.env.PORT || 9090
 
+const db = require('./models/index.js');
 
 // const session = require('express-session');
 // for parsing multipart/form-data
@@ -66,12 +67,13 @@ app.use(session({
 
 // controller
 var authRoute = require('./routes/route.js');
+var controllers = require('./routes/index.js')
 
 app.use(authRoute.checkIfLoggedIn);
 //routes
-app.post('/signup', authRoute.signUp);
+app.post('/signup', controllers.accountController.signUp);
 
-app.post('/signin', authRoute.signIn)
+app.post('/signin', controllers.accountController.signIn)
 
 app.get('/', authRoute.home);
 
@@ -148,9 +150,12 @@ app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
 app.get('/logoutpage', authRoute.logout);
 
 
-
-
-app.listen(PORT, function () {
-  console.log('app on >>>>'+ PORT);
+db.connect()
+.then(function(){
+  app.listen(PORT, function () {
+    console.log('app on >>>>'+ PORT);
+  })
 })
-
+.catch(function(err){
+  console.log(err)
+})

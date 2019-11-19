@@ -39,7 +39,7 @@ authController.signUp = function (request, response) {
 authController.signIn = function (request, response) {
     var data = request.body
     var session = request.session;
-    // console.log(data)
+     console.log(data)
     Model.signIn(data, session, function (err, message) {
         if (err) {
             return response.render('login', {

@@ -175,4 +175,46 @@ authController.trending = function(req,res){
     })
 }
 
+authController.adminLoginPage = function(req,res){
+    res.render('adminlogin',{
+        layout:"admin.hbs"
+    });
+}
+authController.adminAuthentication = function(req,res){
+    var username = req.body.username;
+    var password = req.body.password;
+    Model.adminAuthentication(username,password,function(error,success){
+        if(error){
+            return res.json({status:400,
+                        message:error
+                });
+        }
+        req.session.user=true;
+        return res.json({status:"200",message:success});
+
+    });
+}
+authController.adminDashboard = function(req,res){
+    if(req.session.user){
+        return res.render('dashboard',{
+            layout:"admin.hbs"
+        });
+    }
+    return res.redirect('/admin');
+}
+authController.adminLogout = function(req,res){
+    if(req.session.user){
+        req.session.destroy(function(err){
+          if(err){
+            next(err)
+          }
+          else{
+            res.clearCookie('assignment')
+            return res.redirect('/admin');
+          }
+        });
+      }
+    else return res.redirect('/admin');
+}
+
 module.exports = authController;

@@ -107,5 +107,22 @@ AuthModel.trending = function(cb){
         return cb(null,res);
     })
 }
+var temp = {
+    "username":"admin",
+    "password":"admin"
+  };
+
+AuthModel.adminAuthentication = function(username,password,cb){
+    if(!username){
+        return cb("Username Required");
+    }
+    if(!password){
+        return cb("Password Required");
+    }
+    if(temp.username==username && temp.password==password){
+        return cb(null,"Verified");
+    }
+    return cb("Invalid Credentials");
+}
 
         module.exports = AuthModel;

@@ -42,10 +42,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage })
 
-var temp = {
-  "username":"admin",
-  "password":"admin"
-};
+
 
  
 app.use(session({
@@ -79,47 +76,12 @@ app.get('/loginpage', function (req, res) {
   res.render('login');
 })
 
-
-app.get('/admin',function(req,res){
-    res.render('adminlogin',{
-      layout:"admin.hbs"
-    });
-})
-app.post('/auth',function(req,res){
-  if(temp.username==req.body.username && temp.password==req.body.password){
-    req.session.user=true;
-    return res.json({status:"200",message:"success"});
-    
-    
-  }
-  return res.json({status:"402",message:"Invalid"});
-})
-app.get('/dashboard',function(req,res){
-  if(req.session.user){
-    return res.render('dashboard',{
-      layout:"admin.hbs"
-    })
-  }
-  return res.redirect('/admin');
-
-  console.log(req.body);
-  
-})
-app.get('/adminlogout',function(req,res){
-  if(req.session.user){
-    req.session.destroy(function(err){
-      if(err){
-        next(err)
-      }else{
-        res.clearCookie('assignment')
-        
-        return res.redirect('/admin');
-      }
-    })
-  }
-
-  else return res.redirect('/admin');
-})
+//ADMIN SECTION START
+app.get('/admin',authRoute.adminLoginPage);
+app.post('/auth',authRoute.adminAuthentication);
+app.get('/dashboard',authRoute.adminDashboard);
+app.get('/adminlogout',authRoute.adminLogout);
+//ADMIN SECTION END
 
 
 app.post('/upload', upload.single('meme'), authRoute.upload)

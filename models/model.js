@@ -44,34 +44,68 @@ AuthModel.singUp = function (req, res, cb) {
 
 AuthModel.signIn = function (req, session, cb) {
 
-    var collection = db.collection('accounts');
-    collection.find({}).toArray(function (err, response) {
-        // console.log(req);
-        if (!err) {
-            var user = null;
-            response.forEach(function (value, index) {
-                if (value.userId === req.userId) {
-                    if (value.password === req.password) {
-                        user = value;
-                    }
+        var collection = db.collection('accounts');
+        collection.find({}).toArray(function (err, response) {
+
+                // console.log(req);
+                if (!err) {
+                    var user = null;
+                    response.forEach(function (value, index) {
+                        if (value.userId === req.userId) {
+                            if (value.password === req.password) {
+                                user = value;
+                            }
+                        }
+                    })
                 }
-            })
+                //console.log(user);
+                if (!user) {
+                    var answer = null;
+                    response.forEach(function (value, index) {
+                            if (value.userId === req.userId) {
+                                if (value.seqQue === req.seqQue) {
+                                    if (value.seqAns === req.seqAns) {
+                                        answer = value
+                                    }
+                                }
+                            }
+                        })
+                        if (!answer){
+                            return cb("data does not match")
+                        } else {
+                            return cb(null, answer.password)
+                        }
+                    }
+                    else {
+                        session.user = user;
+                        console.log(session.user);
+                        return cb(null, "logged in")
+                    }
+                })
         }
-        //console.log(user);
-        if (!user) {
-            return cb("data does not match")
-        } else {
-            session.user = user;
-            console.log(session.user);
-            return cb(null, "logged in")
+   
+
+AuthModel.search = function(search,cb){
+    console.log(search);
+    var collection = db.collection('post');
+    collection.find({$or:[{title:search},{tags:search}]}).toArray(function (err, res) {
+        if(err){
+            return cb(err);
         }
+        console.log(res);
+        return cb(null,res);
     })
 }
-//AuthModel.search = function(search,cb){
-   // var collection = db.collection('accounts');
-    //collection.find({}).toArray(function (err, res) {})
 
+AuthModel.trending = function(cb){
+    var collection = db.collection('post');
+    collection.find().sort({like:-1}).toArray(function(err,res){
+        if(err){
+            return cb(err);
+        }
+        console.log(res);
+        return cb(null,res);
+    })
+}
 
-//}
-
-module.exports = AuthModel;
+        module.exports = AuthModel;

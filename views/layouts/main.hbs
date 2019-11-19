@@ -16,6 +16,8 @@
     <script src="https://kit.fontawesome.com/6957f85b90.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
     <header class="row mx-auto align align-items-center navbar navbar-expand-lg navbar-expand-sm fixed-top">
         <div class="logo col-md-1"><a href="/">
             <img src="memehublogo.jpg" width="60" height="30"></a>
@@ -48,7 +50,10 @@
             
         </div>
         <div class="search-bar col-md-4 mx-auto">
-            <input type="text" placeholder="You are one step away" class="form-control">
+            <form action="/search" method="get">
+            <input type="text" placeholder="You are one step away" class="form-control text" name="search">
+            <input type="submit" class="search-button">
+            </form>
 
         </div>
         <div class="template col-md-2">
@@ -72,7 +77,7 @@
        <ul>
            <a href="#"><li>Home</li></a>
            <a href="#"><li>Explore</li></a>
-           <a href="#"><li>Trending</li></a>
+           <a href="/trending"><li>Trending</li></a>
            <a href="#"><li>What's New</li></a>
            <a href="#" id="upload"><li>Upload</li></a>
        </ul>

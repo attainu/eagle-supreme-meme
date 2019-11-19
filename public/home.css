@@ -24,3 +24,24 @@
     max-width: 100%;
     max-height: 400px;
 }
+.post{
+    display: flex;
+    flex-direction: column;
+}
+.main-reaction{
+    display: block
+}
+.displaylikenumbers{
+    display: block;
+}
+.reactionandshare{
+    display: flex;
+}
+.reaction, .share{
+    display: flex;
+}
+.share{
+    float: right;
+    /* position: relative; */
+    /* top: -25px; */
+}

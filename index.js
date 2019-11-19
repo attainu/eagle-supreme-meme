@@ -3,14 +3,16 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
+
+
 const multer = require('multer');
-const PORT = process.env.PORT || 8081
+const PORT = process.env.PORT || 9090
 
 
 // const session = require('express-session');
 // for parsing multipart/form-data
 
-app.use(express.static('public'));
+
 const session = require('express-session');
 
 //middelwares
@@ -26,6 +28,7 @@ app.engine('.hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
+
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -36,24 +39,15 @@ var storage = multer.diskStorage({
     cb(null, file.originalname)
   }
 })
- 
+
 var upload = multer({ storage: storage })
 
+var temp = {
+  "username":"admin",
+  "password":"admin"
+};
 
-
-// var link = [{
-//     "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
-//   },
-//   {
-//     "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
-//   },
-//   {
-//     "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
-//   },
-//   {
-//     "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
-// // login Session
-
+ 
 app.use(session({
   name: "assignment",
   secret: 'someRandomStuff',
@@ -67,6 +61,7 @@ app.use(session({
     secure: false
   }
 }))
+
 
 
 // controller
@@ -83,6 +78,49 @@ app.get('/', authRoute.home);
 app.get('/loginpage', function (req, res) {
   res.render('login');
 })
+
+
+app.get('/admin',function(req,res){
+    res.render('adminlogin',{
+      layout:"admin.hbs"
+    });
+})
+app.post('/auth',function(req,res){
+  if(temp.username==req.body.username && temp.password==req.body.password){
+    req.session.user=true;
+    return res.json({status:"200",message:"success"});
+    
+    
+  }
+  return res.json({status:"402",message:"Invalid"});
+})
+app.get('/dashboard',function(req,res){
+  if(req.session.user){
+    return res.render('dashboard',{
+      layout:"admin.hbs"
+    })
+  }
+  return res.redirect('/admin');
+
+  console.log(req.body);
+  
+})
+app.get('/adminlogout',function(req,res){
+  if(req.session.user){
+    req.session.destroy(function(err){
+      if(err){
+        next(err)
+      }else{
+        res.clearCookie('assignment')
+        
+        return res.redirect('/admin');
+      }
+    })
+  }
+
+  else return res.redirect('/admin');
+})
+
 
 app.post('/upload', upload.single('meme'), authRoute.upload)
 
@@ -110,7 +148,10 @@ app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
 app.get('/logoutpage', authRoute.logout);
 
 //Search Operation
-//app.get('/search',authRoute.search);
+app.get('/search',authRoute.search);
+
+//Trending Post
+app.get('/trending',authRoute.trending);
 
 
 
@@ -118,3 +159,4 @@ app.get('/logoutpage', authRoute.logout);
 app.listen(PORT, function () {
   console.log('app on >>>>'+ PORT);
 })
+

@@ -147,6 +147,12 @@ app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
 
 app.get('/logoutpage', authRoute.logout);
 
+//Search Operation
+app.get('/search',authRoute.search);
+
+//Trending Post
+app.get('/trending',authRoute.trending);
+
 
 
 

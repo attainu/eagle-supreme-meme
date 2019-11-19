@@ -120,7 +120,7 @@ authController.home = function (req, res) {
     if (typeof req.session.user == "undefined") {
         res.render('home', {
             data: link,
-            logIn: "<a href='/loginpage'>Login </a>"
+            logIn: "<a href='/loginpage'>Login/Signup </a>"
         });
     } else {
         res.render('home', {
@@ -136,6 +136,35 @@ authController.logout = function (req, res) {
     session.destroy();
 
     return res.redirect('/');
+}
+
+authController.search = function(req,res){
+    console.log(req.query);
+    //return res.send(req.query);
+    var search = req.query.search
+    Model.search(search,function(error,success){
+        if(error){
+            return res.render('search',{
+                data:error
+            })
+        }
+        return res.render('search',{
+            data:success
+        })
+
+})
+}
+authController.trending = function(req,res){
+    Model.trending(function(error,success){
+        if(error){
+            return res.render('trending',{
+                data:error
+            })
+        }
+        return res.render('trending',{
+            data:success
+        })
+    })
 }
 
 module.exports = authController;

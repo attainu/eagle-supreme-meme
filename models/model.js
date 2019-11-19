@@ -83,5 +83,46 @@ AuthModel.signIn = function (req, session, cb) {
                     }
                 })
         }
+   
+
+AuthModel.search = function(search,cb){
+    console.log(search);
+    var collection = db.collection('post');
+    collection.find({$or:[{title:search},{tags:search}]}).toArray(function (err, res) {
+        if(err){
+            return cb(err);
+        }
+        console.log(res);
+        return cb(null,res);
+    })
+}
+
+AuthModel.trending = function(cb){
+    var collection = db.collection('post');
+    collection.find().sort({like:-1}).toArray(function(err,res){
+        if(err){
+            return cb(err);
+        }
+        console.log(res);
+        return cb(null,res);
+    })
+}
+var temp = {
+    "username":"admin",
+    "password":"admin"
+  };
+
+AuthModel.adminAuthentication = function(username,password,cb){
+    if(!username){
+        return cb("Username Required");
+    }
+    if(!password){
+        return cb("Password Required");
+    }
+    if(temp.username==username && temp.password==password){
+        return cb(null,"Verified");
+    }
+    return cb("Invalid Credentials");
+}
 
         module.exports = AuthModel;

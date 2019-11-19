@@ -41,7 +41,7 @@ authController.signUp = function (request, response) {
 authController.signIn = function (request, response) {
     var data = request.body
     var session = request.session;
-    // console.log(data)
+     console.log(data)
     Model.signIn(data, session, function (err, message) {
         if (err) {
             return response.render('login', {
@@ -93,9 +93,11 @@ authController.upload = async function (request, response) {
 
 authController.checkIfLoggedIn = function (req, res, next) {
 
-    // console.log("check session " + typeof req.session.user);
-    // console.log("Url " + req.originalUrl);
-    if (req.originalUrl !== '/logoutpage') {
+
+    console.log("check session " + typeof req.session.user);
+    console.log("Url " + req.originalUrl);
+    if (req.originalUrl !== '/logoutpage' && req.originalUrl !== '/upload') {
+
         return next();
     } else {
         if (typeof req.session.user === "undefined") {

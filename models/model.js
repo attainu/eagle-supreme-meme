@@ -17,29 +17,29 @@ MongoClient.connect(url, function (err, client) {
 });
 
 
-AuthModel.singUp = function (req, res, cb) {
-    //  console.log(req);
-    var collection = db.collection('accounts');
-    collection.find({}).toArray(function (err, response) {
-        console.log(response);
-        var user = null;
-        response.forEach(function (value, index) {
-            if (value.userId === req.userId) {
-                user = value;
-                return cb("user already exists")
-            }
-        })
-        if (user === null) {
-            collection.insertOne(req, function (error, response) {
-                if (error) {
-                    return cb(error)
-                } else {
-                    return cb(null, "created user")
-                }
-            });
-        }
-    })
-}
+// AuthModel.singUp = function (req, res, cb) {
+//     //  console.log(req);
+//     var collection = db.collection('accounts');
+//     collection.find({}).toArray(function (err, response) {
+//         console.log(response);
+//         var user = null;
+//         response.forEach(function (value, index) {
+//             if (value.userId === req.userId) {
+//                 user = value;
+//                 return cb("user already exists")
+//             }
+//         })
+//         if (user === null) {
+//             collection.insertOne(req, function (error, response) {
+//                 if (error) {
+//                     return cb(error)
+//                 } else {
+//                     return cb(null, "created user")
+//                 }
+//             });
+//         }
+//     })
+// }
 
 
 AuthModel.signIn = function (req, session, cb) {
@@ -51,7 +51,7 @@ AuthModel.signIn = function (req, session, cb) {
                 if (!err) {
                     var user = null;
                     response.forEach(function (value, index) {
-                        if (value.userId === req.userId) {
+                        if (value.userName === req.userName) {
                             if (value.password === req.password) {
                                 user = value;
                             }
@@ -62,9 +62,9 @@ AuthModel.signIn = function (req, session, cb) {
                 if (!user) {
                     var answer = null;
                     response.forEach(function (value, index) {
-                            if (value.userId === req.userId) {
-                                if (value.seqQue === req.seqQue) {
-                                    if (value.seqAns === req.seqAns) {
+                            if (value.userName === req.userName) {
+                                if (value.securityQuestion === req.securityQuestion) {
+                                    if (value.securityAnswer === req.securityAnswer) {
                                         answer = value
                                     }
                                 }

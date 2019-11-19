@@ -41,7 +41,7 @@ authController.signUp = function (request, response) {
 authController.signIn = function (request, response) {
     var data = request.body
     var session = request.session;
-    // console.log(data)
+     console.log(data)
     Model.signIn(data, session, function (err, message) {
         if (err) {
             return response.render('login', {
@@ -93,9 +93,11 @@ authController.upload = async function (request, response) {
 
 authController.checkIfLoggedIn = function (req, res, next) {
 
-    // console.log("check session " + typeof req.session.user);
-    // console.log("Url " + req.originalUrl);
-    if (req.originalUrl !== '/logoutpage') {
+
+    console.log("check session " + typeof req.session.user);
+    console.log("Url " + req.originalUrl);
+    if (req.originalUrl !== '/logoutpage' && req.originalUrl !== '/upload') {
+
         return next();
     } else {
         if (typeof req.session.user === "undefined") {
@@ -173,6 +175,48 @@ authController.trending = function(req,res){
             data:success
         })
     })
+}
+
+authController.adminLoginPage = function(req,res){
+    res.render('adminlogin',{
+        layout:"admin.hbs"
+    });
+}
+authController.adminAuthentication = function(req,res){
+    var username = req.body.username;
+    var password = req.body.password;
+    Model.adminAuthentication(username,password,function(error,success){
+        if(error){
+            return res.json({status:400,
+                        message:error
+                });
+        }
+        req.session.user=true;
+        return res.json({status:"200",message:success});
+
+    });
+}
+authController.adminDashboard = function(req,res){
+    if(req.session.user){
+        return res.render('dashboard',{
+            layout:"admin.hbs"
+        });
+    }
+    return res.redirect('/admin');
+}
+authController.adminLogout = function(req,res){
+    if(req.session.user){
+        req.session.destroy(function(err){
+          if(err){
+            next(err)
+          }
+          else{
+            res.clearCookie('assignment')
+            return res.redirect('/admin');
+          }
+        });
+      }
+    else return res.redirect('/admin');
 }
 
 module.exports = authController;

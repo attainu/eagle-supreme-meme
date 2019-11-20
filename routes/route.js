@@ -66,17 +66,19 @@ authController.upload = async function (request, response) {
 
     const file = request.file
     console.log(file.path);
-    console.log(data.category);
+    //console.log(data.category);
 
     //tiinify
     const source = await tinify.fromFile("file.path");
     source.toFile("optimized.png");
-    console.log(source);
+    //console.log(source);
+    var newfile = file.path.replace("public","");
 
     var finalImg = {
-        image: file.path,
+        image: newfile,
         category: data.category
     };
+    console.log(finalImg);
 
 
     //store to db
@@ -126,7 +128,7 @@ var link = [{
 ]
 
 authController.home = function (req, res) {
-    console.log(req.session.user);
+    //console.log(req.session.user);
     if (typeof req.session.user == "undefined") {
         res.render('home', {
             data: link,
@@ -196,14 +198,7 @@ authController.adminAuthentication = function(req,res){
 
     });
 }
-authController.adminDashboard = function(req,res){
-    if(req.session.user){
-        return res.render('dashboard',{
-            layout:"admin.hbs"
-        });
-    }
-    return res.redirect('/admin');
-}
+
 authController.adminLogout = function(req,res){
     if(req.session.user){
         req.session.destroy(function(err){
@@ -217,6 +212,37 @@ authController.adminLogout = function(req,res){
         });
       }
     else return res.redirect('/admin');
+}
+authController.adminDashboard = function(req,res){
+    if(req.session.user){
+        Model.adminApproval(function(error,success){
+            if(error){
+                return res.render(error);
+            }
+            //console.log(success);
+            return res.render('dashboard',{
+                layout:"admindashboard",
+                data:success
+              })
+        })
+        
+       }
+        else return res.redirect("/admin");
+
+}
+authController.adminPostApproval = function(req,res){
+    console.log(req.body);
+    Model.adminPostApproval(req.body,function(error,success){
+        res.send({status:200,message:success});
+
+    });
+}
+authController.adminPostDecline = function(req,res){
+    //console.log(req.body);
+    Model.adminPostDecline(req.body,function(error,success){
+        res.send({status:200,message:success});
+
+    });
 }
 
 module.exports = authController;

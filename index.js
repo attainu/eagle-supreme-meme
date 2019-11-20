@@ -65,10 +65,14 @@ app.use(session({
 
 
 // controller
-var authRoute = require('./routes/route.js');
+var authRoute = require('./routes/routeTest.js');
 
 app.use(authRoute.checkIfLoggedIn);
+
 //routes
+
+app.get('/photos/:id', authRoute.renderimage);
+
 app.post('/signup', authRoute.signUp);
 
 app.post('/signin', authRoute.signIn)

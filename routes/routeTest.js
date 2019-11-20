@@ -1,5 +1,7 @@
 const authController = {};
 const Model = require('./../models/model.js');
+const fs = require('fs');
+var ObjectId = require('mongodb').ObjectID;
 const tinify = require("tinify");
 tinify.key = "FGssXbLPvZT54cncJw9CGsjrX807xzYW";
 // tinify.fromFile("unoptimized.png").toFile("optimized.png");
@@ -59,23 +61,26 @@ authController.signIn = function (request, response) {
     })
 }
 
-authController.upload = async function (request, response) {
+authController.upload = async function (req, response) {
+    var img = fs.readFileSync(req.file.path);
+    link.push({image:img});
 
-    var data = request.body;
-    
-    const file = request.file;
+    console.log(link)
+    var encode_image = img.toString('base64');
+    // var data = request.body;
+    var finalImg = {
+        contentType: req.file.mimetype,
+        image: new Buffer(encode_image, 'base64')
+    };
+    // const file = request.file;
     // const destination = '/tmp/'+request.file.path;
     // var source = await tinify.fromFile(request.file.path);
     //  await source.toFile(destination);
-    console.log(file.path)
-    var finalImg = {
-        image: file.path,
-        category: data.category
-    };
+
 
     //store to db
     var collection = db.collection('approval_pending');
-    collection.insertOne(finalImg, function  (error, res) {
+    collection.insertOne(finalImg, function (error, result) {
         if (error) {
             return error
         }
@@ -103,17 +108,20 @@ authController.checkIfLoggedIn = function (req, res, next) {
 }
 
 var link = [{
-        "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
-    },
-    {
-        "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
-    },
-    {
-        "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
-    },
-    {
-        "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
-    }
+    "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
+},
+{
+    "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
+},
+{
+    "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
+},
+{
+    "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
+},
+{    
+    "image": "uploads/3.png"
+}
 ]
 
 authController.home = function (req, res) {
@@ -139,47 +147,58 @@ authController.logout = function (req, res) {
     return res.redirect('/');
 }
 
-authController.search = function(req,res){
+authController.search = function (req, res) {
     console.log(req.query);
     //return res.send(req.query);
     var search = req.query.search
-    Model.search(search,function(error,success){
-        if(error){
-            return res.render('search',{
-                data:error
+    Model.search(search, function (error, success) {
+        if (error) {
+            return res.render('search', {
+                data: error
             })
         }
-        return res.render('search',{
-            data:success
+        return res.render('search', {
+            data: success
         })
 
-})
+    })
 }
-authController.trending = function(req,res){
-    Model.trending(function(error,success){
-        if(error){
-            return res.render('trending',{
-                data:error
+authController.trending = function (req, res) {
+    Model.trending(function (error, success) {
+        if (error) {
+            return res.render('trending', {
+                data: error
             })
         }
-        return res.render('trending',{
-            data:success
+        return res.render('trending', {
+            data: success
         })
     })
 }
 
 authController.renderimage = function (req, res) {
-    db.collection('approval_pending').find().toArray((err, result) => {
- 
-        const imgArray= result.map(element => element._id);
-              for (i=0;i<result.length;i++){
-                  console.log(result[i].image);
-                }
-                // res.send(result[i].image)
-   
-     if (err) return console.log(err)
-     res.send(imgArray)
-   
+    // db.collection('approval_pending').find().toArray((err, result) => {
+
+    //     const imgArray= result.map(element => element._id);
+    //           for (i=0;i<result.length;i++){
+    //               console.log(result[i].image);
+    //             }
+    //             // res.send(result[i].image)
+
+    //  if (err) return console.log(err)
+    //  res.send(imgArray)
+
+    // })
+    var filename = JSON.parse(req.params.id);
+    console.log(filename);
+    db.collection('approval_pending').findOne({ "_id": ObjectId(filename) }, (err, result) => {
+
+        if (err) return console.log(err)
+
+        res.contentType('image/jpeg');
+        res.send(result.image.buffer)
+
+
     })
 }
 

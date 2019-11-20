@@ -26,39 +26,38 @@ MongoClient.connect(url, function (err, client) {
 
 
 // controllers 
-authController.signUp = function (request, response) {
-    var data = request.body;
-    //console.log(data);
-    Model.singUp(data, response, function (err, message) {
-        if (err) {
-            return response.send(err)
-        } else {
-            return response.redirect('/');
-        }
-    })
-}
+// authController.signUp = function (request, response) {
+//     var data = request.body;
+//     //console.log(data);
+//     Model.singUp(data, response, function (err, message) {
+//         if (err) {
+//             return response.send(err)
+//         } else {
+//             return response.redirect('/');
+//         }
+//     })
+// }
 
-authController.signIn = function (request, response) {
-    var data = request.body
-    var session = request.session;
-     console.log(data)
-    Model.signIn(data, session, function (err, message) {
-        if (err) {
-            return response.render('login', {
-                error: err
-            })
-        } else {
-            if (message !== "logged in") {
-                response.render('login', {
-                    pass: ("Password:" + message)
-                })
-            } else {
-                return response.redirect('/');
-            }
-        }
-    })
-}
-
+// authController.signIn = function (request, response) {
+//     var data = request.body
+//     var session = request.session;
+//      console.log(data)
+//     Model.signIn(data, session, function (err, message) {
+//         if (err) {
+//             return response.render('login', {
+//                 error: err
+//             })
+//         } else {
+//             if (message !== "logged in") {
+//                 response.render('login', {
+//                     pass: ("Password:" + message)
+//                 })
+//             } else {
+//                 return response.redirect('/');
+//             }
+//         }
+//     })
+// }
 
 authController.upload = async function (request, response) {
         
@@ -93,11 +92,9 @@ authController.upload = async function (request, response) {
 
 authController.checkIfLoggedIn = function (req, res, next) {
 
-
-    console.log("check session " + typeof req.session.user);
+    console.log("check session " + req.session.user);
     console.log("Url " + req.originalUrl);
     if (req.originalUrl !== '/logoutpage' && req.originalUrl !== '/upload') {
-
         return next();
     } else {
         if (typeof req.session.user === "undefined") {

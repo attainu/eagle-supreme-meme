@@ -1,43 +1,32 @@
+<div class="content">
 
-    
-        <div class="content">
-
-{{#each data}}
-<div class="post">
+  {{#each data}}
+  <div class="post">
     <div class="image">
-        <img class="content-image" src="{{this.url}}">
-        
+      <img class="content-image" src="{{this.url}}">
+
     </div>
     <div class="main-reaction">
-        <div class="displaylikenumbers">
-            <span>{{this.like}}Likes</span>
-        </div>
-        <div class="reactionandshare">
+      <div class="displaylikenumbers">
+        <span>{{this.like}}Likes</span>
+      </div>
+      <div class="reactionandshare">
         <div class="reaction">
-            <div class="likebutton"><div class="heart">❤</div>
-		</div>
-            <div class="comment"> Comment Section</div>
-            <div class="wishlist"> WishList</div>
+          <div class="likebutton">
+            <div class="heart" id={{this._id}}>❤ like</div>
+          </div>
+          <div class="comment"> Comment Section</div>
+          <div class="wishlist"> WishList</div>
         </div>
         <div class="share">
-            <div class="fb-share-button" data-href={{this.url}} data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{this.url}}" class="fb-xfbml-parse-ignore">Share</a></div>
-            <div class="twitter">T</div>
+          <div class="fb-share-button" data-href={{this.url}} data-layout="button" data-size="large"><a target="_blank"
+              href="https://www.facebook.com/sharer/sharer.php?u={{this.url}}" class="fb-xfbml-parse-ignore">Share</a>
+          </div>
+          <div class="twitter">T</div>
         </div>
-        </div>
+      </div>
     </div>
+  </div>
+  {{/each}}
 </div>
-{{/each}}
-</div>
-<script>
-			var animated = false;
-			$('.heart').on('click',function(){
-			  if(!animated){
-			    $(this).addClass('happy').removeClass('broken');
-			    animated = true;
-			  }
-			  else {
-			    $(this).removeClass('happy').addClass('broken');
-			    animated = false;
-			  }
-			}); 
-		</script>
+<script src="like.js"></script>

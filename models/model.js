@@ -44,47 +44,47 @@ MongoClient.connect(url, function (err, client) {
 // }
 
 
-AuthModel.signIn = function (req, session, cb) {
+// AuthModel.signIn = function (req, session, cb) {
 
-        var collection = db.collection('accounts');
-        collection.find({}).toArray(function (err, response) {
+//         var collection = db.collection('accounts');
+//         collection.find({}).toArray(function (err, response) {
 
-                // console.log(req);
-                if (!err) {
-                    var user = null;
-                    response.forEach(function (value, index) {
-                        if (value.userName === req.userName) {
-                            if (value.password === req.password) {
-                                user = value;
-                            }
-                        }
-                    })
-                }
-                //console.log(user);
-                if (!user) {
-                    var answer = null;
-                    response.forEach(function (value, index) {
-                            if (value.userName === req.userName) {
-                                if (value.securityQuestion === req.securityQuestion) {
-                                    if (value.securityAnswer === req.securityAnswer) {
-                                        answer = value
-                                    }
-                                }
-                            }
-                        })
-                        if (!answer){
-                            return cb("data does not match")
-                        } else {
-                            return cb(null, answer.password)
-                        }
-                    }
-                    else {
-                        session.user = user;
-                        console.log(session.user);
-                        return cb(null, "logged in")
-                    }
-                })
-        }
+//                 // console.log(req);
+//                 if (!err) {
+//                     var user = null;
+//                     response.forEach(function (value, index) {
+//                         if (value.userName === req.userName) {
+//                             if (value.password === req.password) {
+//                                 user = value;
+//                             }
+//                         }
+//                     })
+//                 }
+//                 //console.log(user);
+//                 if (!user) {
+//                     var answer = null;
+//                     response.forEach(function (value, index) {
+//                             if (value.userName === req.userName) {
+//                                 if (value.securityQuestion === req.securityQuestion) {
+//                                     if (value.securityAnswer === req.securityAnswer) {
+//                                         answer = value
+//                                     }
+//                                 }
+//                             }
+//                         })
+//                         if (!answer){
+//                             return cb("data does not match")
+//                         } else {
+//                             return cb(null, answer.password)
+//                         }
+//                     }
+//                     else {
+//                         session.user = user;
+//                         console.log(session.user);
+//                         return cb(null, "logged in")
+//                     }
+//                 })
+//         }
    
 
 AuthModel.search = function(search,cb){
@@ -105,7 +105,7 @@ AuthModel.trending = function(cb){
         if(err){
             return cb(err);
         }
-        console.log(res);
+       // console.log(res);
         return cb(null,res);
     })
 }

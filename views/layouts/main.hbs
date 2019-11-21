@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meme Hub</title>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="home.css">
+    <script src="https://kit.fontawesome.com/6957f85b90.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
+    <header class="row mx-auto align align-items-center navbar navbar-expand-lg navbar-expand-sm fixed-top">
+        <div class="logo col-md-1"><a href="/">
+            <img src="memehublogo.jpg" width="60" height="30"></a>
+        </div>
+        <div class="categories col-md-1 mx-auto">
+                <div class="hover">
+                    <span class="fontstyle">Categories</span>
+                        <div class="list">
+                        <ul>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                    
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        <li><a href="#">List</a></li>
+                        
+                        
+                    </ul>
+                    </div>
+                </div>
+                  
+                
+                    
+            
+        </div>
+        <div class="search-bar col-md-4 mx-auto">
+            <form action="/search" method="get">
+            <input type="text" placeholder="You are one step away" class="form-control text" name="search">
+            <input type="submit" class="search-button">
+            </form>
+
+        </div>
+        <div class="template col-md-2">
+            <span class="fontstyle"><a href="#">Template</a></span>
+
+        </div>
+
+         <div class="template col-md-2">
+            <span class="fontstyle"><a href="/userProfile">Profile</a></span>
+            
+
+        </div>
+
+        <div class="wishlist col-md-1">
+            <span>Icon</span>
+
+        </div>
+
+        <div class="login-signup col-md-1">
+            <span class="fontstyle">{{{logIn}}}</span>
+
+        </div>
+        
+        
+    </header>
+    <div class="side-nav">
+       <ul>
+           <a href="#"><li>Home</li></a>
+           <a href="#"><li>Explore</li></a>
+           <a href="/trending"><li>Trending</li></a>
+           <a href="#"><li>What's New</li></a>
+           <a href="#" id="upload"><li>Upload</li></a>
+       </ul>
+    </div>
+    <div class="promoted">
+        Promoted
+    </div>
+    
+    {{{body}}}
+    
+    <script src="postupload.js"></script>
+</body>
+</html>

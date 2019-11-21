@@ -63,9 +63,9 @@ authController.signIn = function (request, response) {
 
 authController.upload = async function (req, response) {
     var img = fs.readFileSync(req.file.path);
-    link.push({image:img});
+    // link.push({image:'http://localhost:9094/photos/"5dd541039b4e983a8917f6d3"'});
 
-    console.log(link)
+    // console.log(link)
     var encode_image = img.toString('base64');
     // var data = request.body;
     var finalImg = {
@@ -81,11 +81,15 @@ authController.upload = async function (req, response) {
     //store to db
     var collection = db.collection('approval_pending');
     collection.insertOne(finalImg, function (error, result) {
+        var insertedImgId = result.insertedId;
+        // console.log(insertedImgId);
+        
+        link.push({image:`http://localhost:9094/photos/"${insertedImgId}"`});
         if (error) {
             return error
         }
-        return response.send('info uploaded, redirecting....');
-        // response.redirect("/")
+        // return response.send('info uploaded, redirecting....');
+        response.redirect("/")
     });
 }
 
@@ -107,25 +111,10 @@ authController.checkIfLoggedIn = function (req, res, next) {
     }
 }
 
-var link = [{
-    "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
-},
-{
-    "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
-},
-{
-    "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
-},
-{
-    "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
-},
-{    
-    "image": "uploads/3.png"
-}
-]
+
 
 authController.home = function (req, res) {
-    console.log(req.session.user);
+    // console.log(req.session.user);
     if (typeof req.session.user == "undefined") {
         res.render('home', {
             data: link,
@@ -175,7 +164,7 @@ authController.trending = function (req, res) {
         })
     })
 }
-
+// var filename = 1;
 authController.renderimage = function (req, res) {
     // db.collection('approval_pending').find().toArray((err, result) => {
 
@@ -190,16 +179,33 @@ authController.renderimage = function (req, res) {
 
     // })
     var filename = JSON.parse(req.params.id);
-    console.log(filename);
+    // console.log(filename);
     db.collection('approval_pending').findOne({ "_id": ObjectId(filename) }, (err, result) => {
-
+        // link.push({"image":'http://localhost:9094/photos/"5dd605e3063bc9625af530a9"'});
         if (err) return console.log(err)
 
         res.contentType('image/jpeg');
-        res.send(result.image.buffer)
+        res.send(result.image.buffer);
 
 
     })
 }
+
+var link = [{
+    "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
+},
+{
+    "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
+},
+{
+    "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
+},
+{
+    "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
+},
+{    
+    "image": 'http://localhost:9094/photos/"5dd605e3063bc9625af530a9"'
+}
+]
 
 module.exports = authController;

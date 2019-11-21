@@ -34,7 +34,7 @@ app.set('view engine', '.hbs');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     // console.log(file);
-    cb(null, 'uploads/')
+    cb(null, 'public/uploads/')
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
@@ -87,6 +87,9 @@ app.get('/admin',authRoute.adminLoginPage);
 app.post('/auth',authRoute.adminAuthentication);
 app.get('/dashboard',authRoute.adminDashboard);
 app.get('/adminlogout',authRoute.adminLogout);
+app.post('/approval',authRoute.adminPostApproval);
+app.post('/decline',authRoute.adminPostDecline);
+
 //ADMIN SECTION END
 
 

@@ -1,4 +1,6 @@
 const AuthModel = {};
+const ObjectId = require('mongodb').ObjectID
+
 
 // mongo db
 const mongodb = require('mongodb');
@@ -123,6 +125,52 @@ AuthModel.adminAuthentication = function(username,password,cb){
         return cb(null,"Verified");
     }
     return cb("Invalid Credentials");
+}
+
+AuthModel.adminApproval = function(cb){
+    var collection = db.collection('approval_pending');
+    collection.find().toArray(function(err,res){
+        if(err){
+            return cb(err)
+        }
+        return cb(null,res);
+    })
+
+}
+AuthModel.adminPostApproval = function(postID,cb){
+    var collection1 = db.collection('approval_pending');
+    var collection2 = db.collection('post');
+    //console.log(postID.id);
+    var newID = ObjectId(postID.id);
+    collection1.find({_id: newID}).toArray(function(err,res){
+        if(err){
+            return cb(err);
+        }
+        console.log("This is a response",res);
+        collection2.insertMany(res);
+        collection1.remove({_id: newID});
+        console.log("successful")
+        return cb(null,"Accepted");
+        //return cb(null,"Successful");
+        
+    })
+    
+    
+}
+AuthModel.adminPostDecline = function(postID,cb){
+    var collection = db.collection('approval_pending');
+   // var collection2 = db.collection('post');
+    //console.log(postID.id);
+    var newID = ObjectId(postID.id);
+    
+        collection.remove({_id: newID});
+        console.log("successful")
+        return cb(null,"Decline");
+        //return cb(null,"Successful");
+        
+    
+    
+    
 }
 
         module.exports = AuthModel;

@@ -5,7 +5,7 @@ const account = require('./Account.js');
 const reaction = require('./Reaction.js');
 
 function connect() {
-    return mongoose.connect('mongodb://localhost:27017/meme-hub', { useNewUrlParser: true});
+    return mongoose.connect('mongodb://localhost:27017/meme-hub',  { useNewUrlParser: true, useCreateIndex:true});
 }
 
 module.exports = {

@@ -79,7 +79,8 @@ app.get('/loginpage', function (req, res) {
 })
 
 // reaction
-app.post('/like', controllers.reactionController.like);
+app.post('/like', authRoute.like);
+app.post('/likeCount', authRoute.likeCount);
 
 //ADMIN SECTION START
 app.get('/admin',authRoute.adminLoginPage);

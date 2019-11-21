@@ -1,27 +1,28 @@
 const mongoose = require('mongoose');
 
 const reactionSchema = new mongoose.Schema({
-    accountId: {
-        type: String,
-      //  required: true,
-        unique:true
-    },
-    postId: {
+    _id: {
         type: String,
         required: true
     },
+    accountId: {
+        type: String,
+        required: true,
+    },
+    postId: {
+        type: String,
+        required: true,
+    },
     like: {
         type: Boolean,
-        required: true,           
+        required: true,
     },
     createdAt: {
         type: Date,
         default: (new Date())
     }
-}, {
-    collection: 'reactions'
 });
 
-const Reaction = mongoose.model('Reaction', reactionSchema);
+const Reaction = mongoose.model('reactions', reactionSchema);
 
 module.exports = Reaction;

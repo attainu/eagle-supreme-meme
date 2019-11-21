@@ -61,7 +61,7 @@ authController.signIn = function (request, response) {
     })
 }
 
-authController.upload = async function (req, response) {
+authController.upload =  function (req, response) {
     var img = fs.readFileSync(req.file.path);
     // link.push({image:'http://localhost:9094/photos/"5dd541039b4e983a8917f6d3"'});
 

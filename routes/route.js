@@ -135,27 +135,6 @@ authController.likeCount = function (req, res) {
 }
 
 
-// authController.signIn = function (request, response) {
-//     var data = request.body
-//     var session = request.session;
-//      console.log(data)
-//     Model.signIn(data, session, function (err, message) {
-//         if (err) {
-//             return response.render('login', {
-//                 error: err
-//             })
-//         } else {
-//             if (message !== "logged in") {
-//                 response.render('login', {
-//                     pass: ("Password:" + message)
-//                 })
-//             } else {
-//                 return response.redirect('/');
-//             }
-//         }
-//     })
-// }
-
 authController.upload = async function (request, response) {
 
     var data = request.body;

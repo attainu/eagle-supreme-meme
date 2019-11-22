@@ -10,6 +10,7 @@ $(document).ready(function () {
                 "time" : (new Date()).getTime()
             }
             $("#likeCount" + data.postId).empty();
+            $("#likeCountC"+data.postId).empty()
             $(this).addClass('happy').removeClass('broken');
         } else {
             data = {
@@ -18,6 +19,7 @@ $(document).ready(function () {
                 "time" : (new Date()).getTime()
             }
             $("#likeCount" + data.postId).empty();
+            $("#likeCountC"+data.postId).empty()
             $(this).removeClass('happy').addClass('broken');
         }
         console.log(data);
@@ -36,6 +38,7 @@ $(document).ready(function () {
                         success: function (res){
                             console.log(res, data.postId)
                             $("#likeCount"+data.postId).append("Likes "+ res);
+                            $("#likeCountC"+data.postId).append("Likes "+ res)
                         }
                     })
                 }

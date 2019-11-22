@@ -49,56 +49,57 @@ authController.like = function (req, res) {
                     return res.send("done")
                 }
             });
-        }
+        } else {
 
-        var exists = null
-        for (var i = 0; i < response.length; i++) {
-            console.log('1')
-            console.log(response[i].postId, req.body.postId, response[i].accountId, req.session.user[0]._id)
-            if (response[i].accountId !== req.session.user[0]._id) {
-                console.log("2")
-                exists = false
-            }
-            if (response[i].accountId === req.session.user[0]._id) {
-                console.log("3.1");
-                if (response[i].postId === req.body.postId) {
-                    console.log("3")
-                    exists = true
-                    break;
-                } else {
+            var exists = null
+            for (var i = 0; i < response.length; i++) {
+                console.log('1')
+                console.log(response[i].postId, req.body.postId, response[i].accountId, req.session.user[0]._id)
+                if (response[i].accountId !== req.session.user[0]._id) {
+                    console.log("2")
                     exists = false
                 }
-            }
-            console.log(exists)
-        };
-        if (exists === false) {
-            collection.insertOne({
-                accountId: req.session.user[0]._id,
-                postId: req.body.postId,
-                like: req.body.like
-            }, function (error, response) {
-                console.log("1")
-                if (error) {
-                    return res.send(error)
-                } else {
-                    return res.send("done")
+                if (response[i].accountId === req.session.user[0]._id) {
+                    console.log("3.1");
+                    if (response[i].postId === req.body.postId) {
+                        console.log("3")
+                        exists = true
+                        break;
+                    } else {
+                        exists = false
+                    }
                 }
-            })
-        } else {
-            collection.updateOne({
-                accountId: req.session.user[0]._id,
-                postId: req.body.postId
-            }, {
-                $set: {
+                console.log(exists)
+            };
+            if (exists === false) {
+                collection.insertOne({
+                    accountId: req.session.user[0]._id,
+                    postId: req.body.postId,
                     like: req.body.like
-                }
-            }, function (err, result) {
-                if (!err) {
-                    console.log("2")
-                    return res.send("done")
-                }
-                //  console.log(result)
-            })
+                }, function (error, response) {
+                    console.log("1")
+                    if (error) {
+                        return res.send(error)
+                    } else {
+                        return res.send("done")
+                    }
+                })
+            } else {
+                collection.updateOne({
+                    accountId: req.session.user[0]._id,
+                    postId: req.body.postId
+                }, {
+                    $set: {
+                        like: req.body.like
+                    }
+                }, function (err, result) {
+                    if (!err) {
+                        console.log("2")
+                        return res.send("done")
+                    }
+                    //  console.log(result)
+                })
+            }
         }
     })
 }
@@ -118,40 +119,21 @@ authController.likeCount = function (req, res) {
             }
         })
         console.log(count);
-        // collectionPost.find({}).toArray(function(err, res){
-        //     console.log(typeof res[0]._id, typeof res[0].like, typeof res[0].title)
-        //     res.forEach(function(value, index) {
-        //         if(value._id === parseInt(req.body.postId)){
-        //             console.log(value._id, req.body.postId)
-        //         }
-        //     }); 
-        // })
+
         collectionPost.updateOne({
             _id: ObjectID(req.body.postId)
-        },{
+        }, {
             $set: {
-                like: count 
+                like: count
             }
-        }, function(err, response){
-            if(!err){
+        }, function (err, response) {
+            if (!err) {
                 return res.send(JSON.stringify(count))
             }
         })
     });
 }
 
-// controllers 
-// authController.signUp = function (request, response) {
-//     var data = request.body;
-//     //console.log(data);
-//     Model.singUp(data, response, function (err, message) {
-//         if (err) {
-//             return response.send(err)
-//         } else {
-//             return response.redirect('/');
-//         }
-//     })
-// }
 
 // authController.signIn = function (request, response) {
 //     var data = request.body
@@ -186,7 +168,7 @@ authController.upload = async function (request, response) {
     const source = await tinify.fromFile("file.path");
     source.toFile("optimized.png");
     //console.log(source);
-    var newfile = file.path.replace("public","");
+    var newfile = file.path.replace("public", "");
 
     var finalImg = {
         image: newfile,
@@ -316,47 +298,51 @@ authController.adminAuthentication = function (req, res) {
 }
 
 
-authController.adminLogout = function(req,res){
-    if(req.session.user){
-        req.session.destroy(function(err){
-          if(err){
-            next(err)
-          }
-          else{
-            res.clearCookie('assignment')
-            return res.redirect('/admin');
-          }
+authController.adminLogout = function (req, res) {
+    if (req.session.user) {
+        req.session.destroy(function (err) {
+            if (err) {
+                next(err)
+            } else {
+                res.clearCookie('assignment')
+                return res.redirect('/admin');
+            }
         });
     } else return res.redirect('/admin');
 }
-authController.adminDashboard = function(req,res){
-    if(req.session.user){
-        Model.adminApproval(function(error,success){
-            if(error){
+authController.adminDashboard = function (req, res) {
+    if (req.session.user) {
+        Model.adminApproval(function (error, success) {
+            if (error) {
                 return res.render(error);
             }
             //console.log(success);
-            return res.render('dashboard',{
-                layout:"admindashboard",
-                data:success
-              })
+            return res.render('dashboard', {
+                layout: "admindashboard",
+                data: success
+            })
         })
-        
-       }
-        else return res.redirect("/admin");
+
+    } else return res.redirect("/admin");
 
 }
-authController.adminPostApproval = function(req,res){
+authController.adminPostApproval = function (req, res) {
     console.log(req.body);
-    Model.adminPostApproval(req.body,function(error,success){
-        res.send({status:200,message:success});
+    Model.adminPostApproval(req.body, function (error, success) {
+        res.send({
+            status: 200,
+            message: success
+        });
 
     });
 }
-authController.adminPostDecline = function(req,res){
+authController.adminPostDecline = function (req, res) {
     //console.log(req.body);
-    Model.adminPostDecline(req.body,function(error,success){
-        res.send({status:200,message:success});
+    Model.adminPostDecline(req.body, function (error, success) {
+        res.send({
+            status: 200,
+            message: success
+        });
 
     });
 }

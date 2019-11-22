@@ -6,7 +6,7 @@
     /* display: block; */
     /* align-items: center; */
     /* justify-content: center; */
-    background: rgb(255, 255, 255);
+    background: rgb(239, 239, 239);
     width: 600px;
     /* top: 65px; */
     left: 28%;
@@ -27,6 +27,14 @@
 .post{
     display: flex;
     flex-direction: column;
+
+    background: #f9f9f9;
+    border-radius: 18px;
+    margin-bottom: 14px;
+    padding: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
+
 }
 .main-reaction{
     display: block
@@ -36,12 +44,28 @@
 }
 .reactionandshare{
     display: flex;
+    position: relative;
+    width: 580px;
 }
 .reaction, .share{
     display: flex;
 }
 .share{
     float: right;
-    /* position: relative; */
-    /* top: -25px; */
+
+    display: flex
+    /* top: -25px; */;
+    /* background-color: white; */
+    position: absolute;
+    right: 10px;
+}
+.likebutton{
+    position: relative;
+    top: -23px;
+    left: 37px;
+}
+.comment{
+    position: relative;
+    left: 102px;
+
 }

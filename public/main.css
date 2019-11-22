@@ -197,6 +197,27 @@ text-decoration: none;
 }
 
 
+.wishlistcontent{
+  height: 41px;
+  width: 41px;
+  position: relative;
+  right: -223px;
+  top: -4px;
+}
+.postwishlist{
+  height: 29px;
+  width: 29px;
+}
+.displaylikenumbers span{
+  font-family: sans-serif;
+  font-weight: bold;
+  color:rgb(0, 84, 0);
+  font-size: 13px;
+  position: relative;
+  left: 45px;
+}
+
+
 
 
 
@@ -304,4 +325,30 @@ text-decoration: none;
       opacity: 0;
       transform: scale(3) translateX(30px) rotateZ(25deg) translateY(50px);
     }
+
   }
+  .categoryTitle{
+    clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
+    width: 152px;
+    height: 20px;
+    background: black;
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    position: relative;
+    left: -25px;
+  }
+  .titledesign{
+    height: 16px;
+    width: 21px;
+    background: #484848;
+    position: relative;
+    top: 24px;
+    left: -25px;
+    transform: skewY(24deg);
+  }
+
+

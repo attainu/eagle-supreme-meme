@@ -85,6 +85,18 @@ AuthModel.signIn = function (req, session, cb) {
                     }
                 })
         }
+AuthModel.home = function(cb){
+    
+    var collection = db.collection('post');
+    collection.find().limit(10).toArray(function(err,res){
+        if(err){
+            return cb(err);
+        }
+        console.log(res);
+        return cb(null,res);
+    })
+}
+
    
 
 AuthModel.search = function(search,cb){
@@ -101,7 +113,7 @@ AuthModel.search = function(search,cb){
 
 AuthModel.trending = function(cb){
     var collection = db.collection('post');
-    collection.find().sort({like:-1}).toArray(function(err,res){
+    collection.find().limit(10).sort({like:-1}).toArray(function(err,res){
         if(err){
             return cb(err);
         }

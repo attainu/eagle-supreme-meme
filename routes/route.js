@@ -128,18 +128,27 @@ var link = [{
 ]
 
 authController.home = function (req, res) {
-    //console.log(req.session.user);
-    if (typeof req.session.user == "undefined") {
-        res.render('home', {
-            data: link,
-            logIn: "<a href='/loginpage'>Login/Signup </a>"
-        });
-    } else {
-        res.render('home', {
-            data: link,
-            logIn: "<a href='/logoutpage'>Logout</a>"
-        });
-    }
+    Model.home(function(error,success){
+        if(error){
+            return res.render('home',{
+                data:error
+            })
+        }
+        if (typeof req.session.user == "undefined") {
+            return res.render('home', {
+                data: success,
+                logIn: "<a href='/loginpage'>Login/Signup </a>"
+            });
+        } else {
+            return res.render('trending', {
+                data: success,
+                logIn: "<a href='/logoutpage'>Logout</a>"
+            });
+        }
+        //return res.render('trending',{
+          //  data:success
+        //})
+    })
 }
 
 authController.logout = function (req, res) {
@@ -160,9 +169,20 @@ authController.search = function(req,res){
                 data:error
             })
         }
-        return res.render('search',{
-            data:success
-        })
+        if (typeof req.session.user == "undefined") {
+            return res.render('search', {
+                data: success,
+                logIn: "<a href='/loginpage'>Login/Signup </a>"
+            });
+        } else {
+            return res.render('search', {
+                data: success,
+                logIn: "<a href='/logoutpage'>Logout</a>"
+            });
+        }
+        //return res.render('search',{
+            //data:success
+        //})
 
 })
 }
@@ -173,9 +193,20 @@ authController.trending = function(req,res){
                 data:error
             })
         }
-        return res.render('trending',{
-            data:success
-        })
+        if (typeof req.session.user == "undefined") {
+            return res.render('trending', {
+                data: success,
+                logIn: "<a href='/loginpage'>Login/Signup </a>"
+            });
+        } else {
+            return res.render('trending', {
+                data: success,
+                logIn: "<a href='/logoutpage'>Logout</a>"
+            });
+        }
+        //return res.render('trending',{
+          //  data:success
+        //})
     })
 }
 
@@ -243,6 +274,9 @@ authController.adminPostDecline = function(req,res){
         res.send({status:200,message:success});
 
     });
+}
+authController.editor = function(req,res){
+    res.render('editor')
 }
 
 module.exports = authController;

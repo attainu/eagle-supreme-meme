@@ -6,7 +6,7 @@
     /* display: block; */
     /* align-items: center; */
     /* justify-content: center; */
-    background: rgb(255, 255, 255);
+    background: rgb(239, 239, 239);
     width: 600px;
     /* top: 65px; */
     left: 28%;
@@ -31,6 +31,8 @@
     border-radius: 18px;
     margin-bottom: 14px;
     padding: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 .main-reaction{
     display: block
@@ -40,6 +42,8 @@
 }
 .reactionandshare{
     display: flex;
+    position: relative;
+    width: 580px;
 }
 .reaction{
     display: flex;
@@ -54,7 +58,8 @@
 }
 .likebutton{
     position: relative;
-    top: -22px;
+    top: -23px;
+    left: 37px;
 }
 .comment{
     position: relative;

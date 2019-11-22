@@ -42,9 +42,9 @@ authController.like = function (req, res) {
                 postId: req.body.postId,
                 like: req.body.like
             }, function (error, response) {
-                console.log("no ex new data")
+                console.log("1")
                 if (error) {
-                    return res.send("ins1"+error)
+                    return res.send(error)
                 } else {
                     return res.send("done")
                 }
@@ -53,10 +53,10 @@ authController.like = function (req, res) {
 
         var exists = null
         for (var i = 0; i < response.length; i++) {
-         //   console.log('1')
+            console.log('1')
             console.log(response[i].postId, req.body.postId, response[i].accountId, req.session.user[0]._id)
             if (response[i].accountId !== req.session.user[0]._id) {
-                console.log("w1")
+                console.log("2")
                 exists = false
             }
             if (response[i].accountId === req.session.user[0]._id) {
@@ -66,7 +66,6 @@ authController.like = function (req, res) {
                     exists = true
                     break;
                 } else {
-                    console.log("w2")
                     exists = false
                 }
             }
@@ -78,11 +77,10 @@ authController.like = function (req, res) {
                 postId: req.body.postId,
                 like: req.body.like
             }, function (error, response) {
-                
+                console.log("1")
                 if (error) {
-                    return res.send("ins"+error)
+                    return res.send(error)
                 } else {
-                    console.log("inserted")
                     return res.send("done")
                 }
             })
@@ -95,9 +93,8 @@ authController.like = function (req, res) {
                     like: req.body.like
                 }
             }, function (err, result) {
-                console.log("upp: "+err)
                 if (!err) {
-                    console.log("updated")
+                    console.log("2")
                     return res.send("done")
                 }
                 //  console.log(result)
@@ -243,27 +240,18 @@ var link = [{
 ]
 
 authController.home = function (req, res) {
-    Model.home(function(error,success){
-        if(error){
-            return res.render('home',{
-                data:error
-            })
-        }
-        if (typeof req.session.user == "undefined") {
-            return res.render('home', {
-                data: success,
-                logIn: "<a href='/loginpage'>Login/Signup </a>"
-            });
-        } else {
-            return res.render('trending', {
-                data: success,
-                logIn: "<a href='/logoutpage'>Logout</a>"
-            });
-        }
-        //return res.render('trending',{
-          //  data:success
-        //})
-    })
+    //console.log(req.session.user);
+    if (typeof req.session.user == "undefined") {
+        res.render('home', {
+            data: link,
+            logIn: "<a href='/loginpage'>Login/Signup </a>"
+        });
+    } else {
+        res.render('home', {
+            data: link,
+            logIn: "<a href='/logoutpage'>Logout</a>"
+        });
+    }
 }
 
 authController.logout = function (req, res) {
@@ -284,22 +272,9 @@ authController.search = function (req, res) {
                 data: error
             })
         }
-
-        if (typeof req.session.user == "undefined") {
-            return res.render('search', {
-                data: success,
-                logIn: "<a href='/loginpage'>Login/Signup </a>"
-            });
-        } else {
-            return res.render('search', {
-                data: success,
-                logIn: "<a href='/logoutpage'>Logout</a>"
-            });
-        }
-        //return res.render('search',{
-            //data:success
-        //})
-
+        return res.render('search', {
+            data: success
+        })
 
     })
 }
@@ -310,22 +285,9 @@ authController.trending = function (req, res) {
                 data: error
             })
         }
-
-        if (typeof req.session.user == "undefined") {
-            return res.render('trending', {
-                data: success,
-                logIn: "<a href='/loginpage'>Login/Signup </a>"
-            });
-        } else {
-            return res.render('trending', {
-                data: success,
-                logIn: "<a href='/logoutpage'>Logout</a>"
-            });
-        }
-        //return res.render('trending',{
-          //  data:success
-        //})
-
+        return res.render('trending', {
+            data: success
+        })
     })
 }
 
@@ -397,9 +359,6 @@ authController.adminPostDecline = function(req,res){
         res.send({status:200,message:success});
 
     });
-}
-authController.editor = function(req,res){
-    res.render('editor')
 }
 
 module.exports = authController;

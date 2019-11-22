@@ -29,7 +29,6 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response);
                 if (response === "done"){
-                    console.log(response);
                     $.ajax({
                         url: "/likeCount",
                         method: "post",

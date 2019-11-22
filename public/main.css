@@ -5,6 +5,100 @@ body{
     padding: 0;
     
 }
+.loader{
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99998;
+  
+  background: rgba(224, 224, 224, 0.9);
+}
+.preloader{
+  position: absolute;
+  z-index: 99999;
+  transform: translateY(50%);
+ 
+  
+  
+}
+.center{
+  
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.dot{
+  width: 10px;
+  height: 10px;
+  background: #f00;
+  border-radius: 50%;
+}
+.small{
+  padding: 10px;
+  border-top: 2px solid transparent;
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid #262626;
+  border-left: 2px solid #262626;
+  border-radius: 50%;
+  animation: small 1s linear infinite;
+}
+.medium{
+  padding: 10px;
+  border-top: 2px solid #262626;
+  border-right: 2px solid #262626;
+  border-bottom: 2px solid transparent;
+  border-left: 2px solid transparent;
+  border-radius: 50%;
+  animation: medium 1s linear infinite;
+}
+.large{
+  padding: 10px;
+  border-top: 2px solid transparent;
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid #262626;
+  border-left: 2px solid #262626;
+  border-radius: 50%;
+  animation: large 2s linear infinite;
+}
+@keyframes small
+{
+     0%
+     {
+       transform: rotate(720deg);
+     }
+     100%
+     {
+       transform: rotate(0deg);
+     }
+}
+@keyframes medium
+{
+     0%
+     {
+       transform: rotate(720deg);
+     }
+     100%
+     {
+       transform: rotate(0deg);
+     }
+}
+@keyframes large
+{
+     0%
+     {
+       transform: rotate(0deg);
+     }
+     100%
+     {
+       transform: rotate(720deg);
+     }
+}
+
+
 
 header{
     width: 100%;
@@ -188,14 +282,50 @@ text-decoration: none;
 }
 .promoted{
     position: fixed;
-    top: 100px;
+    top: 73px;
     right: 10px;
-    width: 200px;
+    width: 341px;
     height: 80vh;
     overflow: scroll;
-    background: #979797
+    background: #e3e3e3;
+    border-radius: 5px;
+
+  -webkit-scrollbar{
+      width: 1em;
+      height: 1em;
+  }
+  ::-webkit-scrollbar-button {
+      background: #ccc;
+  }
+  ::-webkit-scrollbar-track-piece {
+      background: #888;
+  }
+  ::-webkit-scrollbar-thumb {
+      background: #eee;
+  }
+}
+.wishlist{
+  height: 41px;
+  width: 41px;
 }
 
+.wishlistcontent{
+  height: 41px;
+  width: 41px;
+  position: relative;
+  right: -211px;
+  top: -9px;
+}
+.postwishlist{
+  height: 41px;
+  width: 41px;
+}
+.displaylikenumbers span{
+  font-family: sans-serif;
+  font-weight: bold;
+  color:rgb(0, 84, 0);
+
+}
 
 
 
@@ -305,3 +435,4 @@ text-decoration: none;
       transform: scale(3) translateX(30px) rotateZ(25deg) translateY(50px);
     }
   }
+

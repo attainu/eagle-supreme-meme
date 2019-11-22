@@ -1,7 +1,7 @@
 .content{
     margin-top: 50px;
     height: auto;
-    border: 1px solid #f1f1f1;
+    border: 1px solid #999999;
     position: absolute;
     /* display: block; */
     /* align-items: center; */
@@ -27,12 +27,14 @@
 .post{
     display: flex;
     flex-direction: column;
+
     background: #f9f9f9;
     border-radius: 18px;
     margin-bottom: 14px;
     padding: 5px;
     margin-left: 2px;
     margin-right: 2px;
+
 }
 .main-reaction{
     display: block
@@ -45,11 +47,12 @@
     position: relative;
     width: 580px;
 }
-.reaction{
+.reaction, .share{
     display: flex;
 }
 .share{
     float: right;
+
     display: flex
     /* top: -25px; */;
     /* background-color: white; */
@@ -64,4 +67,5 @@
 .comment{
     position: relative;
     left: 102px;
+
 }

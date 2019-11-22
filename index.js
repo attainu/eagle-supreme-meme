@@ -78,6 +78,10 @@ app.get('/loginpage', function (req, res) {
   res.render('login');
 })
 
+// reaction
+app.post('/like', authRoute.like);
+app.post('/likeCount', authRoute.likeCount);
+
 //ADMIN SECTION START
 app.get('/admin',authRoute.adminLoginPage);
 app.post('/auth',authRoute.adminAuthentication);
@@ -85,10 +89,8 @@ app.get('/dashboard',authRoute.adminDashboard);
 app.get('/adminlogout',authRoute.adminLogout);
 app.post('/approval',authRoute.adminPostApproval);
 app.post('/decline',authRoute.adminPostDecline);
-//ADMIN SECTION END
 
-//TEMPLATE EDITOR
-app.get('/editor',authRoute.editor);
+//ADMIN SECTION END
 
 
 app.post('/upload', upload.single('meme'), authRoute.upload)

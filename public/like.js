@@ -36,6 +36,7 @@ $(document).ready(function () {
                             $("#likeCount" + data.postId).append("Likes " + res);
                             $("#likeCountC" + data.postId).append("Likes " + res);
                             $('#' + data.postId).toggleClass('happy', 'broken');
+                            $('div.likebutton' + data.postId+ " > div").toggleClass('happy', 'broken');
                         }
                     })
                 }

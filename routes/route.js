@@ -42,9 +42,9 @@ authController.like = function (req, res) {
                 postId: req.body.postId,
                 like: req.body.like
             }, function (error, response) {
-                console.log("1")
+                console.log("no ex new data")
                 if (error) {
-                    return res.send(error)
+                    return res.send("ins1"+error)
                 } else {
                     return res.send("done")
                 }
@@ -53,10 +53,10 @@ authController.like = function (req, res) {
 
         var exists = null
         for (var i = 0; i < response.length; i++) {
-            console.log('1')
+         //   console.log('1')
             console.log(response[i].postId, req.body.postId, response[i].accountId, req.session.user[0]._id)
             if (response[i].accountId !== req.session.user[0]._id) {
-                console.log("2")
+                console.log("w1")
                 exists = false
             }
             if (response[i].accountId === req.session.user[0]._id) {
@@ -66,6 +66,7 @@ authController.like = function (req, res) {
                     exists = true
                     break;
                 } else {
+                    console.log("w2")
                     exists = false
                 }
             }
@@ -77,10 +78,11 @@ authController.like = function (req, res) {
                 postId: req.body.postId,
                 like: req.body.like
             }, function (error, response) {
-                console.log("1")
+                
                 if (error) {
-                    return res.send(error)
+                    return res.send("ins"+error)
                 } else {
+                    console.log("inserted")
                     return res.send("done")
                 }
             })
@@ -93,8 +95,9 @@ authController.like = function (req, res) {
                     like: req.body.like
                 }
             }, function (err, result) {
+                console.log("upp: "+err)
                 if (!err) {
-                    console.log("2")
+                    console.log("updated")
                     return res.send("done")
                 }
                 //  console.log(result)

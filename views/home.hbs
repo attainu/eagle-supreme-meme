@@ -1,10 +1,33 @@
-<div class="content">
+
+    
+        <div class="content">
 
 {{#each data}}
+<div class="post">
     <div class="image">
-        <img class="content-image" src="{{this.image}}">
+        <img class="content-image" src="{{this.url}}">
+        
     </div>
+    <div class="main-reaction">
+        <div class="displaylikenumbers">
+            <span>{{this.like}}Likes</span>
+        </div>
+        <div class="reactionandshare">
+        <div class="reaction">
+            <div class="likebutton"><div class="heart">❤</div>
+		</div>
+            <div class="comment"> Comment Section</div>
+            <div class="wishlistcontent"> <a href="#"><img src="star.png" class="postwishlist"></a></div>
+        </div>
+        <div class="share">
+            <div class="fb-share-button" data-href={{this.url}} data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u="+{{this.encodedURL}}+"&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+            <div class="twitter"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"  class="twitter-share-button" data-size="large" data-text="This is so Funny" data-url={{this.url}} data-show-count="false">Tweet</a></div>
+        </div>
+        </div>
+    </div>
+</div>
 {{/each}}
 </div>
-
-
+<script>
+			
+</script>

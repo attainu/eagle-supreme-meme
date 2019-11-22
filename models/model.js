@@ -49,6 +49,10 @@ MongoClient.connect(url, function (err, client) {
 //         var collection = db.collection('accounts');
 //         collection.find({}).toArray(function (err, response) {
 
+
+               
+
+
 //                 // console.log(req);
 //                 if (!err) {
 //                     var user = null;
@@ -85,6 +89,7 @@ MongoClient.connect(url, function (err, client) {
 //                     }
 //                 })
 //         }
+
    
 
 AuthModel.search = function(search,cb){
@@ -101,7 +106,7 @@ AuthModel.search = function(search,cb){
 
 AuthModel.trending = function(cb){
     var collection = db.collection('post');
-    collection.find().sort({like:-1}).toArray(function(err,res){
+    collection.find().limit(10).sort({like:-1}).toArray(function(err,res){
         if(err){
             return cb(err);
         }

@@ -437,4 +437,27 @@ text-decoration: none;
       transform: scale(3) translateX(30px) rotateZ(25deg) translateY(50px);
     }
   }
+  .categoryTitle{
+    clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
+    width: 152px;
+    height: 20px;
+    background: black;
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    position: relative;
+    left: -25px;
+  }
+  .titledesign{
+    height: 16px;
+    width: 21px;
+    background: #484848;
+    position: relative;
+    top: 24px;
+    left: -25px;
+    transform: skewY(24deg);
+  }
 

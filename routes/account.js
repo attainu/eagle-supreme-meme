@@ -1,25 +1,34 @@
 const Account = require('../models/Account.js');
+var bcrypt = require('bcryptjs');
 
 const accountController = {};
 
 accountController.signUp = function (req, res) {
     var data = req.body;
+    //var hashpassword
+    bcrypt.genSalt(10, function(err, salt) {
+         bcrypt.hash(data.password, salt, function(err, hash) {
+            Account.create({
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                userName: data.userName,
+                password: hash,
+                securityQuestion: data.securityQuestion,
+                securityAnswer: data.securityAnswer
+            }, function (err, response) {
+                if (err) {
+                    console.log(err)
+                    return res.send("Data already exists")
+                }
+                return res.redirect('/')
+            })
+        });
+        
+    });
+    //console.log(hashpassword);
 
-    Account.create({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        userName: data.userName,
-        password: data.password,
-        securityQuestion: data.securityQuestion,
-        securityAnswer: data.securityAnswer
-    }, function (err, response) {
-        if (err) {
-            console.log(err)
-            return res.send("Data already exists")
-        }
-        return res.redirect('/')
-    })
+   
 }
 
 accountController.signIn = function (req, res) {
@@ -32,6 +41,7 @@ accountController.signIn = function (req, res) {
         }
     }, function (err, docs) {
         var user = docs
+        console.log(user);
         if (user.length > 0) {
             //create session 
             req.session.user = user;

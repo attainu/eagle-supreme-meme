@@ -71,3 +71,10 @@
     left: 102px;
 
 }
+.flagImage{
+    height: 27px;
+    width: 22px;
+}
+.flag{
+    position: relative;
+}

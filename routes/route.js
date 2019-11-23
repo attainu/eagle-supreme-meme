@@ -395,5 +395,56 @@ authController.adminPostDecline = function (req, res) {
 
     });
 }
+authController.adminReported = function (req, res) {
+    var checkAdmin = [{
+        "_id":23848234,
+        "userName":"admin",
+        "password":"admin"        
+    }];
+    if (req.session.user) {
+        console.log("ok");
+        if(req.session.user[0]._id === checkAdmin[0]._id && req.session.user[0].userName === checkAdmin[0].userName){
+            
+        console.log(req.session.user);
+        Model.adminReported(function (error, success) {
+            if (error) {
+                return res.render(error);
+            }
+            //console.log(success);
+            return res.render('report', {
+                layout: "admindashboard",
+                data: success
+            })
+        });
+    }else return res.redirect("/admin");
+    } else return res.redirect("/admin");
+
+}
+
+
+authController.adminReportedPost = function(req,res){
+    Model.adminReportedPost(req.body,function(error,success){
+        res.send({
+            status: 200,
+            message:success
+        })
+    })
+}
+authController.adminReview = function(req,res){
+    Model.adminReview(req.body,function(error,success){
+        res.send({
+            status:200,
+            message:success
+        })
+    })
+}
+authController.adminDelete = function(req,res){
+    Model.adminDelete(req.body,function(error,success){
+        res.send({
+            status:200,
+            message:success
+        })
+    })
+}
 
 module.exports = authController;

@@ -93,6 +93,10 @@ app.get('/dashboard',authRoute.adminDashboard);
 app.get('/adminlogout',authRoute.adminLogout);
 app.post('/approval',authRoute.adminPostApproval);
 app.post('/decline',authRoute.adminPostDecline);
+app.get('/reported',authRoute.adminReported);
+app.post('/report',authRoute.adminReportedPost);
+app.post('/review',authRoute.adminReview);
+app.post('/delete',authRoute.adminDelete);
 
 //ADMIN SECTION END
 

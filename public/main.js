@@ -9,6 +9,21 @@ $(document).ready(function(){
 	// 		  $(this).toggleClass('happy broken');
 
     //         });
+    $('.flagImage').on('click',function(){
+        var id = $(this).attr('id')
+        console.log(id);
+        $.ajax({
+            url:"/report",
+            data:{
+                "id": id
+            },
+            method : "post",
+            success: function(data){
+               console.log(data);
+                
+            }
+        })
+    })
    
             
 })

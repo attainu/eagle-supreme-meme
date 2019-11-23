@@ -1,0 +1,51 @@
+<div class="content">
+
+{{#each data}}
+<div class="post {{this._id}}">
+    <div class="image ">
+        <img class="content-image " src={{this.url}}>
+    </div>
+    <div class="action">
+        <div class="approve"><button id={{this._id}} class=" accept btn btn-success">Approve</button></div>
+        <div class="decline"><button id={{this._id}} class="discard btn btn-danger">Decline</button></div>
+    </div>
+</div>
+{{/each}}
+</div>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script>
+    $('.accept').on('click',function(){
+        var id = $(this).attr('id')
+        console.log(id);
+        $.ajax({
+            url:"/review",
+            data:{
+                "id": id
+            },
+            method : "post",
+            success: function(data){
+               console.log(data);
+                $('.'+id).hide();
+            }
+        })
+    })
+    $('.discard').on('click',function(){
+        var id = $(this).attr('id')
+        console.log(id);
+        $.ajax({
+            url:"/delete", 
+            data:{
+                "id": id
+            },
+            method : "post",
+            success: function(data){
+               console.log(data);
+                $('.'+id).hide();
+            }
+        })
+    })
+
+</script>

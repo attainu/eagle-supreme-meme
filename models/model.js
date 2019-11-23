@@ -111,9 +111,45 @@ AuthModel.adminPostDecline = function(postID,cb){
         return cb(null,"Decline");
         //return cb(null,"Successful");
         
-    
-    
-    
+}
+AuthModel.adminReported = function(cb){
+    var collection = db.collection('reported');
+    collection.find().toArray(function(err,res){
+        if(err){
+            return cb(err)
+        }
+        return cb(null,res);
+    })
+
+}
+AuthModel.adminReportedPost = function(postID,cb){
+    var collection1 = db.collection('reported');
+    var collection2 = db.collection('post');
+    var newID = ObjectId(postID.id);
+    collection2.find({_id: newID}).toArray(function(err,res){
+        if(err){
+            return cb(err);
+        }
+        console.log("This is a response",res);
+        collection1.insertMany(res);
+       
+        
+    });
+
 }
 
+AuthModel.adminReview = function(postID,cb){
+    var collection = db.collection('reported');
+    var newID = ObjectId(postID.id);
+    collection.remove({_id: newID});
+    cb(null,"Review")
+}
+AuthModel.adminDelete = function(postID,cb){
+    var collection1 = db.collection('reported');
+    var collection2 = db.collection('post');
+    var newID = ObjectId(postID.id);
+    collection1.remove({_id: newID});
+    collection2.remove({_id: newID});
+    cb(null,"Deleted")
+}
         module.exports = AuthModel;

@@ -140,10 +140,12 @@ authController.getComment = function (req, res) {
     var collection = db.collection('comments');
     var commentArray = []
     collection.find({}).toArray(function (err, response) {
-        console.log(response[0].postId)
-        for (let i = 0; i < response.length; i++) {
-            if (response[i].postId === req.body.postId) {
-                commentArray.push(response[i]);
+        if (response.length > 0) {
+            console.log(response[0].postId)
+            for (let i = 0; i < response.length; i++) {
+                if (response[i].postId === req.body.postId) {
+                    commentArray.push(response[i]);
+                }
             }
         }
         console.log(commentArray)
@@ -215,10 +217,7 @@ authController.checkIfLoggedIn = function (req, res, next) {
         return next();
     } else {
         if (typeof req.session.user === "undefined") {
-            return res.json({
-                status: false,
-                message: "Unauthorized request"
-            });
+            return res.redirect("/loginpage");
         } else {
             return next();
         }
@@ -322,8 +321,14 @@ authController.adminAuthentication = function (req, res) {
                 status: 400,
                 message: error
             });
-        }
-        req.session.user = true;
+        };
+        var user = [{
+            "_id":23848234,
+            "userName":username,
+            "password":password
+            
+        }];
+        req.session.user = user;
         return res.json({
             status: "200",
             message: success
@@ -346,7 +351,16 @@ authController.adminLogout = function (req, res) {
     } else return res.redirect('/admin');
 }
 authController.adminDashboard = function (req, res) {
+    var checkAdmin = [{
+        "_id":23848234,
+        "userName":"admin",
+        "password":"admin"        
+    }];
     if (req.session.user) {
+        console.log("ok");
+        if(req.session.user[0]._id === checkAdmin[0]._id && req.session.user[0].userName === checkAdmin[0].userName){
+            
+        console.log(req.session.user);
         Model.adminApproval(function (error, success) {
             if (error) {
                 return res.render(error);
@@ -356,8 +370,8 @@ authController.adminDashboard = function (req, res) {
                 layout: "admindashboard",
                 data: success
             })
-        })
-
+        });
+    }else return res.redirect("/admin");
     } else return res.redirect("/admin");
 
 }

@@ -6,6 +6,28 @@ const tinify = require("tinify");
 tinify.key = "FGssXbLPvZT54cncJw9CGsjrX807xzYW";
 // tinify.fromFile("unoptimized.png").toFile("optimized.png");
 
+//multer
+const multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      // console.log(file);
+      cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  })
+  
+  
+
+//cloudinary
+const cloudinary = require('cloudinary').v2
+cloudinary.config({
+    cloud_name: 'dogn8cjzk',
+    api_key:'685335288353771',
+    api_secret:'8_cp8VJqpOgKTdto4wjKSKxSDT4'
+})
+
 // mongo db
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
@@ -62,6 +84,14 @@ authController.signIn = function (request, response) {
 }
 
 authController.upload =  function (req, response) {
+    // console.log(req.file);
+    //cloudinary
+    cloudinary.uploader.upload(req.file.path,function(error,response){
+        console.log("err>>>>",error)
+        console.log("res>>",response);
+    })
+
+
     var img = fs.readFileSync(req.file.path);
     // link.push({image:'http://localhost:9094/photos/"5dd541039b4e983a8917f6d3"'});
 

@@ -1,19 +1,18 @@
 const Account = require('../models/Account.js');
-var bcrypt = require('bcryptjs');
+
 
 const accountController = {};
 
 accountController.signUp = function (req, res) {
     var data = req.body;
     //var hashpassword
-    bcrypt.genSalt(10, function(err, salt) {
-         bcrypt.hash(data.password, salt, function(err, hash) {
+    
             Account.create({
                 firstName: data.firstName,
                 lastName: data.lastName,
                 email: data.email,
                 userName: data.userName,
-                password: hash,
+                password: data.password,
                 securityQuestion: data.securityQuestion,
                 securityAnswer: data.securityAnswer
             }, function (err, response) {
@@ -23,12 +22,7 @@ accountController.signUp = function (req, res) {
                 }
                 return res.redirect('/')
             })
-        });
-        
-    });
     //console.log(hashpassword);
-
-   
 }
 
 accountController.signIn = function (req, res) {

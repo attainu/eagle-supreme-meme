@@ -1,3 +1,5 @@
+<div class="content">
+
 
     
         <div class="content">
@@ -5,30 +7,127 @@
 {{#each data}}
 <div class="post">
     <div class="titledesign"></div><div class="categoryTitle"><span>{{this.title}}</span></div>
+
     <div class="image">
-        <img class="content-image" src="{{this.url}}">
-        
+      <img class="content-image" src="{{this.url}}">
+
     </div>
     <div class="main-reaction">
-        <div class="displaylikenumbers">
-            <span>{{this.like}}Likes</span>
-        </div>
-        <div class="reactionandshare">
+      <div class="displaylikenumbers">
+        <span id="likeCount{{this._id}}">{{this.like}}Likes</span>
+      </div>
+      <div class="reactionandshare">
         <div class="reaction">
-            <div class="likebutton"><div class="heart">❤</div>
-		</div>
-            <div class="comment"> Comment Section</div>
-            <div class="wishlistcontent"> <a href="#"><img src="star.png" class="postwishlist"></a></div>
+          <div class="likebutton">
+            <div class="heart" id={{this._id}}>❤ Like</div>
+          </div>
+          <div class="comment">
+
+            {{!-- comment modal --}}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg{{this._id}}">Comments</button>
+
+            <div class="modal fade bd-example-modal-lg{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="bd-example-modal-lg{{this._id}}">{{this.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="image">
+                      <img class="content-image" src="{{this.url}}">
+                    </div>
+
+                    <div class="modal-body">
+                      <div class="displaylikenumbers">
+                        <span id="likeCountC{{this._id}}">{{this.like}}Likes</span>
+                      </div>
+                      <div class="reactionandshare">
+                        <div class="reaction">
+                          <div class="likebutton{{this._id}}">
+                            <div class="heart" id="{{this._id}}">❤ Like</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="share">
+                        <div class="fb-share-button" data-href={{this.url}} data-layout="button" data-size="large"><a
+                            target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{this.url}}"
+                            class="fb-xfbml-parse-ignore">Share</a>
+                        </div>
+                        <div class="twitter">T</div>
+                      </div>
+                    </div>
+                    
+                    <br><br><br>
+                    <div class="modal-body">
+                      <textarea name="comment" placeholder="Enter Comment" style=" width: 100%;"></textarea>
+                      <button class="comment btn btn-primary" style=" width: 70%;" >submit</button>
+                    </div>
+
+                    <div class="modal-body">
+                      <p><b>User Name: </b>hello</p>
+                      <p><b>User Name: </b>hello</p>
+                      <p><b>User Name: </b>hello</p>
+                      <p><b>User Name: </b>hello</p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{!--  --}}
+
+          </div>
+
+          <div class="wishlist"> WishList</div>
         </div>
         <div class="share">
-            <div class="fb-share-button" data-href={{this.url}} data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u="+{{this.encodedURL}}+"&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-            <div class="twitter"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"  class="twitter-share-button" data-size="large" data-text="This is so Funny" data-url={{this.url}} data-show-count="false">Tweet</a></div>
+          <div class="fb-share-button" data-href={{this.url}} data-layout="button" data-size="large"><a target="_blank"
+              href="https://www.facebook.com/sharer/sharer.php?u={{this.url}}" class="fb-xfbml-parse-ignore">Share</a>
+          </div>
+          <div class="twitter">T</div>
         </div>
-        </div>
+      </div>
     </div>
+  </div>
+  {{/each}}
 </div>
-{{/each}}
+
+{{!-- modal --}}
+<button id="loginModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#likeModal"
+  style="margin-top: 50px;" hidden>
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="likeModal" tabindex="-1" role="dialog" aria-labelledby="likeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="likeModalLabel">You have to be Logged-in first</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="/loginpage"><button type="button" class="btn btn-primary">Log-in</button></a>
+      </div>
+    </div>
+  </div>
 </div>
-<script>
-			
+
+{{!----}}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
 </script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+<script src="like.js"></script>

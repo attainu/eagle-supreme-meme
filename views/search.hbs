@@ -1,10 +1,9 @@
-
-
 <div class="content">
 
-{{#each data}}
-<div class="post">
-    <div class="titledesign"></div><div class="categoryTitle"><span>{{this.title}}</span></div>
+  {{#each data}}
+  <div class="post">
+    <div class="titledesign"></div>
+    <div class="categoryTitle"><span>{{this.title}}</span></div>
 
     <div class="image">
       <img class="content-image" src="{{this.url}}">
@@ -22,10 +21,11 @@
           <div class="comment">
 
             {{!-- comment modal --}}
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg{{this._id}}">Comments</button>
+            <button type="button" class="showComments btn btn-primary" name={{this._id}} data-toggle="modal"
+              data-target=".bd-example-modal-lg{{this._id}}">Comments</button>
 
-            <div class="modal fade bd-example-modal-lg{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-              aria-hidden="true">
+            <div class="modal fade bd-example-modal-lg{{this._id}}" tabindex="-1" role="dialog"
+              aria-labelledby="myLargeModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -46,30 +46,23 @@
                       <div class="reactionandshare">
                         <div class="reaction">
                           <div class="likebutton{{this._id}}">
-                            <div class="heart" id="{{this._id}}">❤ Like</div>
+                            <div class="heart" id="{{this._id}}">❤</div>
                           </div>
                         </div>
                       </div>
-                      <div class="share">
-                        <div class="fb-share-button" data-href={{this.url}} data-layout="button" data-size="large"><a
-                            target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{this.url}}"
-                            class="fb-xfbml-parse-ignore">Share</a>
-                        </div>
-                        <div class="twitter">T</div>
-                      </div>
-                    </div>
-                    
-                    <br><br><br>
-                    <div class="modal-body">
-                      <textarea name="comment" placeholder="Enter Comment" style=" width: 100%;"></textarea>
-                      <button class="comment btn btn-primary" style=" width: 70%;" >submit</button>
+
                     </div>
 
+                    <br>
                     <div class="modal-body">
-                      <p><b>User Name: </b>hello</p>
-                      <p><b>User Name: </b>hello</p>
-                      <p><b>User Name: </b>hello</p>
-                      <p><b>User Name: </b>hello</p>
+                      <textarea name="comment" id="saveComment{{this._id}}" placeholder="Enter Comment"
+                        style=" width: 100%;"></textarea>
+                      <p id="commentError{{this._id}}" style="display: none;">Above Field cannot be empty</p>
+                      <button class="saveComment btn btn-primary" name="{{this._id}}"
+                        style="width: 70%; margin-left: 15%;">submit</button>
+                    </div>
+
+                    <div class="modal-body" id="commentList{{this._id}}">
                     </div>
 
                   </div>
@@ -82,9 +75,13 @@
 
           <div class="wishlistcontent"> <a href="#"><img src="star.png" class="postwishlist"></a></div>
         </div>
-       <div class="share">
-            <div class="fb-share-button" data-href={{this.url}} data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u="+{{this.encodedURL}}+"&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-            <div class="twitter"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"  class="twitter-share-button" data-size="large" data-text="This is so Funny" data-url={{this.url}} data-show-count="false">Tweet</a></div>
+        <div class="share">
+          <div class="fb-share-button" data-href={{this.url}} data-layout="button" data-size="large"><a target="_blank"
+              href="https://www.facebook.com/sharer/sharer.php?u=" +{{this.encodedURL}}+"&amp;src=sdkpreparse"
+              class="fb-xfbml-parse-ignore">Share</a></div>
+          <div class="twitter"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"
+              data-size="large" data-text="This is so Funny" data-url={{this.url}} data-show-count="false">Tweet</a>
+          </div>
         </div>
       </div>
     </div>

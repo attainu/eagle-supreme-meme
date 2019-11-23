@@ -82,6 +82,10 @@ app.get('/loginpage', function (req, res) {
 app.post('/like', authRoute.like);
 app.post('/likeCount', authRoute.likeCount);
 
+// comments
+app.post('/getComments', authRoute.getComment);
+app.post('/saveComment', authRoute.saveComment);
+
 //ADMIN SECTION START
 app.get('/admin',authRoute.adminLoginPage);
 app.post('/auth',authRoute.adminAuthentication);

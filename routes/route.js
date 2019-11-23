@@ -134,6 +134,45 @@ authController.likeCount = function (req, res) {
     });
 }
 
+// get comments 
+authController.getComment = function (req, res) {
+    console.log(req.body);
+    var collection = db.collection('comments');
+    var commentArray = []
+    collection.find({}).toArray(function (err, response) {
+        console.log(response[0].postId)
+        for (let i = 0; i < response.length; i++) {
+            if (response[i].postId === req.body.postId) {
+                commentArray.push(response[i]);
+            }
+        }
+        console.log(commentArray)
+        return res.send(commentArray);
+    })
+}
+
+// save comments
+authController.saveComment = function (req, res) {
+    console.log(req.body);
+    var collection = db.collection('comments');
+    if (!(req.session.user)) {
+        return res.send('First login');
+    } else {
+        collection.insertOne({
+            accountId: req.session.user[0]._id,
+            accountName: req.session.user[0].userName,
+            postId: req.body.postId,
+            comment: req.body.comment
+        }, function (error, response) {
+            console.log("1")
+            if (error) {
+                return res.send(error)
+            } else {
+                return res.send([req.session.user[0].userName, req.body.comment])
+            }
+        })
+    }
+}
 
 authController.upload = async function (request, response) {
 
@@ -185,20 +224,6 @@ authController.checkIfLoggedIn = function (req, res, next) {
         }
     }
 }
-
-var link = [{
-        "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
-    },
-    {
-        "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
-    },
-    {
-        "image": "https://i.kym-cdn.com/photos/images/newsfeed/001/248/399/430.png"
-    },
-    {
-        "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
-    }
-]
 
 authController.home = function (req, res) {
     Model.home(function(error,success){

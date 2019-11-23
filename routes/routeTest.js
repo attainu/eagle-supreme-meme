@@ -88,7 +88,8 @@ authController.upload =  function (req, response) {
     //cloudinary
     cloudinary.uploader.upload(req.file.path,function(error,response){
         console.log("err>>>>",error)
-        console.log("res>>",response);
+        console.log("res>>",response.url);
+        urlLink = response.url;
     })
 
 

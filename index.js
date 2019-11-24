@@ -97,8 +97,12 @@ app.get('/reported',authRoute.adminReported);
 app.post('/report',authRoute.adminReportedPost);
 app.post('/review',authRoute.adminReview);
 app.post('/delete',authRoute.adminDelete);
-
 //ADMIN SECTION END
+
+//AUTHENTICATED USER WISHLIST ADD
+app.post('/wishlist',authRoute.wishList);
+//AUTHENTICATED USER WISHLIST GET
+app.get('/mywishlist',authRoute.getWishList);
 
 
 app.post('/upload', upload.single('meme'), authRoute.upload)

@@ -4,9 +4,10 @@
   <div class="post">
     <div class="titledesign"></div>
     <div class="categoryTitle"><span>{{this.title}}</span></div>
+    <div class="flag"><img data-src="flag.png" id="{{this._id}}" class="flagImage"></div>
 
     <div class="image">
-      <img class="content-image" src="{{this.url}}">
+      <img class="content-image" data-src="{{this.url}}">
 
     </div>
     <div class="main-reaction">
@@ -73,7 +74,7 @@
 
           </div>
 
-          <div class="wishlistcontent"> <a href="#"><img src="star.png" class="postwishlist"></a></div>
+          <div class="wishlistcontent"> <a href="#"><img data-src="star.png" class="postwishlist"></a></div>
         </div>
         <div class="share">
           <div class="fb-share-button" data-href={{this.url}} data-layout="button" data-size="large"><a target="_blank"

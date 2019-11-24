@@ -25,7 +25,7 @@ AuthModel.home = function(cb){
         if(err){
             return cb(err);
         }
-        console.log(res);
+        //console.log(res);
         return cb(null,res);
     })
 }

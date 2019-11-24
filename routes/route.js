@@ -237,7 +237,7 @@ authController.home = function (req, res) {
                 logIn: "<a href='/loginpage'>Login/Signup </a>"
             });
         } else {
-            return res.render('trending', {
+            return res.render('home', {
                 data: success,
                 logIn: "<a href='/logoutpage'>Logout</a>"
             });
@@ -446,5 +446,32 @@ authController.adminDelete = function(req,res){
         })
     })
 }
+authController.wishList = function(req,res){
+    if(req.session.user){
+        var collection = db.collection('wishlist');
+        collection.insertOne({
+            accountId: req.session.user[0]._id,
+            accountName: req.session.user[0].userName,
+            postId: req.body.id,});
+        console.log(req.session.user);
+        return res.send("ok");
+    }
+    
 
+}
+authController.getWishList = function(req,res){
+    if(req.session.user){
+        var collection1 = db.collection('wishlist');
+        var collection2 = db.collection('post');
+        collection1.find({accountId:req.session[0]._id}).toArray(function(error,success){
+            if(err){
+                return res.send(error);
+            }
+            console.log(success);
+
+        })
+
+    }
+}
+ 
 module.exports = authController;

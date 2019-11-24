@@ -76,5 +76,6 @@
     width: 22px;
 }
 .flag{
-    position: relative;
+    position: absolute;
+    right: 24px;
 }

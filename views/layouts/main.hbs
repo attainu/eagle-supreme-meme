@@ -33,7 +33,7 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
     <header class="row mx-auto align align-items-center navbar navbar-expand-lg navbar-expand-sm fixed-top">
         <div class="logo col-md-1"><a href="/">
-            <img src="memehublogo.jpg" width="60" height="30"></a>
+            <img data-src="memehublogo.jpg" width="60" height="30"></a>
         </div>
         <div class="categories col-md-1 mx-auto">
                 <div class="hover">
@@ -75,7 +75,7 @@
         </div>
 
         <div class="wishlist col-md-1">
-            <a href="#"><img class="wishlist" src="wishlist.jpg"></a>
+            <a href="#"><img class="wishlist" data-src="wishlist.jpg"></a>
 
         </div>
 
@@ -103,5 +103,23 @@
     
     <script src="postupload.js"></script>
     <script src="main.js"></script>
+    <script>
+  var images = document.querySelectorAll('img');
+  var observer = new IntersectionObserver(function(entries,observer){
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        var img = entry.target;
+        img.setAttribute('src',img.getAttribute('data-src'));
+        observer.unobserve(entry.target);
+      }
+    })
+  },{
+      rootMargin:'0px 0px -10% 0px',
+      
+  });
+  images.forEach(img => {
+    observer.observe(img);
+  })
+</script>
 </body>
 </html>

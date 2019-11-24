@@ -24,6 +24,21 @@ $(document).ready(function(){
             }
         })
     })
+    $('.postwishlist').on('click',function(){
+        var id = $(this).attr('id')
+        console.log(id);
+        $.ajax({
+            url:"/wishlist",
+            data:{
+                "id": id
+            },
+            method : "post",
+            success: function(data){
+               console.log(data);
+                
+            }
+        })
+    })
    
             
 })

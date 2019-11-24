@@ -179,6 +179,20 @@ authController.trending = function(req,res){
     })
 }
 
+//r
+authController.whatsnew = function(req, res) {
+    Model.whatsnew(function(error, success){
+        if(error){
+            return res.render('whatsnew', {
+                data: error
+            })
+        }
+        return res.render('whatsnew', {
+            data: success
+        })
+    })
+}
+
 authController.adminLoginPage = function(req,res){
     res.render('adminlogin',{
         layout:"admin.hbs"

@@ -74,6 +74,7 @@ app.post('/signin', controllers.accountController.signIn)
 
 app.get('/', authRoute.home);
 
+
 app.get('/loginpage', function (req, res) {
   res.render('login');
 })
@@ -119,6 +120,9 @@ app.get('/search',authRoute.search);
 
 //Trending Post
 app.get('/trending',authRoute.trending);
+
+//whats new post
+app.get('/whatsnew', authRoute.whatsnew);
 
 
 db.connect()

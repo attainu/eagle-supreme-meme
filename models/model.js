@@ -109,6 +109,19 @@ AuthModel.trending = function(cb){
         return cb(null,res);
     })
 }
+
+//r
+AuthModel.whatsnew = function(cb){
+    var collection = db.collection('post');
+    collection.find().sort().toArray(function(err,res){
+        if(err){
+            return cb(err);
+        }
+        console.log(res);
+        return cb(null,res);
+    })
+}
+
 var temp = {
     "username":"admin",
     "password":"admin"

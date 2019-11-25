@@ -10,22 +10,22 @@ tinify.key = "FGssXbLPvZT54cncJw9CGsjrX807xzYW";
 const multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      // console.log(file);
-      cb(null, 'uploads/')
+        // console.log(file);
+        cb(null, 'uploads/')
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname)
+        cb(null, file.originalname)
     }
-  })
-  
-  
+})
+
+
 
 //cloudinary
 const cloudinary = require('cloudinary').v2
 cloudinary.config({
     cloud_name: 'dogn8cjzk',
-    api_key:'685335288353771',
-    api_secret:'8_cp8VJqpOgKTdto4wjKSKxSDT4'
+    api_key: '685335288353771',
+    api_secret: '8_cp8VJqpOgKTdto4wjKSKxSDT4'
 })
 
 // mongo db
@@ -82,46 +82,68 @@ authController.signIn = function (request, response) {
         }
     })
 }
-
-authController.upload =  function (req, response) {
-    // console.log(req.file);
+var urlLink;
+authController.upload = function (req, response) {
+    console.log(req.body);
     //cloudinary
-    cloudinary.uploader.upload(req.file.path,function(error,response){
-        console.log("err>>>>",error)
-        console.log("res>>",response.url);
-        urlLink = response.url;
+    var collection = db.collection('approval_pending');
+    cloudinary.uploader.upload(req.file.path, function (error, res) {
+        if (!error) {
+            urlLink = res.url;
+            var finalImg = {
+                contentType: req.file.mimetype,
+                title : req.body.title,
+                tag : req.body.tag,
+                likes : 0,
+                imageURL: urlLink
+            };
+            console.log("res>>", res.url);
+            collection.insertOne(finalImg, function (error, result) {
+                var insertedImgId = result.insertedId;
+                // console.log(insertedImgId);
+
+                link.push({ image: `http://localhost:9094/photos/"${insertedImgId}"` });
+                if (error) {
+                    return error
+                }
+                // return response.send('info uploaded, redirecting....');
+                return response.redirect("/")
+            });
+
+        }
+        // console.log("err>>>>", error)
     })
 
 
-    var img = fs.readFileSync(req.file.path);
-    // link.push({image:'http://localhost:9094/photos/"5dd541039b4e983a8917f6d3"'});
+    // var img = fs.readFileSync(req.file.path);
+    // // link.push({image:'http://localhost:9094/photos/"5dd541039b4e983a8917f6d3"'});
 
-    // console.log(link)
-    var encode_image = img.toString('base64');
-    // var data = request.body;
-    var finalImg = {
-        contentType: req.file.mimetype,
-        image: new Buffer(encode_image, 'base64')
-    };
-    // const file = request.file;
-    // const destination = '/tmp/'+request.file.path;
-    // var source = await tinify.fromFile(request.file.path);
-    //  await source.toFile(destination);
+    // // console.log(link)
+    // var encode_image = img.toString('base64');
+    // // var data = request.body;
+    // var finalImg = {
+    //     contentType: req.file.mimetype,
+    //     imageURL: urlLink
+    // };
+    // // const file = request.file;
+    // // const destination = '/tmp/'+request.file.path;
+    // // var source = await tinify.fromFile(request.file.path);
+    // //  await source.toFile(destination);
 
 
-    //store to db
-    var collection = db.collection('approval_pending');
-    collection.insertOne(finalImg, function (error, result) {
-        var insertedImgId = result.insertedId;
-        // console.log(insertedImgId);
-        
-        link.push({image:`http://localhost:9094/photos/"${insertedImgId}"`});
-        if (error) {
-            return error
-        }
-        // return response.send('info uploaded, redirecting....');
-        response.redirect("/")
-    });
+    // //store to db
+    // var collection = db.collection('approval_pending');
+    // collection.insertOne(finalImg, function (error, result) {
+    //     var insertedImgId = result.insertedId;
+    //     // console.log(insertedImgId);
+
+    //     link.push({ image: `http://localhost:9094/photos/"${insertedImgId}"` });
+    //     if (error) {
+    //         return error
+    //     }
+    //     // return response.send('info uploaded, redirecting....');
+    //     response.redirect("/")
+    // });
 }
 
 authController.checkIfLoggedIn = function (req, res, next) {
@@ -234,7 +256,7 @@ var link = [{
 {
     "image": "https://www.todaysparent.com/wp-content/uploads/2017/06/when-your-kid-becomes-a-meme-1024x576-1497986561.jpg"
 },
-{    
+{
     "image": 'http://localhost:9094/photos/"5dd605e3063bc9625af530a9"'
 }
 ]

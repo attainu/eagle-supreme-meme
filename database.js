@@ -2,20 +2,6 @@
 //Don't Run this file Twice.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
 
 const mongodb = require('mongodb');

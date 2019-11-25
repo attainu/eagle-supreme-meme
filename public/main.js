@@ -39,11 +39,7 @@ $(document).ready(function(){
             }
         })
     })
-    var showLike = function(){
-        console.log('working');
-       $('.likebuttontru div').toggleClass('happy', 'broken')
-    }
-    window.onload=showLike();
+   
     
             
 })

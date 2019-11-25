@@ -18,9 +18,10 @@ accountController.signUp = function (req, res) {
             }, function (err, response) {
                 if (err) {
                     console.log(err)
-                    return res.send("Data already exists")
+                    return res.send("This user already exists, Try different user name or e-mail")
                 }
-                return res.redirect('/')
+                req.session.user = [response];
+                return res.send('New Account created')
             })
     //console.log(hashpassword);
 }

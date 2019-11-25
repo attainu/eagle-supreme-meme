@@ -1,4 +1,3 @@
-
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -41,11 +40,13 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage })
+var upload = multer({
+  storage: storage
+})
 
 
 
- 
+
 app.use(session({
   name: "assignment",
   secret: 'someRandomStuff',
@@ -75,7 +76,11 @@ app.post('/signin', controllers.accountController.signIn)
 app.get('/', authRoute.home);
 
 app.get('/loginpage', function (req, res) {
-  res.render('login');
+  if (!req.session.user) {
+    res.render('login');
+  } else {
+    res.redirect('/logoutpage')
+  }
 })
 
 // reaction
@@ -87,34 +92,34 @@ app.post('/getComments', authRoute.getComment);
 app.post('/saveComment', authRoute.saveComment);
 
 //ADMIN SECTION START
-app.get('/admin',authRoute.adminLoginPage);
-app.post('/auth',authRoute.adminAuthentication);
-app.get('/dashboard',authRoute.adminDashboard);
-app.get('/adminlogout',authRoute.adminLogout);
-app.post('/approval',authRoute.adminPostApproval);
-app.post('/decline',authRoute.adminPostDecline);
-app.get('/reported',authRoute.adminReported);
-app.post('/report',authRoute.adminReportedPost);
-app.post('/review',authRoute.adminReview);
-app.post('/delete',authRoute.adminDelete);
+app.get('/admin', authRoute.adminLoginPage);
+app.post('/auth', authRoute.adminAuthentication);
+app.get('/dashboard', authRoute.adminDashboard);
+app.get('/adminlogout', authRoute.adminLogout);
+app.post('/approval', authRoute.adminPostApproval);
+app.post('/decline', authRoute.adminPostDecline);
+app.get('/reported', authRoute.adminReported);
+app.post('/report', authRoute.adminReportedPost);
+app.post('/review', authRoute.adminReview);
+app.post('/delete', authRoute.adminDelete);
 //ADMIN SECTION END
 
 //AUTHENTICATED USER WISHLIST ADD
-app.post('/wishlist',authRoute.wishList);
+app.post('/wishlist', authRoute.wishList);
 //AUTHENTICATED USER WISHLIST GET
-app.get('/mywishlist',authRoute.getWishList);
+app.get('/mywishlist', authRoute.getWishList);
 
 
 app.post('/upload', upload.single('meme'), authRoute.upload)
 
-app.get('/upload', function(req,res){
+app.get('/upload', function (req, res) {
   // console.log('hello');
   res.render('upload');
 })
 
-app.get('/test',function(req,res){
+app.get('/test', function (req, res) {
   res.sendFile(__dirname + '/test.html');
- 
+
 });
 
 app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
@@ -124,25 +129,25 @@ app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
     error.httpStatusCode = 400
     return next(error)
   }
-    res.send(file)
-  
+  res.send(file)
+
 })
 
 app.get('/logoutpage', authRoute.logout);
 
 //Search Operation
-app.get('/search',authRoute.search);
+app.get('/search', authRoute.search);
 
 //Trending Post
-app.get('/trending',authRoute.trending);
+app.get('/trending', authRoute.trending);
 
 
 db.connect()
-.then(function(){
-  app.listen(PORT, function () {
-    console.log('app on >>>>'+ PORT);
+  .then(function () {
+    app.listen(PORT, function () {
+      console.log('app on >>>>' + PORT);
+    })
   })
-})
-.catch(function(err){
-  console.log(err)
-})
+  .catch(function (err) {
+    console.log(err)
+  })

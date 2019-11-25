@@ -248,6 +248,7 @@ authController.home = function (req, res) {
                 });
             } else { posts = success}
            // console.log(posts);
+           var chPost = JSON.stringify(posts)
                 if (error) {
                     return res.render('home', {
                         data: error
@@ -256,11 +257,13 @@ authController.home = function (req, res) {
                 if (typeof req.session.user == "undefined") {
                     return res.render('home', {
                         data: posts,
+                        chPost: chPost,
                         logIn: "<a href='/loginpage'>Login/Signup </a>"
                     });
                 } else {
                     return res.render('home', {
                         data: posts,
+                        chPost: chPost,
                         logIn: "<a href='/logoutpage'>Logout</a>"
                     });
                 }

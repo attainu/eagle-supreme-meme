@@ -1,5 +1,5 @@
 <div class="content">
-
+   <div id="postArray" hidden>{{{chPost}}}</div>
   {{#each data}}
   <div class="post">
     <div class="titledesign"></div>
@@ -16,8 +16,13 @@
       </div>
       <div class="reactionandshare">
         <div class="reaction">
-          <div class="likebutton">
+          <div class="likebutton{{this.show}}" >
+            {{#if this.show}}
+            <div class="heart happy" id="{{this._id}}">❤</div>
+            {{else}}
             <div class="heart" id="{{this._id}}">❤</div>
+            {{/if}}
+            {{!-- <div class="heart" id="{{this._id}}">❤</div> --}}
           </div>
           <div class="comment">
 

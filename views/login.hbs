@@ -4,7 +4,7 @@
              <div class="col-md-4 mt-5">
                  <div class="container">
                      <div class="login center">
-                         {{#if error}}
+                         {{!-- {{#if error}}
                          <div class="login center hideLogin" style="display: none;"></div>
                          <div class="inputField center" style="display: block;">
                              <form action="/signin" method="POST">
@@ -12,32 +12,33 @@
                                      placeholder="Username" name="userName" required>
                                  <input id="passwordLogin" type="password" class="form-control  mx-auto inputDetail"
                                      placeholder="Password" name="password" required>
-                                 <p style="color: brown;">{{{error}}}</p><br>
+                                 <p style="color: brown;">Error</p><br>
                                  <button type="submit" class=" loginDesign" id="loginSubmit">Login</button>
                              </form>
                          </div>
-                         {{else}}
+                         {{else}} --}}
                          <div class="login center hideLogin">
                              <h1 class="center colors">Welcome Back</h1>
                              <p class="center colors">We Love People Who Share Happiness</p>
                              <button class="buttonLogin loginDesign" id="loginClick">Login</button>
                          </div>
-                         {{/if}}
+                         {{!-- {{/if}} --}}
 
 
                          <div class="inputField center">
-                             <form action="/signin" method="POST">
+                             <form id="loginForm" action="/signin" method="POST">
                                  <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail"
                                      placeholder="Username" name="userName" required>
                                  <input id="passwordLogin" type="password" class="form-control  mx-auto inputDetail"
                                      placeholder="Password" name="password" required>
-                                 <p id='forgotPass'>Forgot Password</p>
+                                 <p id="loginError" style="color: red;"></p>
+                                 <p id='forgotPass' style="color: white;">Forgot Password</p>
                                  <button type="submit" class=" loginDesign" id="loginSubmit">Login</button>
                              </form>
                          </div>
 
                          <div class="forPass center" style="display: none;">
-                             <form action="/signin" method="POST">
+                             <form id="forPassForm" action="/forPass" method="POST">
                                  <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail"
                                      placeholder="Username" name="userName" required>
                                  <select class="form-control  mx-auto inputDetail" name="securityQuestion" required>
@@ -47,9 +48,13 @@
                                  </select>
                                  <input type="text" class="form-control  mx-auto inputDetail" placeholder="Answer"
                                      name="securityAnswer" required>
-                                 <button type="submit" class=" loginDesign" id="forPassSub" style="width: 150px;">Get
+                                     <p id="forPassError" style="color: red;"></p>
+                                     <p style="color: white;">Enter New Password</p>
+                                 <input type="text" class="form-control  mx-auto inputDetail" placeholder="New Password"
+                                     name="newPassword" required>
+                                 <p id='backToLogin' style="color: white;">Back to Log-in</p>
+                                 <button type="submit" class=" loginDesign" id="forPassSub" style="width: 150px;">Change
                                      Password</button>
-                                 <h2 id="seqPassword">{{pass}}</h2>
                              </form>
                          </div>
                      </div>
@@ -76,8 +81,8 @@
                                      placeholder="Username" name="userName" required>
                                  <input id="passwordSign" type="password" class="form-control  mx-auto inputDetail"
                                      placeholder="Password" name="password" required>
-                                 <input id="confirmPasswordSign" type="password" class="form-control  mx-auto inputDetail"
-                                     placeholder="Confirm Password" required>
+                                 <input id="confirmPasswordSign" type="password"
+                                     class="form-control  mx-auto inputDetail" placeholder="Confirm Password" required>
                                  <select class="form-control  mx-auto inputDetail" name="securityQuestion" required>
                                      <option value="petName">Pet Name</option>
                                      <option value="middleName">Middle Name</option>

@@ -29,20 +29,20 @@ MongoClient.connect(url, function (err, client) {
 // save the reactions
 authController.like = function (req, res) {
     var data = req.body;
-    console.log(data.like);
+    // console.log(data.like);
     if (!(req.session.user)) {
         return res.send('First login');
     }
     var collection = db.collection('reactions');
     collection.find({}).toArray(function (err, response) {
-        console.log(response)
+        //  console.log(response)
         if (response.length === 0) {
             collection.insertOne({
                 accountId: req.session.user[0]._id,
                 postId: req.body.postId,
                 like: req.body.like
             }, function (error, response) {
-                console.log("1")
+                //  console.log("1")
                 if (error) {
                     return res.send(error)
                 } else {
@@ -53,23 +53,23 @@ authController.like = function (req, res) {
 
             var exists = null
             for (var i = 0; i < response.length; i++) {
-                console.log('1')
-                console.log(response[i].postId, req.body.postId, response[i].accountId, req.session.user[0]._id)
+                // console.log('1')
+                //  console.log(response[i].postId, req.body.postId, response[i].accountId, req.session.user[0]._id)
                 if (response[i].accountId !== req.session.user[0]._id) {
-                    console.log("2")
+                    //  console.log("2")
                     exists = false
                 }
                 if (response[i].accountId === req.session.user[0]._id) {
-                    console.log("3.1");
+                  //  console.log("3.1");
                     if (response[i].postId === req.body.postId) {
-                        console.log("3")
+                        //   console.log("3")
                         exists = true
                         break;
                     } else {
                         exists = false
                     }
                 }
-                console.log(exists)
+                //  console.log(exists)
             };
             if (exists === false) {
                 collection.insertOne({
@@ -77,7 +77,7 @@ authController.like = function (req, res) {
                     postId: req.body.postId,
                     like: req.body.like
                 }, function (error, response) {
-                    console.log("1")
+                    // console.log("1")
                     if (error) {
                         return res.send(error)
                     } else {
@@ -94,7 +94,7 @@ authController.like = function (req, res) {
                     }
                 }, function (err, result) {
                     if (!err) {
-                        console.log("2")
+                        //  console.log("2")
                         return res.send("done")
                     }
                     //  console.log(result)
@@ -106,7 +106,7 @@ authController.like = function (req, res) {
 
 // like or reaction count 
 authController.likeCount = function (req, res) {
-    console.log("working" + req.body);
+    //  console.log("working" + req.body);
     var collectionLike = db.collection('reactions');
     var collectionPost = db.collection('post');
     collectionLike.find({}).toArray(function (err, response) {
@@ -118,7 +118,7 @@ authController.likeCount = function (req, res) {
                 }
             }
         })
-        console.log(count);
+        // console.log(count);
 
         collectionPost.updateOne({
             _id: ObjectID(req.body.postId)
@@ -225,26 +225,50 @@ authController.checkIfLoggedIn = function (req, res, next) {
 }
 
 authController.home = function (req, res) {
-    Model.home(function(error,success){
-        if(error){
-            return res.render('home',{
-                data:error
+    var request = req;
+    var response = res;
+
+    Model.checkLike(request, response, function (err, doc) {                 //   check like  
+        if (!err) {
+          //  console.log(doc);
+           var likePost = doc
+           var posts = []
+            Model.home(function (error, success) {
+             //   console.log(success);
+             
+             if (doc){
+                success.forEach(element => {
+                    doc.forEach(id =>{
+                        if(JSON.stringify(id) === JSON.stringify(element._id)){
+                            element.show = true
+                           // console.log(element);
+                        } //else {console.log(element._id)}
+                    }) 
+                    posts.push(element)
+                });
+            } else { posts = success}
+           // console.log(posts);
+                if (error) {
+                    return res.render('home', {
+                        data: error
+                    })
+                }
+                if (typeof req.session.user == "undefined") {
+                    return res.render('home', {
+                        data: posts,
+                        logIn: "<a href='/loginpage'>Login/Signup </a>"
+                    });
+                } else {
+                    return res.render('home', {
+                        data: posts,
+                        logIn: "<a href='/logoutpage'>Logout</a>"
+                    });
+                }
+                //return res.render('trending',{
+                //  data:success
+                //})
             })
         }
-        if (typeof req.session.user == "undefined") {
-            return res.render('home', {
-                data: success,
-                logIn: "<a href='/loginpage'>Login/Signup </a>"
-            });
-        } else {
-            return res.render('home', {
-                data: success,
-                logIn: "<a href='/logoutpage'>Logout</a>"
-            });
-        }
-        //return res.render('trending',{
-          //  data:success
-        //})
     })
 }
 
@@ -256,53 +280,53 @@ authController.logout = function (req, res) {
     return res.redirect('/');
 }
 
-authController.search = function(req,res){
+authController.search = function (req, res) {
     console.log(req.query);
     //return res.send(req.query);
     var search = req.query.search
-    Model.search(search,function(error,success){
-        if(error){
-            return res.render('search',{
-                data:error
+    Model.search(search, function (error, success) {
+        if (error) {
+            return res.render('search', {
+                data: error
             })
         }
         if (typeof req.session.user == "undefined") {
-            return res.render('search', {
+            return res.render('home', {
                 data: success,
                 logIn: "<a href='/loginpage'>Login/Signup </a>"
             });
         } else {
-            return res.render('search', {
+            return res.render('home', {
                 data: success,
                 logIn: "<a href='/logoutpage'>Logout</a>"
             });
         }
         //return res.render('search',{
-            //data:success
+        //data:success
         //})
 
-})
+    })
 }
-authController.trending = function(req,res){
-    Model.trending(function(error,success){
-        if(error){
-            return res.render('trending',{
-                data:error
+authController.trending = function (req, res) {
+    Model.trending(function (error, success) {
+        if (error) {
+            return res.render('trending', {
+                data: error
             })
         }
         if (typeof req.session.user == "undefined") {
-            return res.render('trending', {
+            return res.render('home', {
                 data: success,
                 logIn: "<a href='/loginpage'>Login/Signup </a>"
             });
         } else {
-            return res.render('trending', {
+            return res.render('home', {
                 data: success,
                 logIn: "<a href='/logoutpage'>Logout</a>"
             });
         }
         //return res.render('trending',{
-          //  data:success
+        //  data:success
         //})
     })
 }
@@ -323,10 +347,10 @@ authController.adminAuthentication = function (req, res) {
             });
         };
         var user = [{
-            "_id":23848234,
-            "userName":username,
-            "password":password
-            
+            "_id": 23848234,
+            "userName": username,
+            "password": password
+
         }];
         req.session.user = user;
         return res.json({
@@ -352,26 +376,26 @@ authController.adminLogout = function (req, res) {
 }
 authController.adminDashboard = function (req, res) {
     var checkAdmin = [{
-        "_id":23848234,
-        "userName":"admin",
-        "password":"admin"        
+        "_id": 23848234,
+        "userName": "admin",
+        "password": "admin"
     }];
     if (req.session.user) {
         console.log("ok");
-        if(req.session.user[0]._id === checkAdmin[0]._id && req.session.user[0].userName === checkAdmin[0].userName){
-            
-        console.log(req.session.user);
-        Model.adminApproval(function (error, success) {
-            if (error) {
-                return res.render(error);
-            }
-            //console.log(success);
-            return res.render('dashboard', {
-                layout: "admindashboard",
-                data: success
-            })
-        });
-    }else return res.redirect("/admin");
+        if (req.session.user[0]._id === checkAdmin[0]._id && req.session.user[0].userName === checkAdmin[0].userName) {
+
+            console.log(req.session.user);
+            Model.adminApproval(function (error, success) {
+                if (error) {
+                    return res.render(error);
+                }
+                //console.log(success);
+                return res.render('dashboard', {
+                    layout: "admindashboard",
+                    data: success
+                })
+            });
+        } else return res.redirect("/admin");
     } else return res.redirect("/admin");
 
 }
@@ -397,74 +421,77 @@ authController.adminPostDecline = function (req, res) {
 }
 authController.adminReported = function (req, res) {
     var checkAdmin = [{
-        "_id":23848234,
-        "userName":"admin",
-        "password":"admin"        
+        "_id": 23848234,
+        "userName": "admin",
+        "password": "admin"
     }];
     if (req.session.user) {
         console.log("ok");
-        if(req.session.user[0]._id === checkAdmin[0]._id && req.session.user[0].userName === checkAdmin[0].userName){
-            
-        console.log(req.session.user);
-        Model.adminReported(function (error, success) {
-            if (error) {
-                return res.render(error);
-            }
-            //console.log(success);
-            return res.render('report', {
-                layout: "admindashboard",
-                data: success
-            })
-        });
-    }else return res.redirect("/admin");
+        if (req.session.user[0]._id === checkAdmin[0]._id && req.session.user[0].userName === checkAdmin[0].userName) {
+
+            console.log(req.session.user);
+            Model.adminReported(function (error, success) {
+                if (error) {
+                    return res.render(error);
+                }
+                //console.log(success);
+                return res.render('report', {
+                    layout: "admindashboard",
+                    data: success
+                })
+            });
+        } else return res.redirect("/admin");
     } else return res.redirect("/admin");
 
 }
 
 
-authController.adminReportedPost = function(req,res){
-    Model.adminReportedPost(req.body,function(error,success){
+authController.adminReportedPost = function (req, res) {
+    Model.adminReportedPost(req.body, function (error, success) {
         res.send({
             status: 200,
-            message:success
+            message: success
         })
     })
 }
-authController.adminReview = function(req,res){
-    Model.adminReview(req.body,function(error,success){
+authController.adminReview = function (req, res) {
+    Model.adminReview(req.body, function (error, success) {
         res.send({
-            status:200,
-            message:success
+            status: 200,
+            message: success
         })
     })
 }
-authController.adminDelete = function(req,res){
-    Model.adminDelete(req.body,function(error,success){
+authController.adminDelete = function (req, res) {
+    Model.adminDelete(req.body, function (error, success) {
         res.send({
-            status:200,
-            message:success
+            status: 200,
+            message: success
         })
     })
 }
-authController.wishList = function(req,res){
-    if(req.session.user){
+authController.wishList = function (req, res) {
+    if (req.session.user) {
         var collection = db.collection('wishlist');
         collection.insertOne({
             accountId: req.session.user[0]._id,
             accountName: req.session.user[0].userName,
-            postId: req.body.id,});
+            postId: req.body.id,
+        });
         console.log(req.session.user);
         return res.send("ok");
     }
-    
+
 
 }
-authController.getWishList = function(req,res){
-    if(req.session.user){
+authController.getWishList = function (req, res) {
+    if (req.session.user) {
         var collection1 = db.collection('wishlist');
         var collection2 = db.collection('post');
-        collection1.find({accountId:req.session[0]._id}).toArray(function(error,success){
-            if(err){
+        collection1.find({
+            accountId: req.session[0]._id
+        }).toArray(function (error, success) {
+            if (err) {
                 return res.send(error);
             }
             console.log(success);
@@ -473,5 +500,5 @@ authController.getWishList = function(req,res){
 
     }
 }
- 
+
 module.exports = authController;

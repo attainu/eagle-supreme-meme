@@ -10,7 +10,7 @@ $(document).ready(function(){
 
     //         });
     $('.flagImage').on('click',function(){
-        var id = $(this).attr('id')
+        var id = $(this).attr('alt')
         console.log(id);
         $.ajax({
             url:"/report",

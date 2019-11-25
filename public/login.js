@@ -11,26 +11,15 @@ $(document).ready(function () {
         $('.forPass').show()
     })
 
-    console.log($('#seqPassword')[0].innerText);
-
-    if ($('#seqPassword')[0].innerText !== "") {
-        $('.hideLogin').hide()
-        $('.inputField').hide()
-        $('.forPass').show()
-    }
-
-    $('#submitClick').on('click', function () {
-        if ($('#passwordSign').val() !== $('#confirmPasswordSign').val()) {
-            $('#errorModalLabel').empty()
-            $('#errorModalLabel').append("Password doesn't match");
-            $('#passwordSign').val('')
-            $('#confirmPasswordSign').val('')
-            $('#loginModal').click()
-            return false;
-        }
-        return true;
+    $('#backToLogin').on('click', function () {
+        $('.hideLogin').hide();
+        $('.inputField').show()
+        $('.forPass').hide()
     })
 
+
+
+    // sign-up
     $("#signUpForm").submit(function (e) {
 
         e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -54,5 +43,52 @@ $(document).ready(function () {
                 }
             }
         });
+    })
+
+    // log-in 
+    $('#loginForm').submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            success: function (response) {
+                console.log(response);
+                if (response === "Logged-in") {
+                    window.location.href = "/";
+                } else {
+                    $('#loginError').append(response)
+                }
+            }
+        })
+    })
+
+    // forget password
+    $('#forPassForm').submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            success: function (response) {
+                if (response === "done") {
+                    $('.hideLogin').show();
+                    $('.inputField').hide()
+                    $('.forPass').hide()
+                    $('#errorModalLabel').empty()
+                    $('#errorModalLabel').append("Password has been updated");
+                    $('#loginModal').click()
+                    $('#forPassError').empty()
+                } else {
+                    $('#forPassError').append("Invalid input. Check User Name, Security Question and Answer again")
+                }
+            }
+        })
     })
 })

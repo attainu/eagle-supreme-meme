@@ -18,138 +18,188 @@ MongoClient.connect(url, function (err, client) {
     }
 });
 
-AuthModel.home = function(cb){
-    
+AuthModel.home = function (cb) {
+
     var collection = db.collection('post');
-    collection.find().limit(10).toArray(function(err,res){
-        if(err){
+    collection.find().limit(10).toArray(function (err, res) {
+        if (err) {
             return cb(err);
         }
         //console.log(res);
-        return cb(null,res);
+        return cb(null, res);
     })
 }
 
-AuthModel.search = function(search,cb){
+AuthModel.search = function (search, cb) {
     console.log(search);
     var collection = db.collection('post');
-    collection.find({$or:[{title:search},{tags:search}]}).toArray(function (err, res) {
-        if(err){
+    collection.find({
+        $or: [{
+            title: search
+        }, {
+            tags: search
+        }]
+    }).toArray(function (err, res) {
+        if (err) {
             return cb(err);
         }
         console.log(res);
-        return cb(null,res);
+        return cb(null, res);
     })
 }
 
-AuthModel.trending = function(cb){
+AuthModel.trending = function (cb) {
     var collection = db.collection('post');
-    collection.find().limit(10).sort({like:-1}).toArray(function(err,res){
-        if(err){
+    collection.find().limit(10).sort({
+        like: -1
+    }).toArray(function (err, res) {
+        if (err) {
             return cb(err);
         }
         console.log(res);
-        return cb(null,res);
+        return cb(null, res);
     })
 }
 var temp = {
-    "username":"admin",
-    "password":"admin"
-  };
+    "username": "admin",
+    "password": "admin"
+};
 
-AuthModel.adminAuthentication = function(username,password,cb){
-    if(!username){
+AuthModel.adminAuthentication = function (username, password, cb) {
+    if (!username) {
         return cb("Username Required");
     }
-    if(!password){
+    if (!password) {
         return cb("Password Required");
     }
-    if(temp.username==username && temp.password==password){
-        return cb(null,"Verified");
+    if (temp.username == username && temp.password == password) {
+        return cb(null, "Verified");
     }
     return cb("Invalid Credentials");
 }
 
-AuthModel.adminApproval = function(cb){
+AuthModel.adminApproval = function (cb) {
     var collection = db.collection('approval_pending');
-    collection.find().toArray(function(err,res){
-        if(err){
+    collection.find().toArray(function (err, res) {
+        if (err) {
             return cb(err)
         }
-        return cb(null,res);
+        return cb(null, res);
     })
 
 }
-AuthModel.adminPostApproval = function(postID,cb){
+AuthModel.adminPostApproval = function (postID, cb) {
     var collection1 = db.collection('approval_pending');
     var collection2 = db.collection('post');
     //console.log(postID.id);
     var newID = ObjectId(postID.id);
-    collection1.find({_id: newID}).toArray(function(err,res){
-        if(err){
+    collection1.find({
+        _id: newID
+    }).toArray(function (err, res) {
+        if (err) {
             return cb(err);
         }
-        console.log("This is a response",res);
+        console.log("This is a response", res);
         collection2.insertMany(res);
-        collection1.remove({_id: newID});
+        collection1.remove({
+            _id: newID
+        });
         console.log("successful")
-        return cb(null,"Accepted");
+        return cb(null, "Accepted");
         //return cb(null,"Successful");
-        
+
     })
-    
-    
+
+
 }
-AuthModel.adminPostDecline = function(postID,cb){
+AuthModel.adminPostDecline = function (postID, cb) {
     var collection = db.collection('approval_pending');
-   // var collection2 = db.collection('post');
+    // var collection2 = db.collection('post');
     //console.log(postID.id);
     var newID = ObjectId(postID.id);
-    
-        collection.remove({_id: newID});
-        console.log("successful")
-        return cb(null,"Decline");
-        //return cb(null,"Successful");
-        
+
+    collection.remove({
+        _id: newID
+    });
+    console.log("successful")
+    return cb(null, "Decline");
+    //return cb(null,"Successful");
+
 }
-AuthModel.adminReported = function(cb){
+AuthModel.adminReported = function (cb) {
     var collection = db.collection('reported');
-    collection.find().toArray(function(err,res){
-        if(err){
+    collection.find().toArray(function (err, res) {
+        if (err) {
             return cb(err)
         }
-        return cb(null,res);
+        return cb(null, res);
     })
 
 }
-AuthModel.adminReportedPost = function(postID,cb){
+AuthModel.adminReportedPost = function (postID, cb) {
     var collection1 = db.collection('reported');
     var collection2 = db.collection('post');
     var newID = ObjectId(postID.id);
-    collection2.find({_id: newID}).toArray(function(err,res){
-        if(err){
+    collection2.find({
+        _id: newID
+    }).toArray(function (err, res) {
+        if (err) {
             return cb(err);
         }
-        console.log("This is a response",res);
+        console.log("This is a response", res);
         collection1.insertMany(res);
-       
-        
+
+
     });
 
 }
 
-AuthModel.adminReview = function(postID,cb){
+AuthModel.adminReview = function (postID, cb) {
     var collection = db.collection('reported');
     var newID = ObjectId(postID.id);
-    collection.remove({_id: newID});
-    cb(null,"Review")
+    collection.remove({
+        _id: newID
+    });
+    cb(null, "Review")
 }
-AuthModel.adminDelete = function(postID,cb){
+AuthModel.adminDelete = function (postID, cb) {
     var collection1 = db.collection('reported');
     var collection2 = db.collection('post');
     var newID = ObjectId(postID.id);
-    collection1.remove({_id: newID});
-    collection2.remove({_id: newID});
-    cb(null,"Deleted")
+    collection1.remove({
+        _id: newID
+    });
+    collection2.remove({
+        _id: newID
+    });
+    cb(null, "Deleted")
 }
-        module.exports = AuthModel;
+
+AuthModel.checkLike = function (req, res, cb) {
+
+    var collection = db.collection('reactions');
+    if (req.session.user) {
+        var likeAcc = [];
+        var userId = req.session.user[0]._id;
+        collection.find({}).toArray(function (err, response) {
+            response.forEach(element => {
+              //  console.log(element)
+                if (element.accountId === userId) {
+                    if (element.like === "true") {
+                        likeAcc.push(element.postId)
+                    }
+                }
+            });
+          //  console.log(likeAcc)
+            if (!err) {
+                return cb(null, likeAcc)
+            } else {
+                cb(err)
+            }
+        })
+    } else {
+        cb(null)
+    }
+}
+
+module.exports = AuthModel;

@@ -69,9 +69,11 @@ var controllers = require('./routes/index.js')
 
 app.use(authRoute.checkIfLoggedIn);
 //routes
-app.post('/signup', controllers.accountController.signUp);
 
-app.post('/signin', controllers.accountController.signIn)
+// login/signup
+app.post('/signup', controllers.accountController.signUp);
+app.post('/signin', controllers.accountController.signIn);
+app.post('/forPass', controllers.accountController.forPass);
 
 app.get('/', authRoute.home);
 

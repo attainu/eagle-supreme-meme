@@ -51,6 +51,8 @@ $(document).ready(function () {
         })
     });
 
+
+// comments     
     var id 
     $('.showComments').on('click', function(){
         console.log($(this).attr('name'))

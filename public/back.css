@@ -11,6 +11,8 @@ body{
    
     .popup{
         position: absolute;
+        background-attachment: fixed;
+        
     }
 
 }

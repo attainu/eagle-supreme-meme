@@ -494,43 +494,80 @@ authController.wishList = function (req, res) {
     }
      else return res.send("Login");
 }
-authController.getWishList =  function (req, res) {
+// authController.getWishList =  function (req, res) {
+//     if (req.session.user) {
+//         var database = [];
+//         var collection1 = db.collection('wishlist');
+//         var collection2 = db.collection('post');
+//         collection1.find({
+//             accountId: req.session.user[0]._id
+//         }).toArray( async function (error, success) {
+//             if (error) {
+//                 return res.send(error);
+//             }
+//             else {
+//                 //var x;
+                
+//             //console.log(success);
+//             success.forEach(function(data){
+//                 collection2.find({_id:ObjectID(data.postId)}).toArray(function(err,suc){
+//                     if(suc){
+//                         //x=suc;
+//                         console.log("suc",suc);
+                        
+//                         database.push(suc[0]);
+//                         console.log("This is DataBase",database);
+//                         }
+//                     else console.log(err);
+//                 });
+//                 //console.log("okok",database); 
+//                //database.push(x)
+//             });
+//             console.log("520 Databse",database);
+//         }
+            
+            
+//         })
+//        // return res.send(database);
+
+//     }
+// }
+
+authController.getWishList = function (req, res) {
     if (req.session.user) {
         var database = [];
         var collection1 = db.collection('wishlist');
         var collection2 = db.collection('post');
         collection1.find({
             accountId: req.session.user[0]._id
-        }).toArray( async function (error, success) {
+        }).toArray(async function (error, success) {
             if (error) {
                 return res.send(error);
-            }
-            else {
-                var x;
-                
-            //console.log(success);
-            success.forEach(function(data){
-                collection2.find({_id:ObjectID(data.postId)}).toArray(function(err,suc){
-                    if(suc){
-                        x=suc;
-                        console.log("suc",suc);
-                        console.log("This is DataBase",database);
-                        //database.push(suc);
-                        
-
+            } else {
+                collection2.find({}).toArray(function (err, suc) {
+                    suc.forEach(function (data) {
+                        success.forEach(function (id) {
+                            if (JSON.stringify(id.postId) === JSON.stringify(data._id)) {
+                                database.push(data);
+                            }
+                        })
+                    });
+                    console.log("520 Database", database);
+                    if (typeof req.session.user == "undefined") {
+                        return res.render('home', {
+                            data: database,
+                            logIn: "<a href='/loginpage'>Login/Signup </a>"
+                        });
+                    } else {
+                        return res.render('home', {
+                            data: database,
+                            logIn: "<a href='/logoutpage'>Logout</a>"
+                        });
                     }
-                    else console.log(err);
+                    
                 });
-               // console.log("okok",database); 
-               database.push(x)
-            });
-            console.log("520 Databse",database);
-        }
-            
-            
+            }
         })
-       // return res.send(database);
-
     }
 }
 

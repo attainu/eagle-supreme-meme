@@ -1,12 +1,12 @@
 .content{
     margin-top: 50px;
     height: auto;
-    border: 1px solid #999999;
+    /* border: 1px solid #999999; */
     position: absolute;
     /* display: block; */
     /* align-items: center; */
     /* justify-content: center; */
-    background: rgb(243, 243, 243);
+    background: rgb(255, 255, 255);
     width: 600px;
     /* top: 65px; */
     left: 28%;
@@ -29,12 +29,12 @@
     display: flex;
     flex-direction: column;
     background: #f9f9f9;
-    border-radius: 18px;
-    margin-bottom: 14px;
+    border-radius: 5px;
+    margin-bottom: 5px;
     padding: 5px;
     margin-left: 2px;
     margin-right: 2px;
-    box-shadow: 0px 1px 7px 0px #4a4a4a;
+    /* box-shadow: 0px 1px 5px 0px #c4c4c4; */
 }
 .main-reaction{
     display: block;
@@ -75,8 +75,8 @@
 
 .comment{
     position: relative;
-    left: 102px;
-
+    left: 165px;
+    top: 0px;
 }
 .flagImage{
     height: 27px;
@@ -85,4 +85,22 @@
 .flag{
     position: absolute;
     right: 24px;
+}
+.comment .showComments{
+    background: none;
+    color: black;
+    border: none;
+    font-weight: 500;
+    font-family: sans-serif;
+    margin: -6px;
+}
+.commentimagesize{
+    height: 22px;
+    width: 25px;
+}
+.showComments:active{
+    background: none;
+}
+.showComments:focus{
+    outline: none;
 }

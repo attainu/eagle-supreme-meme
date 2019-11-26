@@ -231,7 +231,6 @@ authController.home = function (req, res) {
     Model.checkLike(request, response, function (err, doc) {                 //   check like  
         if (!err) {
           //  console.log(doc);
-           var likePost = doc
            var posts = []
             Model.home(function (error, success) {
              //   console.log(success);
@@ -248,7 +247,7 @@ authController.home = function (req, res) {
                 });
             } else { posts = success}
            // console.log(posts);
-           var chPost = JSON.stringify(posts)
+           
                 if (error) {
                     return res.render('home', {
                         data: error
@@ -257,13 +256,11 @@ authController.home = function (req, res) {
                 if (typeof req.session.user == "undefined") {
                     return res.render('home', {
                         data: posts,
-                        chPost: chPost,
                         logIn: "<a href='/loginpage'>Login/Signup </a>"
                     });
                 } else {
                     return res.render('home', {
                         data: posts,
-                        chPost: chPost,
                         logIn: "<a href='/logoutpage'>Logout</a>"
                     });
                 }

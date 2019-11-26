@@ -79,7 +79,9 @@ app.get('/', authRoute.home);
 
 app.get('/loginpage', function (req, res) {
   if (!req.session.user) {
-    res.render('login');
+    res.render('login',{
+      layout:'userlogin'
+    });
   } else {
     res.redirect('/logoutpage')
   }

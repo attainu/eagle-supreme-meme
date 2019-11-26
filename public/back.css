@@ -1,0 +1,13 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url("loginback.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@media only screen and (max-width:600px){
+    body{
+        display: none;
+    }
+}

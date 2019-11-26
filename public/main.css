@@ -209,7 +209,7 @@ header{
     z-index: -1;
 }
 .search-bar form:hover .text{
-    width: 160px;
+    width: 206px;
     height: 32px;
     left: 0;
     z-index: 2;
@@ -306,7 +306,11 @@ text-decoration: none;
 }
 .wishlist{
   height: 41px;
+  display: flex;
+  justify-content: center;
   width: 41px;
+  align-items: center;
+  display: f;
 }
 
 .wishlistcontent{
@@ -462,3 +466,10 @@ text-decoration: none;
     transform: skewY(24deg);
   }
 
+#upload li{
+  margin: 6px;
+}
+.wishlist a{
+  text-decoration: none;
+
+}

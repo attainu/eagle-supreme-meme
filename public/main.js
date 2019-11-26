@@ -9,6 +9,12 @@ $(document).ready(function(){
 	// 		  $(this).toggleClass('happy broken');
 
     //         });
+    $('.showComments').on('click',function(){
+        $(this).css('background','none');
+    });
+    $('.showComments').on('focus',function(){
+        $(this).css('outline','none');
+    })
     $('.flagImage').on('click',function(){
         var id = $(this).attr('alt')
         console.log(id);

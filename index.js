@@ -5,7 +5,7 @@ const exphbs = require('express-handlebars');
 
 
 const multer = require('multer');
-const PORT = process.env.PORT || 9095
+const PORT = process.env.PORT || 9090
 
 const db = require('./models/index.js');
 
@@ -120,6 +120,7 @@ app.get('/upload', function (req, res) {
   // console.log('hello');
   res.render('upload');
 })
+app.get('/whatsnew',authRoute.whatsnew);
 
 app.get('/test', function (req, res) {
   res.sendFile(__dirname + '/test.html');

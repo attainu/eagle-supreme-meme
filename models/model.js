@@ -29,6 +29,17 @@ AuthModel.home = function (cb) {
         return cb(null, res);
     })
 }
+AuthModel.whatsnew = function (cb) {
+
+    var collection = db.collection('post');
+    collection.find({userupload:"true"}).toArray(function (err, res) {
+        if (err) {
+            return cb(err);
+        }
+        //console.log(res);
+        return cb(null, res);
+    })
+}
 
 AuthModel.search = function (search, cb) {
     console.log(search);

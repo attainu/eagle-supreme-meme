@@ -1,32 +1,24 @@
 $(document).ready(function () {
-
     $('#loginClick').on('click', function () {
         $('.hideLogin').hide();
         $('.inputField').css('display', 'block');
     })
-
     $('#forgotPass').on('click', function () {
         $('.hideLogin').hide();
         $('.inputField').hide()
         $('.forPass').show()
     })
-
     $('#backToLogin').on('click', function () {
         $('.hideLogin').hide();
         $('.inputField').show()
         $('.forPass').hide()
     })
-
-
-
     // sign-up
     $("#signUpForm").submit(function (e) {
-
         e.preventDefault(); // avoid to execute the actual submit of the form.
-
         var form = $(this);
         var url = form.attr('action');
-
+        
         $.ajax({
             type: "POST",
             url: url,
@@ -34,9 +26,14 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response);
                 if (response === "New Account created") {
+                    $('#firstname').val("");
+                    console.log("new")
                     alert(response)
                     window.location.href = "/";
+                    
+
                 } else {
+                    console.log("old")
                     $('#errorModalLabel').empty()
                     $('#errorModalLabel').append(response);
                     $('#loginModal').click()
@@ -44,13 +41,11 @@ $(document).ready(function () {
             }
         });
     })
-
     // log-in 
     $('#loginForm').submit(function (e) {
         e.preventDefault();
         var form = $(this);
         var url = form.attr('action');
-
         $.ajax({
             type: "POST",
             url: url,
@@ -65,13 +60,11 @@ $(document).ready(function () {
             }
         })
     })
-
     // forget password
     $('#forPassForm').submit(function (e) {
         e.preventDefault();
         var form = $(this);
         var url = form.attr('action');
-
         $.ajax({
             type: "POST",
             url: url,

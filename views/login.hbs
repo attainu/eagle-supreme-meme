@@ -1,9 +1,9 @@
- <div class="popup">
-     <div class="container  ">
-         <div class="row ">
-             <div class="col-md-4 ">
-                 <div class="container mt-4">
-                     <div class="login center ">
+<div class="popup">
+     <div class="container mt-5 ">
+         <div class="row mt-5">
+             <div class="col-md-4 mt-5">
+                 <div class="container">
+                     <div class="login center">
                          {{!-- {{#if error}}
                          <div class="login center hideLogin" style="display: none;"></div>
                          <div class="inputField center" style="display: block;">
@@ -23,8 +23,6 @@
                              <button class="buttonLogin loginDesign" id="loginClick">Login</button>
                          </div>
                          {{!-- {{/if}} --}}
-
-
                          <div class="inputField center">
                              <form id="loginForm" action="/signin" method="POST">
                                  <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail"
@@ -36,7 +34,6 @@
                                  <button type="submit" class=" loginDesign" id="loginSubmit">Login</button>
                              </form>
                          </div>
-
                          <div class="forPass center" style="display: none;">
                              <form id="forPassForm" action="/forPass" method="POST">
                                  <input id="usernameLogin" type="text" class="form-control mx-auto inputDetail"
@@ -48,8 +45,8 @@
                                  </select>
                                  <input type="text" class="form-control  mx-auto inputDetail" placeholder="Answer"
                                      name="securityAnswer" required>
-                                     <p id="forPassError" style="color: red;"></p>
-                                     <p style="color: white;">Enter New Password</p>
+                                 <p id="forPassError" style="color: red;"></p>
+                                 <p style="color: white;">Enter New Password</p>
                                  <input type="text" class="form-control  mx-auto inputDetail" placeholder="New Password"
                                      name="newPassword" required>
                                  <p id='backToLogin' style="color: white;">Back to Log-in</p>
@@ -58,16 +55,14 @@
                              </form>
                          </div>
                      </div>
-
                  </div>
              </div>
-             <div class="col-md-8">
+             <div class="col-md-8 mt-5">
                  <div class="container">
                      <div class="signup center">
                          <div class="signupPage">
                              <h1 class="signupCol colors">Join US</h1>
                              <p class="signupCol colors">The Fastest Growing Meme Community</p>
-
                          </div>
                          <div class="signupPage inputFieldSignUP ">
                              <form id="signUpForm" action="/signup" method="POST">
@@ -94,20 +89,16 @@
                              </form>
                          </div>
                      </div>
-
                  </div>
              </div>
          </div>
      </div>
  </div>
-
-
  {{!-- modal --}}
  <button id="loginModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#errorModal"
      style="margin-top: 50px;" hidden>
      Launch demo modal
  </button>
-
  <!-- Modal -->
  <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
      aria-hidden="true">
@@ -119,17 +110,13 @@
                      <span aria-hidden="true">&times;</span>
                  </button>
              </div>
-
              <div class="modal-footer">
                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
              </div>
          </div>
      </div>
  </div>
-
  {{!----}}
-
-
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
  </script>

@@ -25,6 +25,14 @@ MongoClient.connect(url, function (err, client) {
     }
 });
 
+//cloudinary
+const cloudinary = require('cloudinary').v2
+cloudinary.config({
+    cloud_name: 'dogn8cjzk',
+    api_key: '685335288353771',
+    api_secret: '8_cp8VJqpOgKTdto4wjKSKxSDT4'
+})
+
 
 // save the reactions
 authController.like = function (req, res) {
@@ -176,37 +184,35 @@ authController.saveComment = function (req, res) {
     }
 }
 
-authController.upload = async function (request, response) {
-
-    var data = request.body;
-
-    const file = request.file
-    console.log(file.path);
-    //console.log(data.category);
-
-    //tiinify
-    const source = await tinify.fromFile("file.path");
-    source.toFile("optimized.png");
-    //console.log(source);
-    var newfile = file.path.replace("public", "");
-
-    var finalImg = {
-        image: newfile,
-        category: data.category
-    };
-    console.log(finalImg);
-
-
-    //store to db
+var urlLink;
+authController.upload = function (req, response) {
+    console.log(req.body);
+    //cloudinary
     var collection = db.collection('approval_pending');
-    collection.insertOne(finalImg, function (error, res) {
-        if (error) {
-            return error
-        }
+    cloudinary.uploader.upload(req.file.path, function (error, res) {
+        if (!error) {
+            urlLink = res.url;
+            var finalImg = {
+                contentType: req.file.mimetype,
+                title : req.body.title,
+                tag : req.body.tag,
+                likes : 0,
+                image: urlLink
+            };
+            console.log("res>>", res.url);
+            collection.insertOne(finalImg, function (error, result) {
+               
+                if (error) {
+                    return error
+                }
+                // return response.send('info uploaded, redirecting....');
+                return response.redirect("/")
+            });
 
-        return response.send('info uploaded, redirecting....');
-        // response.redirect("/")
-    });
+        }
+        // console.log("err>>>>", error)
+    })
+
 }
 
 authController.checkIfLoggedIn = function (req, res, next) {

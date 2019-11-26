@@ -92,8 +92,43 @@
            <a href="#"><li>Explore</li></a>
            <a href="/trending"><li>Trending</li></a>
            <a href="#"><li>What's New</li></a>
-           <a href="#" id="upload"><li>Upload</li></a>
+           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Upload
+            </button>
        </ul>
+    </div>
+     <!-- Modal -->
+    <div class="modal modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload your Meme</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form container justify-content-center" action="/upload" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="meme" style="border: 1px solid #b5b0b0"><br><br>
+                        <select required name="title">
+                            <option value="">Select category</option>
+                            <option value="funny" >Funny</option>
+                            <option value="bollywood">Bollywood</option>
+                            <option value="sarcasm">Sarcasm</option>
+                            <option value="random">Random</option>
+                        </select><br><br>
+                        <input type="text" name="tag" id="category" placeholder="#tags"><br><br>
+                        {{!-- <input type="submit"> --}}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                {{!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                </div> --}}
+            </div>
+        </div>
     </div>
     <div class="promoted">
         <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Muting the family WhatsApp group for an entire year is my culture. <br>What&#39;s yours?</p>&mdash; Anish Karkera (@Anish_Karkera) <a href="https://twitter.com/Anish_Karkera/status/1197390854291382272?ref_src=twsrc%5Etfw">November 21, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

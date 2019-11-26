@@ -473,30 +473,63 @@ authController.adminDelete = function (req, res) {
 authController.wishList = function (req, res) {
     if (req.session.user) {
         var collection = db.collection('wishlist');
-        collection.insertOne({
-            accountId: req.session.user[0]._id,
-            accountName: req.session.user[0].userName,
-            postId: req.body.id,
-        });
-        console.log(req.session.user);
-        return res.send("ok");
+        collection.find({$and:[{accountId:req.session.user[0]._id},{postId:req.body.id}]}).toArray(function(err,success){
+            if(err){
+                return res.send(err);
+            }
+            if(success.length<1){
+                collection.insertOne({
+                    accountId: req.session.user[0]._id,
+                    accountName: req.session.user[0].userName,
+                    postId: req.body.id,
+                });
+                return res.send("Saved");
+
+            }
+            else return res.send("Already Saved");
+        })
+       
+        //console.log(req.session.user);
+        
     }
-
-
+     else return res.send("Login");
 }
-authController.getWishList = function (req, res) {
+authController.getWishList =  function (req, res) {
     if (req.session.user) {
+        var database = [];
         var collection1 = db.collection('wishlist');
         var collection2 = db.collection('post');
         collection1.find({
-            accountId: req.session[0]._id
-        }).toArray(function (error, success) {
-            if (err) {
+            accountId: req.session.user[0]._id
+        }).toArray( async function (error, success) {
+            if (error) {
                 return res.send(error);
             }
-            console.log(success);
+            else {
+                var x;
+                
+            //console.log(success);
+            success.forEach(function(data){
+                collection2.find({_id:ObjectID(data.postId)}).toArray(function(err,suc){
+                    if(suc){
+                        x=suc;
+                        console.log("suc",suc);
+                        console.log("This is DataBase",database);
+                        //database.push(suc);
+                        
 
+                    }
+                    else console.log(err);
+                });
+               // console.log("okok",database); 
+               database.push(x)
+            });
+            console.log("520 Databse",database);
+        }
+            
+            
         })
+       // return res.send(database);
 
     }
 }

@@ -67,13 +67,7 @@
 }
 .likebutton{
     position: relative;
-    top: -23px;
-    left: 37px;
-}
-
-.likebuttontrue{
-    position: relative;
-    top: -23px;
+    top: -12px;
     left: 37px;
 }
 

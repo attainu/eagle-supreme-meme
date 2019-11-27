@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
 const account = require('./Account.js');
-
+var pass = encodeURIComponent('meme-hub@6')
+var url = 'mongodb+srv://root:'+pass+'@meme-hub-vxtlu.mongodb.net/meme-hub?retryWrites=true&w=majority';
 
 function connect() {
-    return mongoose.connect('mongodb://localhost:27017/meme-hub',  { useNewUrlParser: true, useCreateIndex:true});
+    return mongoose.connect(url,  { useNewUrlParser: true, useCreateIndex:true});
 }
 
 module.exports = {

@@ -31,10 +31,10 @@ app.set('view engine', '.hbs');
 
 // SET STORAGE
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    // console.log(file);
-    cb(null, 'public/uploads/')
-  },
+  // destination: function (req, file, cb) {
+  //   // console.log(file);
+  //   cb(null, 'public/uploads/')
+  // },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
   }

@@ -48,18 +48,17 @@
                     <span class="fontstyle">Categories</span>
                         <div class="list">
                         <ul>
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">List</a></li>
-                    
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">List</a></li>
-                        <li><a href="#">List</a></li>
+                        <li><a href="/search?search=funny">Funny</a></li>
+                        <li><a href="/search?search=food">Food & Drinks</a></li>
+                        <li><a href="/search?search=sports">Sports</a></li>
+                        <li><a href="/search?search=gaming">Gaming</a></li>
+                        <li><a href="/search?search=programing">Programing</a></li>
+                        <li><a href="/search?search=web+series">Web Series </a></li>
+                        <li><a href="/search?search=bollywood">Bollywood</a></li>
+                        <li><a href="/search?search=cat">Cat</a></li>
+                        <li><a href="/search?search=politics">Politics</a></li>
+                        <li><a href="/search?search=tech">Tech</a></li>
+                        <li><a href="/search?search=random">Random</a></li>
                         
                         
                     </ul>
@@ -99,7 +98,7 @@
            <a href="/"><li>Home</li></a>
            <a href="/"><li>Explore</li></a>
            <a href="/trending"><li>Trending</li></a>
-           <a href="/mywishlist"><li>What's New</li></a>
+           <a href="/whatsnew"><li>What's New</li></a>
            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Upload
             </button>
@@ -122,8 +121,15 @@
                         <select required name="title" class="form-control">
                             <option value="">Select category</option>
                             <option value="funny" >Funny</option>
+                            <option value="food">Food & Drinks</option>
+                            <option value="sports">Sports</option>
+                            <option value="gaming">Gaming</option>
+                            <option value="programing">Programing</option>
+                            <option value="web series">Web Serries</option>
                             <option value="bollywood">Bollywood</option>
-                            <option value="sarcasm">Sarcasm</option>
+                            <option value="cat">Cat</option>
+                            <option value="politics">Politics</option>
+                            <option value="tech">Tech</option>
                             <option value="random">Random</option>
                         </select><br><br>
                         <input  class="form-control" type="text" name="tag" id="category" placeholder="#tags"><br><br>
@@ -165,6 +171,32 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <a href="/loginpage"><button type="button" class="btn btn-primary">Log-in</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!----}}
+
+{{!-- modal --}}
+<button id="reportDone" type="button" class="btn btn-primary" data-toggle="modal" data-target="#reportModal"
+  style="margin-top: 50px;" hidden>
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reportModalLabel">The Post has been reported successfully</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

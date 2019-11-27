@@ -9,7 +9,8 @@ tinify.key = "FGssXbLPvZT54cncJw9CGsjrX807xzYW";
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 var db = null;
-var url = 'mongodb://localhost:27017';
+var pass = encodeURIComponent('meme-hub@6')
+var url = 'mongodb+srv://root:'+pass+'@meme-hub-vxtlu.mongodb.net/meme-hub?retryWrites=true&w=majority';
 MongoClient.connect(url, function (err, client) {
     if (err) {
         console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -28,9 +29,9 @@ MongoClient.connect(url, function (err, client) {
 //cloudinary
 const cloudinary = require('cloudinary').v2
 cloudinary.config({
-    cloud_name: 'dogn8cjzk',
-    api_key: '685335288353771',
-    api_secret: '8_cp8VJqpOgKTdto4wjKSKxSDT4'
+    cloud_name: 'memehubeagle',
+    api_key: '746724469249981',
+    api_secret: 'wrCdY-SrNtq4DrzuUbVQ-3bKhOY'
 })
 
 
@@ -198,7 +199,7 @@ authController.upload = function (req, response) {
                 tag : req.body.tag,
                 likes : 0,
                 url: urlLink,
-                name:req.session.user[0].firstName,
+                name:req.session.user[0].userName,
                 userupload:"true"
             };
             console.log("res>>", res.url);
@@ -623,6 +624,8 @@ authController.getWishList = function (req, res) {
                 });
             }
         })
+    } else {
+        return res.redirect('/loginpage')
     }
 }
 

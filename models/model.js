@@ -6,7 +6,8 @@ const ObjectId = require('mongodb').ObjectID
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 var db = null;
-var url = 'mongodb://localhost:27017';
+var pass = encodeURIComponent('meme-hub@6')
+var url = 'mongodb+srv://root:'+pass+'@meme-hub-vxtlu.mongodb.net/meme-hub?retryWrites=true&w=majority';
 MongoClient.connect(url, function (err, client) {
     if (err) {
         console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -159,6 +160,7 @@ AuthModel.adminReportedPost = function (postID, cb) {
         }
         console.log("This is a response", res);
         collection1.insertMany(res);
+        return cb(null, "done")
 
 
     });

@@ -26,8 +26,8 @@ $(document).ready(function(){
             },
             method : "post",
             success: function(data){
-               console.log(data);
-               $(".report ").text(data);
+               console.log("report"+data);
+               $("#reportDone").click();
                 
             }
         })

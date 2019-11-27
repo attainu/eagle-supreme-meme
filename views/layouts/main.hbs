@@ -96,10 +96,10 @@
     </header>
     <div class="side-nav">
        <ul>
-           <a href="#"><li>Home</li></a>
-           <a href="#"><li>Explore</li></a>
+           <a href="/"><li>Home</li></a>
+           <a href="/"><li>Explore</li></a>
            <a href="/trending"><li>Trending</li></a>
-           <a href="#"><li>What's New</li></a>
+           <a href="/mywishlist"><li>What's New</li></a>
            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Upload
             </button>
@@ -118,15 +118,15 @@
                 </div>
                 <div class="modal-body">
                     <form class="form container justify-content-center" action="/upload" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="meme" style="border: 1px solid #b5b0b0"><br><br>
-                        <select required name="title">
+                        <input type="file" name="meme" style="border: 1px solid #b5b0b0" class="form-control"><br><br>
+                        <select required name="title" class="form-control">
                             <option value="">Select category</option>
                             <option value="funny" >Funny</option>
                             <option value="bollywood">Bollywood</option>
                             <option value="sarcasm">Sarcasm</option>
                             <option value="random">Random</option>
                         </select><br><br>
-                        <input type="text" name="tag" id="category" placeholder="#tags"><br><br>
+                        <input  class="form-control" type="text" name="tag" id="category" placeholder="#tags"><br><br>
                         {{!-- <input type="submit"> --}}
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

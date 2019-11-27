@@ -465,7 +465,7 @@ text-decoration: none;
   .titledesign{
     height: 16px;
     width: 21px;
-    background: #484848;
+    background: #303030;
     position: relative;
     top: 24px;
     left: -25px;
@@ -567,4 +567,10 @@ figcaption{
         width: 100%;
       }
 
+}
+
+.promoted .categoryTitle{
+  position: relative;
+  left: 0;
+  background: #e18686;
 }

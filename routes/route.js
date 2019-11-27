@@ -35,7 +35,7 @@ cloudinary.config({
 })
 
 authController.checkIfLoggedIn = function (req, res, next) {
-
+          console.log('This is not a loop'+ req.originalUrl)
     //   console.log("check session " + req.session.user);
     //  console.log("Url " + req.originalUrl);
     if (req.originalUrl !== '/logoutpage' && req.originalUrl !== '/upload') {
@@ -43,7 +43,7 @@ authController.checkIfLoggedIn = function (req, res, next) {
     } else {
         if (req.session.user === undefined) {
             console.log("Session Error")
-            return res.render("login");
+            return res.redirect("/loginpage");
         } else {
             return next();
         }

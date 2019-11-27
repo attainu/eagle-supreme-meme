@@ -122,21 +122,21 @@ app.post('/upload', upload.single('meme'), authRoute.upload)
 // })
 app.get('/whatsnew',authRoute.whatsnew);
 
-app.get('/test', function (req, res) {
-  res.sendFile(__dirname + '/test.html');
+// app.get('/test', function (req, res) {
+//   res.sendFile(__dirname + '/test.html');
 
-});
+// });
 
-app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
-  const file = req.file
-  if (!file) {
-    const error = new Error('Please upload a file')
-    error.httpStatusCode = 400
-    return next(error)
-  }
-  res.send(file)
+// app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
+//   const file = req.file
+//   if (!file) {
+//     const error = new Error('Please upload a file')
+//     error.httpStatusCode = 400
+//     return next(error)
+//   }
+//   res.send(file)
 
-})
+// })
 
 app.get('/logoutpage', authRoute.logout);
 

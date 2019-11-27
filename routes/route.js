@@ -10,7 +10,7 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 var db = null;
 var pass = encodeURIComponent('meme-hub@6')
-var url = 'mongodb+srv://root:'+pass+'@meme-hub-vxtlu.mongodb.net/meme-hub?retryWrites=true&w=majority';
+var url = 'mongodb+srv://root:' + pass + '@meme-hub-vxtlu.mongodb.net/meme-hub?retryWrites=true&w=majority';
 MongoClient.connect(url, function (err, client) {
     if (err) {
         console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -35,7 +35,7 @@ cloudinary.config({
 })
 
 authController.checkIfLoggedIn = function (req, res, next) {
-     //     console.log('This is request'+ req)
+    //     console.log('This is request'+ req)
     //   console.log("check session " + req.session.user);
     //  console.log("Url " + req.originalUrl);
     if (req.originalUrl !== '/logoutpage' && req.originalUrl !== '/upload') {
@@ -43,9 +43,9 @@ authController.checkIfLoggedIn = function (req, res, next) {
     } else {
         if (req.session.user === undefined) {
             req = null;
-      //      console.log("Session Error")
+            //      console.log("Session Error")
             res.redirect("/loginpage");
-       //     console.log("After response")
+            //     console.log("After response")
         } else {
             return next();
         }
@@ -87,7 +87,7 @@ authController.like = function (req, res) {
                     exists = false
                 }
                 if (response[i].accountId === req.session.user[0]._id) {
-                  //  console.log("3.1");
+                    //  console.log("3.1");
                     if (response[i].postId === req.body.postId) {
                         //   console.log("3")
                         exists = true
@@ -211,25 +211,25 @@ authController.upload = function (req, response) {
     //cloudinary
     var collection = db.collection('approval_pending');
     cloudinary.uploader.upload(req.file.path, function (error, res) {
-        console.log("this the cloudinary Error"+ error)
+        console.log("this the cloudinary Error" + error)
         if (!error) {
             urlLink = res.url;
             var finalImg = {
-                title : req.body.title,
-                tag : req.body.tag,
-                likes : 0,
+                title: req.body.title,
+                tag: req.body.tag,
+                likes: 0,
                 url: urlLink,
-                name:req.session.user[0].userName,
-                userupload:"true"
+                name: req.session.user[0].userName,
+                userupload: "true"
             };
             console.log("res>>", res.url);
             collection.insertOne(finalImg, function (error, result) {
-               console.log("inserting error"+ error)
+                console.log("inserting error" + error)
                 if (error) {
                     return response.send(error)
                 } else {
                     return response.send("done")
-                }        
+                }
             });
 
         } else {
@@ -245,26 +245,28 @@ authController.home = function (req, res) {
     var request = req;
     var response = res;
 
-    Model.checkLike(request, response, function (err, doc) {                 //   check like  
+    Model.checkLike(request, response, function (err, doc) { //   check like  
         if (!err) {
-          //  console.log(doc);
-           var posts = []
+            //  console.log(doc);
+            var posts = []
             Model.home(function (error, success) {
-             //   console.log(success);
-             
-             if (doc){
-                success.forEach(element => {
-                    doc.forEach(id =>{
-                        if(JSON.stringify(id) === JSON.stringify(element._id)){
-                            element.show = true
-                           // console.log(element);
-                        } //else {console.log(element._id)}
-                    }) 
-                    posts.push(element)
-                });
-            } else { posts = success}
-           // console.log(posts);
-           
+                //   console.log(success);
+
+                if (doc) {
+                    success.forEach(element => {
+                        doc.forEach(id => {
+                            if (JSON.stringify(id) === JSON.stringify(element._id)) {
+                                element.show = true
+                                // console.log(element);
+                            } //else {console.log(element._id)}
+                        })
+                        posts.push(element)
+                    });
+                } else {
+                    posts = success
+                }
+                // console.log(posts);
+
                 if (error) {
                     return res.render('home', {
                         data: error
@@ -292,26 +294,28 @@ authController.whatsnew = function (req, res) {
     var request = req;
     var response = res;
 
-    Model.checkLike(request, response, function (err, doc) {                 //   check like  
+    Model.checkLike(request, response, function (err, doc) { //   check like  
         if (!err) {
-          //  console.log(doc);
-           var posts = []
+            //  console.log(doc);
+            var posts = []
             Model.whatsnew(function (error, success) {
-             //   console.log(success);
-             
-             if (doc){
-                success.forEach(element => {
-                    doc.forEach(id =>{
-                        if(JSON.stringify(id) === JSON.stringify(element._id)){
-                            element.show = true
-                           // console.log(element);
-                        } //else {console.log(element._id)}
-                    }) 
-                    posts.push(element)
-                });
-            } else { posts = success}
-           // console.log(posts);
-           
+                //   console.log(success);
+
+                if (doc) {
+                    success.forEach(element => {
+                        doc.forEach(id => {
+                            if (JSON.stringify(id) === JSON.stringify(element._id)) {
+                                element.show = true
+                                // console.log(element);
+                            } //else {console.log(element._id)}
+                        })
+                        posts.push(element)
+                    });
+                } else {
+                    posts = success
+                }
+                // console.log(posts);
+
                 if (error) {
                     return res.render('whatsnew', {
                         data: error
@@ -348,50 +352,99 @@ authController.search = function (req, res) {
     console.log(req.query);
     //return res.send(req.query);
     var search = req.query.search
-    Model.search(search, function (error, success) {
-        if (error) {
-            return res.render('search', {
-                data: error
+    var request = req;
+    var response = res;
+
+    Model.checkLike(request, response, function (err, doc) { //   check like  
+        if (!err) {
+            //  console.log(doc);
+            var posts = []
+            Model.search(search, function (error, success) {
+                if (doc) {
+                    success.forEach(element => {
+                        doc.forEach(id => {
+                            if (JSON.stringify(id) === JSON.stringify(element._id)) {
+                                element.show = true
+                                // console.log(element);
+                            } //else {console.log(element._id)}
+                        })
+                        posts.push(element)
+                    });
+                } else {
+                    posts = success
+                }
+
+                if (error) {
+                    return res.render('search', {
+                        data: error
+                    })
+                }
+                if (typeof req.session.user == "undefined") {
+                    return res.render('home', {
+                        data: success,
+                        logIn: "<a href='/loginpage'>Login/Signup </a>"
+                    });
+                } else {
+                    return res.render('home', {
+                        data: success,
+                        logIn: "<a href='/logoutpage'>Logout</a>"
+                    });
+                }
+                //return res.render('search',{
+                //data:success
+                //})
+
             })
         }
-        if (typeof req.session.user == "undefined") {
-            return res.render('home', {
-                data: success,
-                logIn: "<a href='/loginpage'>Login/Signup </a>"
-            });
-        } else {
-            return res.render('home', {
-                data: success,
-                logIn: "<a href='/logoutpage'>Logout</a>"
-            });
-        }
-        //return res.render('search',{
-        //data:success
-        //})
-
     })
 }
 authController.trending = function (req, res) {
-    Model.trending(function (error, success) {
-        if (error) {
-            return res.render('trending', {
-                data: error
+    var request = req;
+    var response = res;
+
+    Model.checkLike(request, response, function (err, doc) { //   check like  
+        if (!err) {
+            //  console.log(doc);
+            var posts = []
+            Model.home(function (error, success) {
+                //   console.log(success);
+
+                if (doc) {
+                    success.forEach(element => {
+                        doc.forEach(id => {
+                            if (JSON.stringify(id) === JSON.stringify(element._id)) {
+                                element.show = true
+                                // console.log(element);
+                            } //else {console.log(element._id)}
+                        })
+                        posts.push(element)
+                    });
+                } else {
+                    posts = success
+                }
+                // console.log(posts);
+
+                if (error) {
+                    return res.render('home', {
+                        data: error
+                    })
+                }
+                if (typeof req.session.user == "undefined") {
+                    return res.render('home', {
+                        data: posts,
+                        logIn: "<a href='/loginpage'>Login/Signup </a>"
+                    });
+                } else {
+                    return res.render('home', {
+                        data: posts,
+                        logIn: "<a href='/logoutpage'>Logout</a>"
+                    });
+                }
+                //return res.render('trending',{
+                //  data:success
+                //})
             })
         }
-        if (typeof req.session.user == "undefined") {
-            return res.render('home', {
-                data: success,
-                logIn: "<a href='/loginpage'>Login/Signup </a>"
-            });
-        } else {
-            return res.render('home', {
-                data: success,
-                logIn: "<a href='/logoutpage'>Logout</a>"
-            });
-        }
-        //return res.render('trending',{
-        //  data:success
-        //})
     })
 }
 
@@ -537,11 +590,17 @@ authController.adminDelete = function (req, res) {
 authController.wishList = function (req, res) {
     if (req.session.user) {
         var collection = db.collection('wishlist');
-        collection.find({$and:[{accountId:req.session.user[0]._id},{postId:req.body.id}]}).toArray(function(err,success){
-            if(err){
+        collection.find({
+            $and: [{
+                accountId: req.session.user[0]._id
+            }, {
+                postId: req.body.id
+            }]
+        }).toArray(function (err, success) {
+            if (err) {
                 return res.send(err);
             }
-            if(success.length<1){
+            if (success.length < 1) {
                 collection.insertOne({
                     accountId: req.session.user[0]._id,
                     accountName: req.session.user[0].userName,
@@ -549,14 +608,12 @@ authController.wishList = function (req, res) {
                 });
                 return res.send("Saved");
 
-            }
-            else return res.send("Already Saved");
+            } else return res.send("Already Saved");
         })
-       
+
         //console.log(req.session.user);
-        
-    }
-     else return res.send("Login");
+
+    } else return res.send("Login");
 }
 // authController.getWishList =  function (req, res) {
 //     if (req.session.user) {
@@ -571,14 +628,14 @@ authController.wishList = function (req, res) {
 //             }
 //             else {
 //                 //var x;
-                
+
 //             //console.log(success);
 //             success.forEach(function(data){
 //                 collection2.find({_id:ObjectID(data.postId)}).toArray(function(err,suc){
 //                     if(suc){
 //                         //x=suc;
 //                         console.log("suc",suc);
-                        
+
 //                         database.push(suc[0]);
 //                         console.log("This is DataBase",database);
 //                         }
@@ -589,8 +646,8 @@ authController.wishList = function (req, res) {
 //             });
 //             console.log("520 Databse",database);
 //         }
-            
-            
+
+
 //         })
 //        // return res.send(database);
 
@@ -628,7 +685,7 @@ authController.getWishList = function (req, res) {
                             logIn: "<a href='/logoutpage'>Logout</a>"
                         });
                     }
-                    
+
                 });
             }
         })

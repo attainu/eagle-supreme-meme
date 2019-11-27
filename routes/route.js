@@ -44,7 +44,7 @@ authController.checkIfLoggedIn = function (req, res, next) {
         if (req.session.user === undefined) {
             console.log("Session Error")
             res.redirect("/loginpage");
-            console.log("After response" + JSON.stringify(res))
+            console.log("After response")
         } else {
             return next();
         }

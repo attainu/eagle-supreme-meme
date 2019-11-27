@@ -34,6 +34,21 @@ cloudinary.config({
     api_secret: 'wrCdY-SrNtq4DrzuUbVQ-3bKhOY'
 })
 
+authController.checkIfLoggedIn = function (req, res, next) {
+
+    //   console.log("check session " + req.session.user);
+    //  console.log("Url " + req.originalUrl);
+    if (req.originalUrl !== '/logoutpage' && req.originalUrl !== '/upload') {
+        return next();
+    } else {
+        if (typeof req.session.user === "undefined") {
+            return res.redirect("/loginpage");
+        } else {
+            return next();
+        }
+    }
+}
+
 
 // save the reactions
 authController.like = function (req, res) {
@@ -188,9 +203,7 @@ authController.saveComment = function (req, res) {
 var urlLink;
 authController.upload = function (req, response) {
     console.log(req.body);
-    if (!res.session.user){
-       response.redirect('/loginpage')
-    } else {
+    
     //cloudinary
     var collection = db.collection('approval_pending');
     cloudinary.uploader.upload(req.file.path, function (error, res) {
@@ -218,23 +231,8 @@ authController.upload = function (req, response) {
         }
         // console.log("err>>>>", error)
     })
-} 
 
-}
 
-authController.checkIfLoggedIn = function (req, res, next) {
-
-    //   console.log("check session " + req.session.user);
-    //  console.log("Url " + req.originalUrl);
-    if (req.originalUrl !== '/logoutpage' && req.originalUrl !== '/upload') {
-        return next();
-    } else {
-        if (typeof req.session.user === "undefined") {
-            return res.redirect("/loginpage");
-        } else {
-            return next();
-        }
-    }
 }
 
 authController.home = function (req, res) {

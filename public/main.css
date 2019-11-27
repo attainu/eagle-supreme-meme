@@ -106,6 +106,7 @@ header{
     background: black;
     position: fixed;
     z-index: 99;
+    box-shadow: 0px 1px 7px 0px #000000;
 }
 .list{
     position: absolute;
@@ -281,26 +282,30 @@ text-decoration: none;
     box-shadow: 0px 6px 20px 1px #cccccc;
 }
 .promoted{
-    position: fixed;
-    top: 73px;
+    /* position: fixed; */
+    top: 53px;
+    margin-top: 41px;
     right: 10px;
-    width: 341px;
-    height: 80vh;
+    float: right;
+    width: 349px;
+    height: 100vh;
     overflow: scroll;
-    background: #e3e3e3;
-    border-radius: 5px;
-
-  -webkit-scrollbar{
+    background: #fffafa;
+    /* border-radius: 5px; */
+    -webkit-scrollbar{
       width: 1em;
-      height: 1em;
+    height: 1em;
   }
-  ::-webkit-scrollbar-button {
+  ::
+    -webkit-scrollbar-button {
       background: #ccc;
   }
-  ::-webkit-scrollbar-track-piece {
+  ::
+    -webkit-scrollbar-track-piece {
       background: #888;
   }
-  ::-webkit-scrollbar-thumb {
+  ::
+    -webkit-scrollbar-thumb {
       background: #eee;
   }
 }
@@ -323,6 +328,7 @@ text-decoration: none;
 .postwishlist{
   height: 29px;
   width: 29px;
+  cursor: pointer;
 }
 .displaylikenumbers span{
   font-family: sans-serif;
@@ -337,8 +343,8 @@ text-decoration: none;
 
 
 .heart {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     transform: translateZ(0);
     color: #aaa;
     font-size: 3em;
@@ -471,5 +477,94 @@ text-decoration: none;
 }
 .wishlist a{
   text-decoration: none;
+
+}
+figcaption{
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+@media screen and (max-width: 768px){
+      .line{
+        width: 30px;
+        height: 3px;
+        background: white;
+        margin: 5px;
+        cursor: pointer;
+        border: 2px solid black;
+      }
+      .hamburger{
+        position: fixed;
+        cursor: pointer;
+        right: 5%;
+        top: 5%;
+        transform: translate(-5%,-5%);
+        z-index: 99999;
+      }
+      header{
+        position: fixed;
+        right: 0px;
+        background: grey;
+        height: 100vh;
+        width: 100%;
+        display: none !important;
+        padding-top: 10px;
+        flex-direction: column;
+      }
+      .size{
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: auto;
+        margin-top: 20px;
+        padding: 0;
+        
+      }
+      .side-nav{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0%;
+        z-index: 99;
+        background: white;
+        margin: 0;
+        padding-right: 10%;
+        width: 100%;
+      }
+      .side-nav ul{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      .content{
+        position: absolute;
+        left: 0;
+        width: 100%;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+
+      }
+      .post{
+        width: 99%;
+        margin: auto;
+      }
+      .promoted{
+        display: none;
+      }
+      .share{
+        flex-direction: column;
+        top: -15px;
+      }
+      .reactionandshare{
+        width: 100%;
+      }
 
 }

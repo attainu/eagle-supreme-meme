@@ -1,5 +1,6 @@
 $(window).on('load',function(){
-    
+    $('.classChangeF').addClass('fb-share-button')
+    $('#classChangeT').attr('class','twitter-share-button');
      
 })
 $(document).ready(function(){
@@ -26,6 +27,7 @@ $(document).ready(function(){
             method : "post",
             success: function(data){
                console.log(data);
+               $(".report ").text(data);
                 
             }
         })
@@ -41,6 +43,10 @@ $(document).ready(function(){
             method : "post",
             success: function(data){
                console.log(data);
+               if(data=="Login"){
+               $("#loginModal").click()
+               }
+              
                 
             }
         })

@@ -43,12 +43,16 @@
     padding-right: 0px;
 }
 .displaylikenumbers{
-    display: block;
+    display: inline-block;
+    position: relative;
+    top: 24px;
+    left: 53px;
 }
 .reactionandshare{
     display: flex;
     position: relative;
     width: 580px;
+    height: 49px;
 }
 .reaction, .share{
     display: flex;
@@ -81,6 +85,7 @@
 .flagImage{
     height: 27px;
     width: 22px;
+    cursor: pointer;
 }
 .flag{
     position: absolute;
@@ -103,4 +108,10 @@
 }
 .showComments:focus{
     outline: none;
+}
+.save{
+    position: relative;
+    left: 203px;
+    top: 31px;
+    height: 0;
 }

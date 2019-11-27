@@ -188,6 +188,7 @@ authController.saveComment = function (req, res) {
 var urlLink;
 authController.upload = function (req, response) {
     console.log(req.body);
+    if (res.session.user){
     //cloudinary
     var collection = db.collection('approval_pending');
     cloudinary.uploader.upload(req.file.path, function (error, res) {
@@ -215,6 +216,7 @@ authController.upload = function (req, response) {
         }
         // console.log("err>>>>", error)
     })
+} 
 
 }
 

@@ -116,10 +116,10 @@ app.get('/mywishlist', authRoute.getWishList);
 
 app.post('/upload', upload.single('meme'), authRoute.upload)
 
-app.get('/upload', function (req, res) {
-  // console.log('hello');
-  res.render('upload');
-})
+// app.get('/upload', function (req, res) {
+//   // console.log('hello');
+//   res.render('upload');
+// })
 app.get('/whatsnew',authRoute.whatsnew);
 
 app.get('/test', function (req, res) {

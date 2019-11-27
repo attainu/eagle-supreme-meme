@@ -35,7 +35,7 @@ cloudinary.config({
 })
 
 authController.checkIfLoggedIn = function (req, res, next) {
-          console.log('This is request'+ req)
+     //     console.log('This is request'+ req)
     //   console.log("check session " + req.session.user);
     //  console.log("Url " + req.originalUrl);
     if (req.originalUrl !== '/logoutpage' && req.originalUrl !== '/upload') {
@@ -43,9 +43,9 @@ authController.checkIfLoggedIn = function (req, res, next) {
     } else {
         if (req.session.user === undefined) {
             req = null;
-            console.log("Session Error")
+      //      console.log("Session Error")
             res.redirect("/loginpage");
-            console.log("After response")
+       //     console.log("After response")
         } else {
             return next();
         }
@@ -206,7 +206,8 @@ authController.saveComment = function (req, res) {
 var urlLink;
 authController.upload = function (req, response) {
     console.log(req.body);
-    
+    console.log(req.file);
+    console.log(req.file.path);
     //cloudinary
     var collection = db.collection('approval_pending');
     cloudinary.uploader.upload(req.file.path, function (error, res) {
@@ -225,12 +226,14 @@ authController.upload = function (req, response) {
             collection.insertOne(finalImg, function (error, result) {
                console.log("inserting error"+ error)
                 if (error) {
-                    return error
-                }
-                // return response.send('info uploaded, redirecting....');
-                return response.redirect("/")
+                    return response.send(error)
+                } else {
+                    return response.send("done")
+                }        
             });
 
+        } else {
+            response.send(error)
         }
         // console.log("err>>>>", error)
     })

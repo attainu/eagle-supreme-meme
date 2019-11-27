@@ -41,7 +41,21 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({
-  storage: storage
+  storage: storage,
+  // fileFilter: function (req, file, callback) {
+  //   var ext = file.mimetype;
+  //   var allowedType = [
+  //     'image/png',
+  //     'images/jpg',
+  //     'image/jpeg',
+  //     'image/jpe',
+  //     'image/gif'
+  //   ]
+  //   if (allowedType.indexOf(ext) === -1) {
+  //     return callback("Invalid file type")
+  //   }
+  //   callback(null, true)
+  // }
 })
 
 
@@ -79,8 +93,8 @@ app.get('/', authRoute.home);
 
 app.get('/loginpage', function (req, res) {
   if (!req.session.user) {
-    res.render('login',{
-      layout:'userlogin'
+    res.render('login', {
+      layout: 'userlogin'
     });
   } else {
     res.redirect('/logoutpage')
@@ -120,7 +134,7 @@ app.post('/upload', upload.single('meme'), authRoute.upload)
 //   // console.log('hello');
 //   res.render('upload');
 // })
-app.get('/whatsnew',authRoute.whatsnew);
+app.get('/whatsnew', authRoute.whatsnew);
 
 // app.get('/test', function (req, res) {
 //   res.sendFile(__dirname + '/test.html');
@@ -145,6 +159,15 @@ app.get('/search', authRoute.search);
 
 //Trending Post
 app.get('/trending', authRoute.trending);
+
+//check login (only for upload modal)
+app.post('/checkLogin', function(req, res){
+  if(req.session.user){
+    res.send("loggedIn")
+  } else{
+    res.send("notLoggedIn")
+  }
+})
 
 
 db.connect()

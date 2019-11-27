@@ -99,24 +99,24 @@
            <a href="/"><li>Explore</li></a>
            <a href="/trending"><li>Trending</li></a>
            <a href="/whatsnew"><li>What's New</li></a>
-           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+           <button type="button" id="uploadModalBtn" class="btn btn-dark" data-toggle="modal" data-target="#uploadModal">
                 Upload
             </button>
        </ul>
     </div>
      <!-- Modal -->
-    <div class="modal modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Upload your Meme</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="uploadModalLabel">Upload your Meme</h5>
+                    <button type="button"id="BtnClose" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form container justify-content-center" action="/upload" method="POST" enctype="multipart/form-data">
+                    <form class="form container justify-content-center" id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
                         <input type="file" name="meme" style="border: 1px solid #b5b0b0" class="form-control"><br><br>
                         <select required name="title" class="form-control">
                             <option value="">Select category</option>
@@ -134,7 +134,7 @@
                         </select><br><br>
                         <input  class="form-control" type="text" name="tag" id="category" placeholder="#tags"><br><br>
                         {{!-- <input type="submit"> --}}
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" id="btnUpForm" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
                 {{!-- <div class="modal-footer">

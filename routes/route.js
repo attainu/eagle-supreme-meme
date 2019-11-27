@@ -207,10 +207,10 @@ authController.upload = function (req, response) {
     //cloudinary
     var collection = db.collection('approval_pending');
     cloudinary.uploader.upload(req.file.path, function (error, res) {
+        console.log("this the cloudinary Error"+ error)
         if (!error) {
             urlLink = res.url;
             var finalImg = {
-                contentType: req.file.mimetype,
                 title : req.body.title,
                 tag : req.body.tag,
                 likes : 0,
@@ -220,7 +220,7 @@ authController.upload = function (req, response) {
             };
             console.log("res>>", res.url);
             collection.insertOne(finalImg, function (error, result) {
-               
+               console.log("inserting error"+ error)
                 if (error) {
                     return error
                 }

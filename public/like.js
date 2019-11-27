@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
     var data
-    $('.heart').on('click', function () {
+    $('.heart1').on('click', function () {
 
-        if ($(this).attr("class") === "heart" || $(this).attr("class") === "heart broken") {
+        if ($(this).attr("class") === "heart1") {
             data = {
                 "postId": $(this).attr('id'),
                 "like": true,
@@ -33,10 +33,11 @@ $(document).ready(function () {
                             console.log(res, data.postId)
                             $("#likeCount" + data.postId).empty();
                             $("#likeCountC" + data.postId).empty()
-                            $("#likeCount" + data.postId).append("Likes " + res);
-                            $("#likeCountC" + data.postId).append("Likes " + res);
-                            $('#' + data.postId).toggleClass('happy', 'broken');
-                            $('div.likebutton' + data.postId+ " > div").toggleClass('happy', 'broken');
+                            $("#likeCount" + data.postId).append(res + " Likes");
+                            $("#likeCountC" + data.postId).append(res + " Likes");
+                            $('#' + data.postId).toggleClass('heart-line', 'broken');
+                            $('div.likebutton' + data.postId+ " > div").toggleClass('heart-line', 'broken');
+                            $('div.likebuttonMess' + data.postId+ " > div").toggleClass('heart-line', 'broken');
                         }
                     })
                 }

@@ -574,3 +574,25 @@ figcaption{
   left: 0;
   background: #e18686;
 }
+
+.heart1 {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 65%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  background: url(heart.png) no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+}
+.heart-line {
+  background-position: -2800px 0;
+  transition: background 1s steps(28);
+}
+
+.likebuttontrue{
+  position: relative;
+    top: -12px;
+    left: 37px;
+}

@@ -53,5 +53,16 @@ $(document).ready(function(){
     })
    
     
+//   var animated = false;
+//   $('.heart1').click(function () {
+//     if (!animated) {
+//       $(this).addClass('heart-line');
+//       animated = true;
+//     } else {
+//       $(this).removeClass('heart-line').addClass('heart1');
+//       animated = false;
+//     }
+//   });
+
             
 })

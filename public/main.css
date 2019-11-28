@@ -624,6 +624,22 @@ figcaption{
       .btnn{
         display: none;
       }
+      .categoryTitle{
+        width: 32vw;
+        height: auto;
+        font-size: 3vw;
+        left: -1.5vw;
+      }
+      .titledesign{
+        
+    top: 4.6vw;
+        
+    left: -1.3vw;
+        
+    width: 2vw;
+        
+    height: 4vw;
+      }
       
 }
 @media screen and (max-width: 480px){
@@ -709,7 +725,11 @@ width: 4vw !important;
 
   }
   .reaction{
-    
+
+  }
+  .text{
+    width: 55vw !important;
+    height: 7vw;
   }
 }
 .btnn-small{

@@ -19,10 +19,23 @@ MongoClient.connect(url, function (err, client) {
     }
 });
 
+AuthModel.explore = function (cb) {
+
+    var collection = db.collection('post');
+    collection.find({name:"admin"}).limit(15).sort().toArray(function (err, res) {
+        if (err) {
+            return cb(err);
+        }
+        //console.log(res);
+        return cb(null, res);
+    })
+}
 AuthModel.home = function (cb) {
 
     var collection = db.collection('post');
-    collection.find({name:"admin"}).limit(15).toArray(function (err, res) {
+    collection.find({name:"admin"}).limit(10).sort({
+        _id: -1
+    }).toArray(function (err, res) {
         if (err) {
             return cb(err);
         }
@@ -33,7 +46,9 @@ AuthModel.home = function (cb) {
 AuthModel.whatsnew = function (cb) {
 
     var collection = db.collection('post');
-    collection.find({userupload:"true"}).toArray(function (err, res) {
+    collection.find().limit(15).sort({
+        _id: -1
+    }).toArray(function (err, res) {
         if (err) {
             return cb(err);
         }

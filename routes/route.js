@@ -241,6 +241,56 @@ authController.upload = function (req, response) {
 
 }
 
+authController.explore = function(req, res){
+    var request = req;
+    var response = res;
+
+    Model.checkLike(request, response, function (err, doc) { //   check like  
+        if (!err) {
+            //  console.log(doc);
+            var posts = []
+            Model.explore(function (error, success) {
+                //   console.log(success);
+
+                if (doc) {
+                    success.forEach(element => {
+                        doc.forEach(id => {
+                            if (JSON.stringify(id) === JSON.stringify(element._id)) {
+                                element.show = true
+                                // console.log(element);
+                            } //else {console.log(element._id)}
+                        })
+                        posts.push(element)
+                    });
+                } else {
+                    posts = success
+                }
+                // console.log(posts);
+
+                if (error) {
+                    return res.render('home', {
+                        data: error
+                    })
+                }
+                if (typeof req.session.user == "undefined") {
+                    return res.render('home', {
+                        data: posts,
+                        logIn: "<a href='/loginpage'>Login/Signup </a>"
+                    });
+                } else {
+                    return res.render('home', {
+                        data: posts,
+                        logIn: "<a href='/logoutpage'>Logout</a>"
+                    });
+                }
+                //return res.render('trending',{
+                //  data:success
+                //})
+            })
+        }
+    })
+}
+
 authController.home = function (req, res) {
     var request = req;
     var response = res;

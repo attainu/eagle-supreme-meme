@@ -165,6 +165,9 @@ app.get('/search', authRoute.search);
 //Trending Post
 app.get('/trending', authRoute.trending);
 
+//Explore
+app.get('/explore', authRoute.explore);
+
 //check login (only for upload modal)
 app.post('/checkLogin', function(req, res){
   if(req.session.user){

@@ -14,5 +14,10 @@ body{
         background-attachment: fixed;
         
     }
+    body{
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 
 }

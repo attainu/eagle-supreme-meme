@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     })
     $(document).ready(function () {
-        $('.loader').fadeOut(2500);
+        $('.loader').fadeOut(2900);
         // $('.heart').on('click',function(){
         //     $(this).addClass('broken');
         // 		  $(this).toggleClass('happy broken');

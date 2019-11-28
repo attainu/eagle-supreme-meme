@@ -47,16 +47,14 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <div class="image">
+                    <div class="image ">
                       <img class="content-image" data-src="{{this.url}}">
                     </div>
 
                     <div class="modal-body">
-                      <div class="displaylikenumbers">
-                        <span id="likeCountC{{this._id}}">{{this.like}}Likes</span>
-                      </div>
-                      <div class="reactionandshare">
-                        <div class="reaction">
+                      
+                      <div class="reactionandsharecm">
+                        <div class="reactioncm">
                           <div class="likebuttonMess{{this._id}}">
                             {{#if this.show}}
                             {{!-- <div class="heart happy" id="{{this._id}}">❤</div> --}}
@@ -67,18 +65,24 @@
                             {{/if}}
                             {{!-- <div class="heart" id="{{this._id}}">❤</div> --}}
                           </div>
+                          <div class="displaylikenumberscm">
+                        <span id="likeCountC{{this._id}}">{{this.like}}Likes</span>
+                      </div>
                         </div>
                       </div>
+                      
 
                     </div>
 
-                    <br>
-                    <div class="modal-body">
-                      <textarea name="comment" id="saveComment{{this._id}}" placeholder="Enter Comment"
+                    
+                    <div class="modal-body row">
+                      <div class="col-md-6 mx-auto">
+                      <textarea name="comment" id="saveComment{{this._id}}" class="form-control" placeholder="Enter Comment"
                         style=" width: 100%;"></textarea>
                       <p id="commentError{{this._id}}" style="display: none;">Above Field cannot be empty</p>
-                      <button class="saveComment btn btn-primary" name="{{this._id}}"
-                        style="width: 70%; margin-left: 15%;">submit</button>
+                      <button class="saveComment btn btn-primary mx-auto mt-2 " name="{{this._id}}"
+                        style="width: 30%; margin-left: 15%;">submit</button>
+                        </div>
                     </div>
 
                     <div class="modal-body" id="commentList{{this._id}}">

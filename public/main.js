@@ -54,8 +54,14 @@ $(document).ready(function () {
                 }
             })
         })
+        $('.hamburger').on('click',function(){
+            console.log("Clicked");
+            $('.change').toggleClass('changeTO');
+            $('.line').toggleClass('lineChange');
+        });
 
-        var log
+
+        var log;
         $('#uploadModalBtn').on('click', async function () {
 
             $.ajax({

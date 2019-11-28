@@ -29,34 +29,9 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 
-// SET STORAGE
-var storage = multer.diskStorage({
-  // destination: function (req, file, cb) {
-  //   // console.log(file);
-  //   cb(null, 'public/uploads/')
-  // },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-})
 
-var upload = multer({
-  storage: storage,
-  // fileFilter: function (req, file, callback) {
-  //   var ext = file.mimetype;
-  //   var allowedType = [
-  //     'image/png',
-  //     'images/jpg',
-  //     'image/jpeg',
-  //     'image/jpe',
-  //     'image/gif'
-  //   ]
-  //   if (allowedType.indexOf(ext) === -1) {
-  //     return callback("Invalid file type")
-  //   }
-  //   callback(null, true)
-  // }
-})
+
+
 
 
 
@@ -83,6 +58,35 @@ var controllers = require('./routes/index.js')
 
 app.use(authRoute.checkIfLoggedIn);
 //routes
+
+// SET STORAGE
+var storage = multer.diskStorage(
+  // destination: function (req, file, cb) {
+  //   // console.log(file);
+  //   cb(null, 'public/uploads/')
+  // },
+  
+  {filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({
+  storage: storage,
+  // fileFilter: function (req, file, callback) {
+  //   var ext = file.mimetype;
+  //   var allowedType = [
+  //     'image/png',
+  //     'images/jpg',
+  //     'image/jpeg',
+  //     'image/jpe',
+  //     'image/gif'
+  //   ]
+  //   if (allowedType.indexOf(ext) === -1) {
+  //     return callback("Invalid file type")
+  //   }
+  //   callback(null, true)
+  // }
+})
 
 // login/signup
 app.post('/signup', controllers.accountController.signUp);

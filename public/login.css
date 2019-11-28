@@ -14,11 +14,11 @@
 }
 .login{
 
-height: 523px;
+height: 494px;
 
 width: 300px;
 
-margin-top: 65px;
+margin-top: 46px;
 
 background: rgb(22, 22, 22,0.3);
 
@@ -89,7 +89,7 @@ justify-content: center;
 }
 
 .popup{
-    height: 100vh;
+    height: 100%;
     width: 100%;
     position: fixed;
     justify-content: center;
@@ -98,4 +98,16 @@ justify-content: center;
     top: 0;
     padding-top: 0;
     margin-top: 0;
+}
+.loginpageheader{
+    width: 100%;
+    height: 60px;
+    background: black;
+    display: flex;
+    /* background-image: linear-gradient(to right, #9c5ffb, #a85dfb, #b45bfa, #c059f9, #cb57f8, #cb57f8, #cb57f8, #cb57f8, #c059f9, #b45bfa, #a85dfb, #9c5ffb); */
+    position: fixed;
+    z-index: 99;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
 }

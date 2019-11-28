@@ -737,6 +737,18 @@ top: 21px !important;
     
 top: 20px !important;
   }
+  .list{
+    
+right: 10vw;
+    
+left: 24vw;
+    
+top: -3vw;
+    
+width: 56vw;
+    
+z-index: 3;
+  }
 }
 .btnn-small{
   display: none;

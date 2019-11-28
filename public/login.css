@@ -111,3 +111,9 @@ justify-content: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.3);
 }
+@media screen and (max-width: 768px){
+    .loginpageheader{
+        background: black;
+        opacity: 1;
+    }
+}

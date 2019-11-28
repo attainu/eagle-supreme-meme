@@ -1,239 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Meme Hub</title>
-    <link rel="icon" href="memehublogo.jpg" type="image/icon type">
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="home.css">
-    <script src="https://kit.fontawesome.com/6957f85b90.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Meme Hub</title>
+  <link rel="icon" href="memehublogo.jpg" type="image/icon type">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="https://kit.fontawesome.com/6957f85b90.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <div class="loader">
+  <div class="loader">
     <div class="preloader">
-        <div class="center">
-            <div class="large">
-                <div class="medium">
-                    <div class="small">
-                        <div class="dot"></div>
-                    </div>
-                </div>
+      <div class="center">
+        <div class="large">
+          <div class="medium">
+            <div class="small">
+              <div class="dot"></div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0">
+  </script>
+  <div class="hamburger">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+  <header class=" change row mx-auto align align-items-center fixed-top">
+
+    <div class=" size logo col-md-1"><a href="/">
+        <img data-src="memehublogo.jpg" width="60" height="30"></a>
     </div>
-    
-    <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
-<div class="hamburger">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-    <header class=" change row mx-auto align align-items-center fixed-top">
-        
-        <div class=" size logo col-md-1"><a href="/">
-            <img data-src="memehublogo.jpg" width="60" height="30"></a>
-        </div>
-        <div class="  size categories col-md-1 mx-auto">
-                <div class="hover">
-                    <span class="fontstyle">Categories</span>
-                        <div class="list">
-                        <ul>
-                        <li><a href="/search?search=funny">Funny</a></li>
-                        <li><a href="/search?search=food">Food & Drinks</a></li>
-                        <li><a href="/search?search=sports">Sports</a></li>
-                        <li><a href="/search?search=gaming">Gaming</a></li>
-                        <li><a href="/search?search=programing">Programing</a></li>
-                        <li><a href="/search?search=web+series">Web Series </a></li>
-                        <li><a href="/search?search=bollywood">Bollywood</a></li>
-                        <li><a href="/search?search=cat">Cat</a></li>
-                        <li><a href="/search?search=politics">Politics</a></li>
-                        <li><a href="/search?search=tech">Tech</a></li>
-                        <li><a href="/search?search=random">Random</a></li>
-                        
-                        
-                    </ul>
-                    </div>
-                </div>
-                  
-                
-                    
-            
-        </div>
-        <div class="  size search-bar col-md-4 mx-auto">
-            <form action="/search" method="get">
-            <input type="text" placeholder="You are one step away" class="form-control text" name="search">
-            <input type="submit" class="search-button" value="">
-            </form>
+    <div class="  size categories col-md-1 mx-auto">
+      <div class="hover">
+        <span class="fontstyle">Categories</span>
+        <div class="list">
+          <ul>
+            <li><a href="/search?search=funny">Funny</a></li>
+            <li><a href="/search?search=food">Food & Drinks</a></li>
+            <li><a href="/search?search=sports">Sports</a></li>
+            <li><a href="/search?search=gaming">Gaming</a></li>
+            <li><a href="/search?search=programing">Programing</a></li>
+            <li><a href="/search?search=web+series">Web Series </a></li>
+            <li><a href="/search?search=bollywood">Bollywood</a></li>
+            <li><a href="/search?search=cat">Cat</a></li>
+            <li><a href="/search?search=politics">Politics</a></li>
+            <li><a href="/search?search=tech">Tech</a></li>
+            <li><a href="/search?search=random">Random</a></li>
 
+
+          </ul>
         </div>
-        <div class="  size template col-md-2">
-            <span class="fontstyle"><a href="#">Template</a></span>
+      </div>
 
-        </div>
 
-        <div class="  size wishlist col-md-1">
-            <a href="/mywishlist"><span class="fontstyle"> Saved</span></a>
 
-        </div>
 
-        <div class="  size login-signup col-md-1">
-            <span class="fontstyle">{{{logIn}}}</span>
-
-        </div>
-        
-        
-    </header>
-    <div class="side-nav">
-       <ul>
-           <a href="/"><li><img data-src="home.png">Home</li></a>
-           <a href="/"><li><img data-src="explore.png">Explore</li></a>
-           <a href="/trending"><li><img data-src="trending.png">Trending</li></a>
-           <a href="/whatsnew"><li><img data-src="new.png">What's New</li></a>
-           <button type="button" id="uploadModalBtn" class="btnn" data-toggle="modal" data-target="#uploadModal">
-                Upload
-            </button>
-            <button type="button" id="uploadModalBtn2" class="btnn-small" data-toggle="modal" data-target="#uploadModal">
-                
-            </button>
-       </ul>
     </div>
-     <!-- Modal -->
-    <div class="modal modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="uploadModalLabel">Upload your Meme</h5>
-                    <button type="button"id="BtnClose" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="form container justify-content-center" id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="meme" style="border: 1px solid #b5b0b0" class="form-control"><br><br>
-                        <select required name="title" class="form-control">
-                            <option value="">Select category</option>
-                            <option value="funny" >Funny</option>
-                            <option value="food">Food & Drinks</option>
-                            <option value="sports">Sports</option>
-                            <option value="gaming">Gaming</option>
-                            <option value="programing">Programing</option>
-                            <option value="web series">Web Serries</option>
-                            <option value="bollywood">Bollywood</option>
-                            <option value="cat">Cat</option>
-                            <option value="politics">Politics</option>
-                            <option value="tech">Tech</option>
-                            <option value="random">Random</option>
-                        </select><br><br>
-                        <input  class="form-control" type="text" name="tag" id="category" placeholder="#tags"><br><br>
-                        {{!-- <input type="submit"> --}}
-                        <button type="submit" id="btnUpForm" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-                {{!-- <div class="modal-footer">
+    <div class="  size search-bar col-md-4 mx-auto">
+      <form action="/search" method="get">
+        <input type="text" placeholder="You are one step away" class="form-control text" name="search">
+        <input type="submit" class="search-button" value="">
+      </form>
+
+    </div>
+    <div class="  size template col-md-2">
+      <span class="fontstyle"><a href="#">Template</a></span>
+
+    </div>
+
+    <div class="  size wishlist col-md-1">
+      <a href="/mywishlist"><span class="fontstyle"> Saved</span></a>
+
+    </div>
+
+    <div class="  size login-signup col-md-1">
+      <span class="fontstyle">{{{logIn}}}</span>
+
+    </div>
+
+
+  </header>
+  <div class="side-nav">
+    <ul>
+      <a href="/">
+        <li><img data-src="home.png">Home</li>
+      </a>
+      <a href="/">
+        <li><img data-src="explore.png">Explore</li>
+      </a>
+      <a href="/trending">
+        <li><img data-src="trending.png">Trending</li>
+      </a>
+      <a href="/whatsnew">
+        <li><img data-src="new.png">What's New</li>
+      </a>
+      <button type="button" id="uploadModalBtn" class="btnn" data-toggle="modal" data-target="#uploadModal">
+        Upload
+      </button>
+      <button type="button" id="uploadModalBtn2" class="btnn-small" data-toggle="modal" data-target="#uploadModal">
+
+      </button>
+    </ul>
+  </div>
+  <!-- Modal -->
+  <div class="modal modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadModalLabel">Upload your Meme</h5>
+          <button type="button" id="BtnClose" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form container justify-content-center" id="uploadForm" action="/upload" method="POST"
+            enctype="multipart/form-data">
+            <input type="file" name="meme" style="border: 1px solid #b5b0b0" class="form-control"><br><br>
+            <select required name="title" class="form-control">
+              <option value="">Select category</option>
+              <option value="funny">Funny</option>
+              <option value="food">Food & Drinks</option>
+              <option value="sports">Sports</option>
+              <option value="gaming">Gaming</option>
+              <option value="programing">Programing</option>
+              <option value="web series">Web Serries</option>
+              <option value="bollywood">Bollywood</option>
+              <option value="cat">Cat</option>
+              <option value="politics">Politics</option>
+              <option value="tech">Tech</option>
+              <option value="random">Random</option>
+            </select><br><br>
+            <input class="form-control" type="text" name="tag" id="category" placeholder="#tags"><br><br>
+            {{!-- <input type="submit"> --}}
+            <button type="submit" id="btnUpForm" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        {{!-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
-                </div> --}}
-            </div>
-        </div>
+      </div> --}}
     </div>
-    <div class="promoted">
-        <div class="titledesign"></div>
+  </div>
+  </div>
+  <div class="promoted">
+    <div class="titledesign"></div>
     <div class="categoryTitle"><span>Promoted</span></div>
-        <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Muting the family WhatsApp group for an entire year is my culture. <br>What&#39;s yours?</p>&mdash; Anish Karkera (@Anish_Karkera) <a href="https://twitter.com/Anish_Karkera/status/1197390854291382272?ref_src=twsrc%5Etfw">November 21, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </div>
-    
-    {{{body}}}
-    {{!-- modal --}}
-<button id="loginModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#likeModal"
-  style="margin-top: 50px;" hidden>
-  Launch demo modal
-</button>
+    <blockquote class="twitter-tweet">
+      <p lang="en" dir="ltr">Muting the family WhatsApp group for an entire year is my culture. <br>What&#39;s yours?
+      </p>&mdash; Anish Karkera (@Anish_Karkera) <a
+        href="https://twitter.com/Anish_Karkera/status/1197390854291382272?ref_src=twsrc%5Etfw">November 21, 2019</a>
+    </blockquote>
+    <blockquote class="twitter-tweet">
+      <p lang="en" dir="ltr">I&#39;ve blocked almost every handsome guy from my Twitter and Instagram, so if you see
+        this you know who you&#39;re.</p>&mdash; Sanaya Maheshwari (@Sarcaswari) <a
+        href="https://twitter.com/Sarcaswari/status/1200022628393578496?ref_src=twsrc%5Etfw">November 28, 2019</a>
+    </blockquote>
+    <blockquote class="twitter-tweet">
+      <p lang="en" dir="ltr">Wanna buy something but can’t find it online?<br>Just text someone about it! Instagram will
+        show you ads the next minute.<br>Problem solved.</p>&mdash; Aayushi (@aayushhiiiii) <a
+        href="https://twitter.com/aayushhiiiii/status/1199930658748895233?ref_src=twsrc%5Etfw">November 28, 2019</a>
+    </blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
 
-<!-- Modal -->
-<div class="modal fade" id="likeModal" tabindex="-1" role="dialog" aria-labelledby="likeModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="likeModalLabel">You have to be Logged-in first</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+  {{{body}}}
+  {{!-- modal --}}
+  <button id="loginModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#likeModal"
+    style="margin-top: 50px;" hidden>
+    Launch demo modal
+  </button>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="/loginpage"><button type="button" class="btn btn-primary">Log-in</button></a>
+  <!-- Modal -->
+  <div class="modal fade" id="likeModal" tabindex="-1" role="dialog" aria-labelledby="likeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="likeModalLabel">You have to be Logged-in first</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="/loginpage"><button type="button" class="btn btn-primary">Log-in</button></a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-{{!----}}
+  {{!----}}
 
-{{!-- modal --}}
-<button id="reportDone" type="button" class="btn btn-primary" data-toggle="modal" data-target="#reportModal"
-  style="margin-top: 50px;" hidden>
-  Launch demo modal
-</button>
+  {{!-- modal --}}
+  <button id="reportDone" type="button" class="btn btn-primary" data-toggle="modal" data-target="#reportModal"
+    style="margin-top: 50px;" hidden>
+    Launch demo modal
+  </button>
 
-<!-- Modal -->
-<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="reportModalLabel">The Post has been reported successfully</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+  <!-- Modal -->
+  <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reportModalLabel">The Post has been reported successfully</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-{{!----}}
+  {{!----}}
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-</script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-</script>
-    
-    <script src="postupload.js"></script>
-    <script src="main.js"></script>
-    <script>
-  var images = document.querySelectorAll('img');
-  var observer = new IntersectionObserver(function(entries,observer){
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        var img = entry.target;
-        img.setAttribute('src',img.getAttribute('data-src'));
-        observer.unobserve(entry.target);
-      }
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+
+  <script src="postupload.js"></script>
+  <script src="main.js"></script>
+  <script>
+    var images = document.querySelectorAll('img');
+    var observer = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          var img = entry.target;
+          img.setAttribute('src', img.getAttribute('data-src'));
+          observer.unobserve(entry.target);
+        }
+      })
+    }, {
+      rootMargin: '0px 0px -1% 0px',
+
+    });
+    images.forEach(img => {
+      observer.observe(img);
     })
-  },{
-      rootMargin:'0px 0px -1% 0px',
-      
-  });
-  images.forEach(img => {
-    observer.observe(img);
-  })
-</script>
+  </script>
 </body>
+
 </html>

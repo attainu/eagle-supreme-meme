@@ -91,9 +91,13 @@ $(document).ready(function () {
                             cache: false,
                             timeout: 600000,
                             success: function (data) {
+                                console.log(data);
                                 if (data === "done") {
                                     $("#BtnClose").click();
                                     alert('Post Uploaded')
+                                } else {
+                                    console.log("no")
+                                    alert("Not Uploaded try different Format");
                                 }
                             },
                             error: function (e) {
@@ -141,9 +145,13 @@ $(document).ready(function () {
                             cache: false,
                             timeout: 600000,
                             success: function (data) {
+                                console.log(data);
                                 if (data === "done") {
                                     $("#BtnClose").click();
                                     alert('Post Uploaded')
+                                } else {
+                                    console.log("no")
+                                    alert("Not Uploaded try different Format");
                                 }
                             },
                             error: function (e) {

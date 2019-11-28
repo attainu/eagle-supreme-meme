@@ -129,6 +129,7 @@ app.post('/delete', authRoute.adminDelete);
 
 //AUTHENTICATED USER WISHLIST ADD
 app.post('/wishlist', authRoute.wishList);
+app.post('/deleteWishList', authRoute.deleteWishList)
 //AUTHENTICATED USER WISHLIST GET
 app.get('/mywishlist', authRoute.getWishList);
 

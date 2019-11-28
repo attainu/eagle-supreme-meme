@@ -54,6 +54,23 @@ $(document).ready(function () {
             }
         })
     })
+    $('.deletewishlist').on('click', function () {
+        var id = $(this).attr('id')
+        console.log(id);
+        $.ajax({
+            url: "/deleteWishList",
+            data: {
+                "id": id
+            },
+            method: "post",
+            success: function (data) {
+                console.log(data);
+                if (data == "deleted") {
+                    $('#post'+id).hide();
+                }
+            }
+        })
+    })
     $('.hamburger').on('click', function () {
         console.log("Clicked");
         $('.change').toggleClass('changeTO');

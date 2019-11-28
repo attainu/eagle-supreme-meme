@@ -817,3 +817,14 @@ z-index: 3;
   display: flex;
   align-items: center;
 }
+.deletewishlist {
+  height: 29px;
+  width: 29px;
+  cursor: pointer;
+}
+@media screen and (max-width: 480px){
+.deletewishlist {
+    height: 5vw !important;
+    width: 5vw !important;
+}
+}

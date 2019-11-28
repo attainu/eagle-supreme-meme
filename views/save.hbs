@@ -1,0 +1,119 @@
+<div class="content">
+
+  {{#each data}}
+  <div class="post" id="post{{this._id}}">
+    <div class="titledesign"></div>
+    <div class="categoryTitle"><span>{{this.title}}</span></div>
+    <div class="flag"><img data-src="flag.png" alt="{{this._id}}" class="flagImage">
+      <figcaption class="report">Report</figcaption>
+    </div>
+
+    <div class="image">
+
+      <img class="content-image" data-src="{{this.url}}">
+
+    </div>
+    <div class="main-reaction">
+      <div class="displaylikenumbers">
+        <span id="likeCount{{this._id}}">{{this.like}} Likes</span>
+      </div>
+      <div class="reactionandshare">
+        <div class="reaction">
+          <div class="likebutton{{this.show}}">
+            {{#if this.show}}
+            {{!-- <div class="heart happy" id="{{this._id}}">❤</div> --}}
+            <div class="heart1 heart-line" id="{{this._id}}"></div>
+            {{else}}
+            {{!-- <div class="heart" id="{{this._id}}">❤</div> --}}
+            <div class="heart1" id="{{this._id}}"></div>
+            {{/if}}
+            {{!-- <div class="heart" id="{{this._id}}">❤</div> --}}
+          </div>
+          <div class="comment">
+            <img class="commentimagesize" data-src="chat.png">
+
+            {{!-- comment modal --}}
+            <button type="button" class="showComments" name={{this._id}} data-toggle="modal"
+              data-target=".bd-example-modal-lg{{this._id}}">Comments</button>
+
+            <div class="modal fade bd-example-modal-lg{{this._id}}" tabindex="-1" role="dialog"
+              aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="bd-example-modal-lg{{this._id}}">{{this.title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="image ">
+                      <img class="content-image" data-src="{{this.url}}">
+                    </div>
+
+                    <div class="modal-body">
+                      
+                      <div class="reactionandsharecm">
+                        <div class="reactioncm">
+                          <div class="likebuttonMess{{this._id}}">
+                            {{#if this.show}}
+                            {{!-- <div class="heart happy" id="{{this._id}}">❤</div> --}}
+                            <div class="heart1 heart-line" id="{{this._id}}"></div>
+                            {{else}}
+                            {{!-- <div class="heart" id="{{this._id}}">❤</div> --}}
+                            <div class="heart1" id="{{this._id}}"></div>
+                            {{/if}}
+                            {{!-- <div class="heart" id="{{this._id}}">❤</div> --}}
+                          </div>
+                          <div class="displaylikenumberscm">
+                        <span id="likeCountC{{this._id}}">{{this.like}}Likes</span>
+                      </div>
+                        </div>
+                      </div>
+                      
+
+                    </div>
+
+                    
+                    <div class="modal-body row">
+                      <div class="col-md-6 mx-auto">
+                      <textarea name="comment" id="saveComment{{this._id}}" class="form-control" placeholder="Enter Comment"
+                        style=" width: 100%;"></textarea>
+                      <p id="commentError{{this._id}}" style="display: none;">Above Field cannot be empty</p>
+                      <button class="saveComment btn btn-primary mx-auto mt-2 " name="{{this._id}}"
+                        style="width: 30%; margin-left: 15%;">submit</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-body" id="commentList{{this._id}}">
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{!--  --}}
+
+          </div>
+
+          <div class="wishlistcontent" id="{{this._id}}"> <img data-src="delete-photo.png" id="{{this._id}}"
+              class="deletewishlist"></div>
+          {{!-- <figcaption class="save">Delete</figcaption> --}}
+        </div>
+        <div class="share">
+          <div class="fb-share-butto classChangeF" data-href={{this.url}} data-layout="button" data-size="large"><a
+              target="_blank" href="https://www.facebook.com/sharer/sharer.php?u="
+              +{{this.encodedURL}}+"&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+          <div class="twitter"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" id="classChangeT"
+              class="twitter-share-button" data-size="large" data-text="This is so Funny" data-url={{this.url}}
+              data-show-count="false">Tweet</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
+
+<script src="like.js"></script>

@@ -22,7 +22,7 @@ MongoClient.connect(url, function (err, client) {
 AuthModel.home = function (cb) {
 
     var collection = db.collection('post');
-    collection.find().limit(10).toArray(function (err, res) {
+    collection.find({name:"admin"}).limit(15).toArray(function (err, res) {
         if (err) {
             return cb(err);
         }

@@ -644,7 +644,7 @@ figcaption{
   color: white;
   border-radius:10px;
   /* height: 40px; */
-  /* width: 100px; */
+  width: 145px;
   margin-top: 19px;
   outline: none;
 }
@@ -652,5 +652,5 @@ figcaption{
   outline: none;
 }
 .btnn:hover{
-  box-shadow: 0px 1px 3px black;
+  box-shadow: 0px 0px 2px 0px black;
 }

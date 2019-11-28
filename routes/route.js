@@ -456,7 +456,7 @@ authController.trending = function (req, res) {
         if (!err) {
             //  console.log(doc);
             var posts = []
-            Model.home(function (error, success) {
+            Model.trending(function (error, success) {
                 //   console.log(success);
 
                 if (doc) {

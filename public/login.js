@@ -87,7 +87,7 @@ $(document).ready(function () {
                     $('#forPassError').empty()
                 } else {
                     $('#forPassError').empty()
-                    $('#forPassError').append("Invalid input. Check User Name, Security Question and Answer again")
+                    $('#forPassError').append("Invalid input. Try again")
                 }
             }
         })

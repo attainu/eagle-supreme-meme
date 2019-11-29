@@ -6,7 +6,7 @@ const exphbs = require('express-handlebars');
 
 
 const multer = require('multer');
-const PORT = process.env.PORT || 9095
+const PORT = process.env.PORT || 9096
 
 
 // const session = require('express-session');
@@ -157,7 +157,9 @@ app.get('/search',authRoute.search);
 //Trending Post
 app.get('/trending',authRoute.trending);
 
-
+app.get('/profile',function(req,res){
+    res.sendFile(__dirname+'/test.html')
+})
 
 
 app.listen(PORT, function () {

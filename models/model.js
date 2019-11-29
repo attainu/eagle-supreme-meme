@@ -64,7 +64,7 @@ AuthModel.search = function (search, cb) {
         $or: [{
             title: search
         }, {
-            tags: search
+            tag: search
         }]
     }).toArray(function (err, res) {
         if (err) {

@@ -207,20 +207,18 @@ AuthModel.checkLike = function (req, res, cb) {
 
     var collection = db.collection('reactions');
     if (req.session.user) {
-        var likeAcc = [];
         var userId = req.session.user[0]._id;
-        collection.find({}).toArray(function (err, response) {
-            response.forEach(element => {
-              //  console.log(element)
-                if (element.accountId === userId) {
-                    if (element.like === "true") {
-                        likeAcc.push(element.postId)
-                    }
+        collection.find({
+            $and: [{
+                    accountId: userId
+                },
+                {
+                    like: "true"
                 }
-            });
-          //  console.log(likeAcc)
+            ]
+        }).toArray(function (err, response) {
             if (!err) {
-                return cb(null, likeAcc)
+                return cb(null, response)
             } else {
                 cb(err)
             }

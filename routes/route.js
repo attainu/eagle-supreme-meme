@@ -61,15 +61,23 @@ authController.like = function (req, res) {
         return res.send('First login');
     }
     var collection = db.collection('reactions');
-    collection.find({}).toArray(function (err, response) {
-        //  console.log(response)
+    collection.find({
+        $and: [{
+                postId: req.body.postId
+            },
+            {
+                accountId: req.session.user[0]._id
+            }
+        ]
+    }).toArray(function (err, response) {
+      //  console.log(response)
         if (response.length === 0) {
             collection.insertOne({
                 accountId: req.session.user[0]._id,
                 postId: req.body.postId,
                 like: req.body.like
             }, function (error, response) {
-                //  console.log("1")
+               // console.log("1")
                 if (error) {
                     return res.send(error)
                 } else {
@@ -77,56 +85,19 @@ authController.like = function (req, res) {
                 }
             });
         } else {
-
-            var exists = null
-            for (var i = 0; i < response.length; i++) {
-                // console.log('1')
-                //  console.log(response[i].postId, req.body.postId, response[i].accountId, req.session.user[0]._id)
-                if (response[i].accountId !== req.session.user[0]._id) {
-                    //  console.log("2")
-                    exists = false
-                }
-                if (response[i].accountId === req.session.user[0]._id) {
-                    //  console.log("3.1");
-                    if (response[i].postId === req.body.postId) {
-                        //   console.log("3")
-                        exists = true
-                        break;
-                    } else {
-                        exists = false
-                    }
-                }
-                //  console.log(exists)
-            };
-            if (exists === false) {
-                collection.insertOne({
-                    accountId: req.session.user[0]._id,
-                    postId: req.body.postId,
+            collection.updateOne({
+                accountId: req.session.user[0]._id,
+                postId: req.body.postId
+            }, {
+                $set: {
                     like: req.body.like
-                }, function (error, response) {
-                    // console.log("1")
-                    if (error) {
-                        return res.send(error)
-                    } else {
-                        return res.send("done")
-                    }
-                })
-            } else {
-                collection.updateOne({
-                    accountId: req.session.user[0]._id,
-                    postId: req.body.postId
-                }, {
-                    $set: {
-                        like: req.body.like
-                    }
-                }, function (err, result) {
-                    if (!err) {
-                        //  console.log("2")
-                        return res.send("done")
-                    }
-                    //  console.log(result)
-                })
-            }
+                }
+            }, function (err, result) {
+                if (!err) {
+                  //  console.log("2")
+                    return res.send("done")
+                }
+            })
         }
     })
 }
@@ -136,17 +107,17 @@ authController.likeCount = function (req, res) {
     //  console.log("working" + req.body);
     var collectionLike = db.collection('reactions');
     var collectionPost = db.collection('post');
-    collectionLike.find({}).toArray(function (err, response) {
-        var count = 0;
-        response.forEach(function (value, index) {
-            if (value.postId === req.body.postId) {
-                if (value.like === "true") {
-                    ++count
-                }
+    collectionLike.find({
+        $and: [{
+                postId: req.body.postId
+            },
+            {
+                like: "true"
             }
-        })
-        // console.log(count);
-
+        ]
+    }).toArray(function (err, response) {
+        console.log(response);
+        var count = response.length
         collectionPost.updateOne({
             _id: ObjectID(req.body.postId)
         }, {
@@ -217,7 +188,7 @@ authController.upload = function (req, response) {
             var finalImg = {
                 title: req.body.title,
                 tag: req.body.tag,
-                likes: 0,
+                like: 0,
                 url: urlLink,
                 name: req.session.user[0].userName,
                 userupload: "true"
@@ -241,7 +212,7 @@ authController.upload = function (req, response) {
 
 }
 
-authController.explore = function(req, res){
+authController.explore = function (req, res) {
     var request = req;
     var response = res;
 
@@ -255,7 +226,7 @@ authController.explore = function(req, res){
                 if (doc) {
                     success.forEach(element => {
                         doc.forEach(id => {
-                            if (JSON.stringify(id) === JSON.stringify(element._id)) {
+                            if (JSON.stringify(id.postId) === JSON.stringify(element._id)) {
                                 element.show = true
                                 // console.log(element);
                             } //else {console.log(element._id)}
@@ -305,7 +276,7 @@ authController.home = function (req, res) {
                 if (doc) {
                     success.forEach(element => {
                         doc.forEach(id => {
-                            if (JSON.stringify(id) === JSON.stringify(element._id)) {
+                            if (JSON.stringify(id.postId) === JSON.stringify(element._id)) {
                                 element.show = true
                                 // console.log(element);
                             } //else {console.log(element._id)}
@@ -354,7 +325,7 @@ authController.whatsnew = function (req, res) {
                 if (doc) {
                     success.forEach(element => {
                         doc.forEach(id => {
-                            if (JSON.stringify(id) === JSON.stringify(element._id)) {
+                            if (JSON.stringify(id.postId) === JSON.stringify(element._id)) {
                                 element.show = true
                                 // console.log(element);
                             } //else {console.log(element._id)}
@@ -413,7 +384,7 @@ authController.search = function (req, res) {
                 if (doc) {
                     success.forEach(element => {
                         doc.forEach(id => {
-                            if (JSON.stringify(id) === JSON.stringify(element._id)) {
+                            if (JSON.stringify(id.postId) === JSON.stringify(element._id)) {
                                 element.show = true
                                 // console.log(element);
                             } //else {console.log(element._id)}
@@ -462,7 +433,7 @@ authController.trending = function (req, res) {
                 if (doc) {
                     success.forEach(element => {
                         doc.forEach(id => {
-                            if (JSON.stringify(id) === JSON.stringify(element._id)) {
+                            if (JSON.stringify(id.postId) === JSON.stringify(element._id)) {
                                 element.show = true
                                 // console.log(element);
                             } //else {console.log(element._id)}
@@ -710,13 +681,17 @@ authController.deleteWishList = function (req, res) {
     if (req.session.user) {
         var collection = db.collection('wishlist');
         collection.deleteOne({
-            $and: [
-                {postId: req.body.id},
-                {accountId: req.session.user[0]._id}
-            ]}, function (err, success) {
+            $and: [{
+                    postId: req.body.id
+                },
+                {
+                    accountId: req.session.user[0]._id
+                }
+            ]
+        }, function (err, success) {
             if (err) {
                 return res.send(err);
-            } else return res.send("deleted"); 
+            } else return res.send("deleted");
         })
     }
 }

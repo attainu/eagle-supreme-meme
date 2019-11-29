@@ -709,7 +709,11 @@ authController.getWishList = function (req, res) {
 authController.deleteWishList = function (req, res) {
     if (req.session.user) {
         var collection = db.collection('wishlist');
-        collection.deleteOne({postId: req.body.id}, function (err, success) {
+        collection.deleteOne({
+            $and: [
+                {postId: req.body.id},
+                {accountId: req.session.user[0]._id}
+            ]}, function (err, success) {
             if (err) {
                 return res.send(err);
             } else return res.send("deleted"); 

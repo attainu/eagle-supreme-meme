@@ -48,9 +48,9 @@ $(document).ready(function () {
                 console.log(data);
                 if (data == "Login") {
                     $("#loginModal").click()
+                } else {
+                    alert ("Post has been "+ data)
                 }
-
-
             }
         })
     })
@@ -66,6 +66,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 if (data == "deleted") {
+                    alert("Post has been " + data)
                     $('#post'+id).hide();
                 }
             }

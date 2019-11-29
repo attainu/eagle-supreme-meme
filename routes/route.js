@@ -70,14 +70,14 @@ authController.like = function (req, res) {
             }
         ]
     }).toArray(function (err, response) {
-      //  console.log(response)
+        //  console.log(response)
         if (response.length === 0) {
             collection.insertOne({
                 accountId: req.session.user[0]._id,
                 postId: req.body.postId,
                 like: req.body.like
             }, function (error, response) {
-               // console.log("1")
+                // console.log("1")
                 if (error) {
                     return res.send(error)
                 } else {
@@ -94,7 +94,7 @@ authController.like = function (req, res) {
                 }
             }, function (err, result) {
                 if (!err) {
-                  //  console.log("2")
+                    //  console.log("2")
                     return res.send("done")
                 }
             })
@@ -640,39 +640,50 @@ authController.wishList = function (req, res) {
 
 authController.getWishList = function (req, res) {
     if (req.session.user) {
+        var request = req;
+        var response = res;
         var database = [];
         var collection1 = db.collection('wishlist');
         var collection2 = db.collection('post');
+        Model.checkLike(request, response, function (err, doc) {
+            if(!err){
+            var posts = []
         collection1.find({
             accountId: req.session.user[0]._id
         }).toArray(async function (error, success) {
             if (error) {
                 return res.send(error);
             } else {
-                collection2.find({}).toArray(function (err, suc) {
-                    suc.forEach(function (data) {
-                        success.forEach(function (id) {
-                            if (JSON.stringify(id.postId) === JSON.stringify(data._id)) {
-                                database.push(data);
+                success.forEach(function (id) {
+                    collection2.find({
+                        _id: ObjectID(id.postId)
+                    }).toArray(function (err, suc) {
+                        database.push(suc[0]);
+                        if (database.length === success.length) {
+                            if (doc) {
+                                database.forEach(element => {
+                                    doc.forEach(id => {
+                                        if (JSON.stringify(id.postId) === JSON.stringify(element._id)) {
+                                            element.show = true
+                                            // console.log(element);
+                                        } //else {console.log(element._id)}
+                                    })
+                                    posts.push(element)
+                                });
+                            } else {
+                                posts = database
                             }
-                        })
+                            return res.render('save', {
+                                data: posts,
+                                logIn: "<a href='/logoutpage'>Logout</a>"
+                            });
+                        }
                     });
-                    console.log("520 Database", database);
-                    if (typeof req.session.user == "undefined") {
-                        return res.render('save', {
-                            data: database,
-                            logIn: "<a href='/loginpage'>Login/Signup </a>"
-                        });
-                    } else {
-                        return res.render('save', {
-                            data: database,
-                            logIn: "<a href='/logoutpage'>Logout</a>"
-                        });
-                    }
-
-                });
+                })
             }
         })
+    }
+    })
     } else {
         return res.redirect('/loginpage')
     }

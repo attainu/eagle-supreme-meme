@@ -178,6 +178,12 @@ app.post('/checkLogin', function(req, res){
   }
 })
 
+app.get('/memeeditor', function(req, res){
+   res.render('memeeditor',{
+     layout: 'userlogin'
+   })
+})
+
 
 db.connect()
   .then(function () {

@@ -658,7 +658,14 @@ authController.getWishList = function (req, res) {
                     collection2.find({
                         _id: ObjectID(id.postId)
                     }).toArray(function (err, suc) {
+                        if(suc.length === 0){
+                           return res.render('save', {
+                                data: posts,
+                                logIn: "<a href='/logoutpage'>Logout</a>"
+                            });
+                        } else {
                         database.push(suc[0]);
+                        console.log(database);
                         if (database.length === success.length) {
                             if (doc) {
                                 database.forEach(element => {
@@ -678,6 +685,7 @@ authController.getWishList = function (req, res) {
                                 logIn: "<a href='/logoutpage'>Logout</a>"
                             });
                         }
+                    }
                     });
                 })
             }

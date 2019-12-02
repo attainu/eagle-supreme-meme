@@ -1,5 +1,5 @@
 <div class="content">
-
+  {{#if data}}
   {{#each data}}
   <div class="post" id="post{{this._id}}">
     <div class="titledesign"></div>
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="modal-body">
-                      
+
                       <div class="reactionandsharecm">
                         <div class="reactioncm">
                           <div class="likebuttonMess{{this._id}}">
@@ -66,23 +66,23 @@
                             {{!-- <div class="heart" id="{{this._id}}">❤</div> --}}
                           </div>
                           <div class="displaylikenumberscm">
-                        <span id="likeCountC{{this._id}}">{{this.like}}Likes</span>
-                      </div>
+                            <span id="likeCountC{{this._id}}">{{this.like}}Likes</span>
+                          </div>
                         </div>
                       </div>
-                      
+
 
                     </div>
 
-                    
+
                     <div class="modal-body row">
                       <div class="col-md-6 mx-auto">
-                      <textarea name="comment" id="saveComment{{this._id}}" class="form-control" placeholder="Enter Comment"
-                        style=" width: 100%;"></textarea>
-                      <p id="commentError{{this._id}}" style="display: none;">Above Field cannot be empty</p>
-                      <button class="saveComment btn btn-primary mx-auto mt-2 " name="{{this._id}}"
-                        style="width: 30%; margin-left: 15%;">submit</button>
-                        </div>
+                        <textarea name="comment" id="saveComment{{this._id}}" class="form-control"
+                          placeholder="Enter Comment" style=" width: 100%;"></textarea>
+                        <p id="commentError{{this._id}}" style="display: none;">Above Field cannot be empty</p>
+                        <button class="saveComment btn btn-primary mx-auto mt-2 " name="{{this._id}}"
+                          style="width: 30%; margin-left: 15%;">submit</button>
+                      </div>
                     </div>
 
                     <div class="modal-body" id="commentList{{this._id}}">
@@ -113,6 +113,15 @@
     </div>
   </div>
   {{/each}}
+  {{else}}
+  <div class="post">
+   <div class="image">
+
+      <img class="content-image" data-src="tenor.gif" style="width: 600px;">
+
+    </div>
+  </div>
+  {{/if}}
 </div>
 
 

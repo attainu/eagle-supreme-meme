@@ -654,6 +654,11 @@ authController.getWishList = function (req, res) {
             if (error) {
                 return res.send(error);
             } else {
+                if (success.length === 0){
+                    return res.render('save', {
+                        data: posts,
+                        logIn: "<a href='/logoutpage'>Logout</a>"})
+                } else {
                 success.forEach(function (id) {
                     collection2.find({
                         _id: ObjectID(id.postId)
@@ -665,7 +670,6 @@ authController.getWishList = function (req, res) {
                             });
                         } else {
                         database.push(suc[0]);
-                        console.log(database);
                         if (database.length === success.length) {
                             if (doc) {
                                 database.forEach(element => {
@@ -688,6 +692,7 @@ authController.getWishList = function (req, res) {
                     }
                     });
                 })
+            }
             }
         })
     }

@@ -1,0 +1,119 @@
+
+.center{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: 1s all;
+    text-align: center;
+}
+.colors{
+    
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+.login{
+
+height: 494px;
+
+width: 300px;
+
+margin-top: 46px;
+
+background: rgb(22, 22, 22,0.3);
+
+/* box-shadow: -4px 7px 20px 0px #d2c2be; */
+}
+.container{
+    
+height: 468px;
+    
+margin: 0 auto;
+    
+padding: 0px 32px;
+    
+/* width: 100%; */
+    
+/* height: 100vh; */
+    
+/* display: flex; */
+    
+align-items: center;
+    
+justify-content: center;
+}
+.buttonLogin{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: 0.9s all;
+    
+    
+}
+.inputDetail{
+    width: 214px;
+    height: 35px;
+    border-radius: 15px;
+    margin: 10px;
+}
+.inputField{
+    display: none;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: 0.9s all;
+    
+    
+}
+.loginDesign{
+    background: rgb(0, 0, 0);
+    border: 2px solid rgb(255, 255, 255);
+    color: white;
+    border-radius:10px;
+    height: 40px;
+    width: 100px;
+}
+
+.signupPage{
+    background: rgb(0, 0, 0,0.4);
+}
+.signup{
+    background: rgb(0, 0, 0,0);
+    height: 400px;
+    /* box-shadow: -3px 4px 20px 0px #d2c2be; */
+}
+.signupCol{
+    color: rgb(255, 255, 255);
+}
+
+.popup{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    top: 0;
+    padding-top: 0;
+    margin-top: 0;
+}
+.loginpageheader{
+    width: 100%;
+    height: 60px;
+    background: black;
+    display: flex;
+    /* background-image: linear-gradient(to right, #9c5ffb, #a85dfb, #b45bfa, #c059f9, #cb57f8, #cb57f8, #cb57f8, #cb57f8, #c059f9, #b45bfa, #a85dfb, #9c5ffb); */
+    position: fixed;
+    z-index: 99;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+@media screen and (max-width: 768px){
+    .loginpageheader{
+        background: black;
+        opacity: 1;
+    }
+}
